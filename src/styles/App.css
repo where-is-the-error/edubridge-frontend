@@ -1,0 +1,45 @@
+/* App.css */
+.home-screen {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.home-screen h1 {
+  font-size: 2em;
+  color: #1E90FF;
+}
+
+.content h2 {
+  font-size: 1.5em;
+}
+
+.content p {
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.start-button {
+  background-color: #1E90FF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.start-button:hover {
+  background-color: #4682B4;
+}
+
+.tiger-icon img {
+  width: 150px;
+  height: auto;
+}
+
+.next-screen {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
