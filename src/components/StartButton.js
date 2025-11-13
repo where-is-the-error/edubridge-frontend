@@ -6,7 +6,7 @@ const StartButton = () => {
   const navigate = useNavigate();
 
   const handleStartClick = () => {
-    navigate('/next');  
+    navigate('/login');  
   };
 
   return (
