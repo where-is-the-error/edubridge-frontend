@@ -1,0 +1,127 @@
+/* 전체 화면 꽉 채우기 */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 수직 중앙 */
+  align-items: center;     /* 수평 중앙 */
+  height: 100vh;
+  width: 100vw;
+  background-color: #ffffff;
+  font-family: "Pretendard", sans-serif;
+  position: relative;
+  overflow: visible;
+}
+
+/* 로고 영역 */
+.logo {
+  position: absolute;
+  top: 0.4vw;
+  left: 2vw;
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 4vw;
+  font-weight: 750;
+  text-shadow: 0 0.3vw 0.6vw rgba(0, 0, 0, 0.25);
+  color: #1c91ff;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  align-items: center;
+  justify-content: center;
+  gap: 1vw; /* 요소 간격 통일 */
+  position: relative; /* 내부 개별 요소 조정 가능하게 */
+}
+
+/* 제목 */
+.title {
+  color: #3b3b3b;
+  -webkit-text-stroke: 0.03vw #000;
+  font-size: 4vw;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+  width: 25vw;
+
+  /* 개별 위치 조정 가능 */
+  position: relative;
+  top: 0vw;   /* 위/아래 이동 */
+  left: -24vw;  /* 좌/우 이동 */
+}
+
+/* 서브 타이틀 */
+.subtitle {
+  color: #6c6767;
+  font-size: 1.7vw;
+  font-weight: 800;
+  width: 30vw;
+  text-align: center;
+  margin-top: -1vw;
+  margin-bottom: 1vw; /* gap으로 간격 조절 */
+
+  /* 개별 위치 조정 가능 */
+  position: relative;
+  top: 0vw;
+  left: -24vw;
+}
+
+/* Start 버튼 */
+.btn-start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1C91FF;
+  color: white;
+  font-size: 3.5vw;
+  font-weight: 700;
+  width: 30vw;
+  height: 5vw;
+  border: 0.05vw solid #000000;
+  border-radius: 1.5vw;
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: 0.2s ease;
+  -webkit-text-stroke: 0.03vw #000;
+  margin: 0; /* gap으로 간격 조절 */
+
+  /* 개별 위치 조정 가능 */
+  position: relative;
+  top: 0vw;
+  left: -24vw;
+}
+
+.btn-start:hover {
+  transform: scale(1.03);
+}
+
+/* 호랑이 이미지 */
+.tiger {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  width: 35vw;
+  height: auto;
+  z-index: 0;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* 하단 상태 텍스트 */
+.status-text {
+  position: absolute;
+  bottom: 2.5vw;
+  color: #444;
+  font-weight: 500;
+  font-size: 0.9vw;
+}
