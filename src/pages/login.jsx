@@ -6,7 +6,7 @@ const Login = () => {
 
   const handleLogin = () => {
     // 로그인 성공 시
-    navigate("/homeafter"); // HomeAfter 페이지로 이동
+    navigate("/age"); // age 페이지로 이동
   };
 
   return (

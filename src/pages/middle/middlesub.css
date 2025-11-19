@@ -1,0 +1,115 @@
+/* ===============================
+   기본 설정
+   =============================== */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+  overflow: auto;
+}
+
+/* ===============================
+   전체 컨테이너
+   =============================== */
+.middlesub-container {
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;      /* ele와 동일하게 적용 */
+  align-items: center;
+}
+
+/* ===============================
+   로고
+   =============================== */
+.middlesub-logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.middlesub-logo-dot {
+  width: 60px;
+  height: 60px;
+  background: #1C91FF;
+  border-radius: 50%;
+  margin-right: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.middlesub-logo-text {
+  font-size: 85px;
+  font-weight: 700;
+  color: #1C91FF;
+  margin: 0;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ===============================
+   제목 (ele와 완전 동일하게)
+   =============================== */
+.middlesub-title {
+  margin-top: -18px;        /* ele 기준 */
+  font-size: 90px;
+  font-weight: 900;
+  color: #000;
+}
+
+/* ===============================
+   박스 정렬 (ele 기준)
+   =============================== */
+.middlesub-box-wrapper {
+  margin-top: 80px;
+  display: flex;
+  gap: 60px;                /* ele 기준 */
+}
+
+/* ===============================
+   박스 (ele 기준)
+   =============================== */
+.middlesub-box {
+  width: 280px;             /* ele 기준 */
+  height: 280px;            /* ele 기준 */
+  border: 7px solid #000;
+  border-radius: 35px;      /* ele 기준 */
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.middlesub-box:hover {
+  transform: scale(1.06);
+}
+
+/* ===============================
+   아이콘 (ele 기준)
+   =============================== */
+.middlesub-icon {
+  width: 140px;             /* ele 기준 */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* ===============================
+   텍스트 (ele 기준)
+   =============================== */
+.middlesub-text {
+  font-size: 45px;          /* ele 기준 */
+  font-weight: 800;
+  color: #000;              /* ele 기준 */
+  margin: 0;
+}

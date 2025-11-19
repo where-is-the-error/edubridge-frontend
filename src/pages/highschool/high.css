@@ -1,0 +1,115 @@
+/* ===============================
+   기본 설정
+   =============================== */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+  overflow: auto;
+}
+
+/* ===============================
+   전체 컨테이너
+   =============================== */
+.high-container {
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ===============================
+   로고
+   =============================== */
+.high-logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.high-logo-dot {
+  width: 60px;
+  height: 60px;
+  background: #1C91FF;
+  border-radius: 50%;
+  margin-right: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.high-logo-text {
+  font-size: 85px;
+  font-weight: 700;
+  color: #1C91FF;
+  margin: 0;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ===============================
+   제목 (age 기준)
+   =============================== */
+.high-title {
+  margin-top: 50px;
+  font-size: 90px;
+  font-weight: 900;
+  color: #000;
+}
+
+/* ===============================
+   박스 정렬 (age 기준)
+   =============================== */
+.high-box-wrapper {
+  margin-top: 80px;
+  display: flex;
+  gap: 120px;
+}
+
+/* ===============================
+   박스 디자인 (age 기준)
+   =============================== */
+.high-box {
+  width: 350px;
+  height: 350px;
+  border: 7px solid #000;
+  border-radius: 40px;
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.high-box:hover {
+  transform: scale(1.06);
+}
+
+/* ===============================
+   박스 아이콘 (age 기준)
+   =============================== */
+.high-icon {
+  width: 170px;
+  height: auto;
+  margin-bottom: 25px;
+}
+
+/* ===============================
+   박스 텍스트 (age 기준)
+   =============================== */
+.high-text {
+  font-size: 55px;
+  font-weight: 800;
+  color: #3B3B3B;
+  margin: 0;
+}
