@@ -55,6 +55,7 @@ html, body, #root {
 }
 
 .home-logo-text {
+  /*font-style: pretendard;*/
   font-size: 85px;
   font-weight: 700;
   color: #1C91FF;

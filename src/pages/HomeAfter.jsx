@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./HomeAfter.css";
-import tiger2 from "../../assets/tiger2.png";
+import "../styles/HomeAfter.css";
+import tiger2 from "../assets/tiger2.png";
 
 const HomeAfter = () => {
   const navigate = useNavigate();

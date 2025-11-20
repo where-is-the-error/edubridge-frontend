@@ -1,6 +1,6 @@
 import React from "react";
-import "./Home.css";
-import tiger from "../../assets/tiger.png";
+import "../styles/Home.css";
+import tiger from "../assets/tiger.png";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {

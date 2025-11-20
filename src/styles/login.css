@@ -1,0 +1,137 @@
+/* 기본적인 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,  body, #root{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* 로그인 컨테이너 스타일 */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* 뷰포트 전체 높이 채우기 */
+  width: 100%; /* 뷰포트 전체 너비 채우기 */
+  padding: 0; /* 외부 여백 제거하여 좌우로 꽉 차게 함 */
+  background-color: #fff; 
+  box-sizing: border-box;
+}
+
+.login-box {
+  width: 20%;            /* 화면에 맞춰 가변적으로 확장 */
+  max-width: 420px;     /* 큰 화면에서 박스 최대 너비 제한 */
+  padding: 2rem;        /* 내부 여백 */
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  text-align: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #1a73e8;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+input[type="password"] {
+  padding-right: 42px; /* 토글 아이콘을 위한 여유 공간 확보 */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a73e8;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #145db1;
+}
+
+.google-login-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #db4437;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.google-login-btn:hover {
+  background-color: #c1351d;
+}
+
+.signup-link {
+  display: block;
+  margin-top: 15px;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/* 모바일 대응 */
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20px;
+  }
+  .login-box {
+    padding: 1.25rem;
+    border-radius: 10px;
+  }
+  .input-group {
+    margin-bottom: 14px;
+  }
+  input[type="text"], input[type="password"] {
+    padding: 10px;
+    font-size: 15px;
+  }
+  .toggle-password {
+    top: 10px;
+    right: 10px;
+  }
+}

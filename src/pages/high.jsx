@@ -1,23 +1,31 @@
 import React from "react";
-import "./high.css";
+import "../styles/high.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../../assets/icon.png";
+import icon from "../assets/icon.png";
+import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
 
 const High = () => {
   const navigate = useNavigate();
 
-  const goHomeAfter = () => {
-    navigate("/homeafter");
+  const goHomeAfter = () => navigate("/homeafter");
+
+  // 1학년 선택
+  const goHighGrade1 = () => {
+    saveUserData("grade", "1");      // 학년 저장
+    navigate("/highgrade1");         // 다음 페이지 이동
   };
 
-  // 1학년
-  const goHighGrade1 = () => navigate("/highgrade1");
+  // 2학년 선택
+  const goHighSub2 = () => {
+    saveUserData("grade", "2");
+    navigate("/highsub2");
+  };
 
-  // 2학년
-  const goHighSub2 = () => navigate("/highsub2");
-
-  // 3학년
-  const goHighSub3 = () => navigate("/highsub3");
+  // 3학년 선택
+  const goHighSub3 = () => {
+    saveUserData("grade", "3");
+    navigate("/highsub3");
+  };
 
   return (
     <div className="high-container">

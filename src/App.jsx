@@ -1,20 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home";
 import Login from "./pages/login";
-import HomeAfter from "./pages/home/HomeAfter";
-import Age from "./pages/age/age";
-import Ele from "./pages/elementary/ele";
-import Middle from "./pages/middle/middle";
-import High from "./pages/highschool/high";
-import MiddleSub from "./pages/middle/middlesub";
-import HighGrade1 from "./pages/high1/highgrade1";
-import HighSub2 from "./pages/high2/highsub2";
-import HighSociety2 from "./pages/high2/highsociety2";
-import HighScience2 from "./pages/high2/highscience2";
-import HighSub3 from "./pages/high3/highsub3";
-import HighSociety3 from "./pages/high3/highsociety3";
-import HighScience3 from "./pages/high3/highscience3";
+import SignUp from "./pages/signup";
+import HomeAfter from "./pages/HomeAfter";
+import Age from "./pages/age";
+import Ele from "./pages/ele";
+import Middle from "./pages/middle";
+import High from "./pages/high";
+import MiddleSub from "./pages/middlesub";
+import HighGrade1 from "./pages/highgrade1";
+import HighSub2 from "./pages/highsub2";
+import HighSociety2 from "./pages/highsociety2";
+import HighScience2 from "./pages/highscience2";
+import HighSub3 from "./pages/highsub3";
+import HighSociety3 from "./pages/highsociety3";
+import HighScience3 from "./pages/highscience3";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/homeafter" element={<HomeAfter />} />
         <Route path="/age" element={<Age />}/>
         <Route path="/ele" element={<Ele />}/>

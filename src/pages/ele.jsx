@@ -1,13 +1,38 @@
 import React from "react";
-import "./ele.css";
+import "../styles/ele.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../../assets/icon.png";
+import icon from "../assets/icon.png";
+import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
 
 const Ele = () => {
   const navigate = useNavigate();
 
-  const goHomeAfter = () => {
-    navigate("/homeafter");
+  const goHomeAfter = () => navigate("/homeafter");
+
+  // ⬇ 과목 선택 시 저장 + 이동
+  const korea = () => {
+    saveUserData("subject", "korea");
+    navigate("/mainpage");
+  };
+
+  const math = () => {
+    saveUserData("subject", "math");
+    navigate("/mainpage");
+  };
+
+  const english = () => {
+    saveUserData("subject", "english");
+    navigate("/mainpage");
+  };
+
+  const social = () => {
+    saveUserData("subject", "social");
+    navigate("/mainpage");
+  };
+
+  const science = () => {
+    saveUserData("subject", "science");
+    navigate("/mainpage");
   };
 
   return (
@@ -29,27 +54,27 @@ const Ele = () => {
       {/* 박스 영역 */}
       <div className="ele-box-wrapper">
 
-        <div className="ele-box">
+        <div className="ele-box" onClick={korea} style={{ cursor: "pointer" }}>
           <img src={icon} className="ele-icon" alt="icon" />
           <p className="ele-text">국어</p>
         </div>
 
-        <div className="ele-box">
+        <div className="ele-box" onClick={math} style={{ cursor: "pointer" }}>
           <img src={icon} className="ele-icon" alt="icon" />
           <p className="ele-text">수학</p>
         </div>
 
-        <div className="ele-box">
+        <div className="ele-box" onClick={english} style={{ cursor: "pointer" }}>
           <img src={icon} className="ele-icon" alt="icon" />
           <p className="ele-text">영어</p>
         </div>
 
-        <div className="ele-box">
+        <div className="ele-box" onClick={social} style={{ cursor: "pointer" }}>
           <img src={icon} className="ele-icon" alt="icon" />
           <p className="ele-text">사회</p>
         </div>
 
-        <div className="ele-box">
+        <div className="ele-box" onClick={science} style={{ cursor: "pointer" }}>
           <img src={icon} className="ele-icon" alt="icon" />
           <p className="ele-text">과학</p>
         </div>

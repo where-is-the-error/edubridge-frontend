@@ -1,17 +1,27 @@
 import React from "react";
-import "./middle.css";
+import "../styles//middle.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../../assets/icon.png";
+import icon from "../assets/icon.png";
+import { saveUserData } from "../utils/userStorage";  // ⬅ 저장 기능 추가
 
 const Middle = () => {
   const navigate = useNavigate();
 
-  const goHomeAfter = () => {
-    navigate("/homeafter");
+  const goHomeAfter = () => navigate("/homeafter");
+
+  // 학년 선택 시 저장 + 다음 페이지로 이동
+  const selectGrade1 = () => {
+    saveUserData("grade", "1");      // 중1 저장
+    navigate("/middlesub");
   };
 
-  // 학년 선택 후 → middlesub 이동
-  const goMiddleSub = () => {
+  const selectGrade2 = () => {
+    saveUserData("grade", "2");      // 중2 저장
+    navigate("/middlesub");
+  };
+
+  const selectGrade3 = () => {
+    saveUserData("grade", "3");      // 중3 저장
     navigate("/middlesub");
   };
 
@@ -35,19 +45,19 @@ const Middle = () => {
       <div className="middle-box-wrapper">
 
         {/* 1학년 */}
-        <div className="middle-box" onClick={goMiddleSub} style={{ cursor: "pointer" }}>
+        <div className="middle-box" onClick={selectGrade1} style={{ cursor: "pointer" }}>
           <img src={icon} className="middle-icon" alt="icon" />
           <p className="middle-text">1학년</p>
         </div>
 
         {/* 2학년 */}
-        <div className="middle-box" onClick={goMiddleSub} style={{ cursor: "pointer" }}>
+        <div className="middle-box" onClick={selectGrade2} style={{ cursor: "pointer" }}>
           <img src={icon} className="middle-icon" alt="icon" />
           <p className="middle-text">2학년</p>
         </div>
 
         {/* 3학년 */}
-        <div className="middle-box" onClick={goMiddleSub} style={{ cursor: "pointer" }}>
+        <div className="middle-box" onClick={selectGrade3} style={{ cursor: "pointer" }}>
           <img src={icon} className="middle-icon" alt="icon" />
           <p className="middle-text">3학년</p>
         </div>
