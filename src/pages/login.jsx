@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/login.css";
+import "../styles/login.css"; // CSS 파일 경로는 그대로 유지됩니다.
 
 const Login = () => {
   const navigate = useNavigate();
 
   // 상태 관리
-  const [email, setEmail] = useState(""); // username 대신 email 사용
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -18,9 +18,10 @@ const Login = () => {
 
   // 로그인 처리(API 연동)
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // 👈 폼 제출 시 페이지 새로고침 방지
     setError("");
 
+    // 🔑 정확한 API 경로: http://localhost:3000/api/auth/signin
     const API_URL = "http://localhost:3000/api/auth/signin";
 
     try {
@@ -34,15 +35,31 @@ const Login = () => {
       });
 
       if (response.ok) {
+        // 200번대 응답: 로그인 성공
         const data = await response.json();
+        // 🔑 3. 인증 정보 저장
         localStorage.setItem("accessToken", data.token);
         navigate("/age"); // 로그인 성공 → 연령 선택 페이지로 이동
+
+      } else if (response.status === 401) {
+        // 🚨 401 Unauthorized: 백엔드에서 인증 실패 시 body 없이 보낸 경우 처리
+        setError("이메일 또는 비밀번호가 일치하지 않습니다.");
+
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || "이메일 또는 비밀번호를 확인해주세요.");
+        // 그 외의 4xx, 5xx 에러 처리
+        // 400 Bad Request 등 다른 에러일 경우를 대비해 JSON 파싱 시도
+        try {
+          const errorData = await response.json();
+          // 백엔드에서 message를 보냈다면 그 메시지를 사용, 아니면 일반 에러 메시지 사용
+          setError(errorData.message || `로그인 실패 (코드: ${response.status})`);
+        } catch (e) {
+          // JSON 본문이 없거나 파싱 불가능한 경우
+          setError(`서버 응답 오류가 발생했습니다. (코드: ${response.status})`);
+        }
       }
     } catch (err) {
-      setError("서버에 연결할 수 없습니다.");
+      // 네트워크 연결 자체 실패 (CORS 문제, 서버 꺼짐 등)
+      setError("서버에 연결할 수 없습니다. 백엔드 서버 상태를 확인하세요.");
       console.error("Login Error:", err);
     }
   };
@@ -52,6 +69,7 @@ const Login = () => {
       <div className="login-box">
         <h2>EDU BRIDGE</h2>
 
+        {/* 폼 제출 이벤트에 handleLogin 함수 연결 */}
         <form onSubmit={handleLogin}>
           {/* 이메일 입력 */}
           <div className="input-group">
