@@ -39,7 +39,7 @@ const Login = () => {
         const data = await response.json();
         // 🔑 3. 인증 정보 저장
         localStorage.setItem("accessToken", data.token);
-        navigate("/age"); // 로그인 성공 → 연령 선택 페이지로 이동
+        navigate("/HomeAfter"); // 로그인 성공 → 연령 선택 페이지로 이동
 
       } else if (response.status === 401) {
         // 🚨 401 Unauthorized: 백엔드에서 인증 실패 시 body 없이 보낸 경우 처리

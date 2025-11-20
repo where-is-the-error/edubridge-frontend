@@ -23,7 +23,7 @@ const Home = () => {
         <p className="home-subtitle">지금 이곳에서 새로운 배움을 이어보세요</p>
 
         {/* 버튼 */}
-        <button className="home-button" onClick={() => navigate("/login")}>
+        <button className="home-button" onClick={() => navigate("/HomeAfter")}>
           Start!
         </button>
 
