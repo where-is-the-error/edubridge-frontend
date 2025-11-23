@@ -15,7 +15,7 @@ const Home = () => {
         {/* 로고 */}
         <div className="home-logo">
           <div className="home-logo-dot"></div>
-          <h1 className="home-logo-text">EDU BRIDGE</h1>
+          <h1 className="home-logo-text">EduBridge</h1>
         </div>
 
         {/* 텍스트 */}

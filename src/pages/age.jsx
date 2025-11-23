@@ -34,7 +34,7 @@ const Age = () => {
       {/* 로고 */}
       <div className="age-logo" onClick={goHomeAfter} style={{ cursor: "pointer" }}>
         <div className="age-logo-dot"></div>
-        <h1 className="age-logo-text">EDU BRIDGE</h1>
+        <h1 className="age-logo-text">EduBridge</h1>
       </div>
 
       {/* 제목 */}

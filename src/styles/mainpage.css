@@ -58,21 +58,3 @@ html, body, #root {
   color: #1C91FF;
   font-weight: 700;
 }
-
-/* ===============================
-   반응형 설정
-   =============================== */
-@media (max-width: 768px) {
-  .mainpage-container > h1 {
-    font-size: 36px;
-  }
-
-  .info-box {
-    width: 90%;
-    padding: 20px;
-  }
-
-  .info-box p {
-    font-size: 22px;
-  }
-}

@@ -37,7 +37,7 @@ const High = () => {
         style={{ cursor: "pointer" }}
       >
         <div className="high-logo-dot"></div>
-        <h1 className="high-logo-text">EDU BRIDGE</h1>
+        <h1 className="high-logo-text">EduBridge</h1>
       </div>
 
       {/* 제목 */}

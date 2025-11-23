@@ -35,7 +35,7 @@ const Middle = () => {
         style={{ cursor: "pointer" }}
       >
         <div className="middle-logo-dot"></div>
-        <h1 className="middle-logo-text">EDU BRIDGE</h1>
+        <h1 className="middle-logo-text">EduBridge</h1>
       </div>
 
       {/* 제목 */}

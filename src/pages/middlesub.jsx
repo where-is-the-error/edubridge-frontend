@@ -45,7 +45,7 @@ const MiddleSub = () => {
         style={{ cursor: "pointer" }}
       >
         <div className="middlesub-logo-dot"></div>
-        <h1 className="middlesub-logo-text">EDU BRIDGE</h1>
+        <h1 className="middlesub-logo-text">EduBridge</h1>
       </div>
 
       {/* 제목 */}

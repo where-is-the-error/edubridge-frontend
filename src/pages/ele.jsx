@@ -45,7 +45,7 @@ const Ele = () => {
         style={{ cursor: "pointer" }}
       >
         <div className="ele-logo-dot"></div>
-        <h1 className="ele-logo-text">EDU BRIDGE</h1>
+        <h1 className="ele-logo-text">EduBridge</h1>
       </div>
 
       {/* 제목 */}

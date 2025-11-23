@@ -39,7 +39,7 @@ const HighScience3 = () => {
         style={{ cursor: "pointer" }}
       >
         <div className="sci3-logo-dot"></div>
-        <h1 className="sci3-logo-text">EDU BRIDGE</h1>
+        <h1 className="sci3-logo-text">EduBridge</h1>
       </div>
 
       {/* 제목 */}
