@@ -1,25 +1,41 @@
-// 사용자 선택 데이터 저장 (프론트용)
+// src/utils/userStorage.js
+
+// 사용자 선택 데이터 저장 (로컬 전용)
 export const saveLocalUserData = (key, value) => {
   const existing = JSON.parse(localStorage.getItem("userData")) || {};
   const updated = { ...existing, [key]: value };
   localStorage.setItem("userData", JSON.stringify(updated));
 };
 
-// 나중에 백엔드가 생기면 이 부분만 수정해서 서버에 저장
+// 🚨 백엔드 주소를 실제 실행 중인 주소와 경로로 변경
+const API_BASE_URL = "http://localhost:3000";
+const API_PATH = "/api/user/info"; // 사용자 정보 업데이트 경로 가정
+
+// 사용자 선택 데이터 저장 (백엔드 연동)
 export const saveUserData = async (key, value) => {
   // 1) 로컬에 먼저 저장
   saveLocalUserData(key, value);
 
-  // 2) 백엔드 API가 있을 경우 서버에도 저장
+  // 🔑 토큰이 없으면 서버에 요청을 보내지 않습니다.
+  const token = localStorage.getItem("accessToken");
+  if (!token) {
+    console.warn("경고: 토큰 없음. 로컬에만 저장되었습니다.");
+    return;
+  }
+
+  // 2) 백엔드 API에 저장
   try {
-    await fetch("https://your-backend.com/api/user/update" , {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    await fetch(API_BASE_URL + API_PATH, {
+      method: "PUT", // 정보 업데이트는 PUT/PATCH 사용
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`, // 🔑 인증 토큰 포함
+      },
       body: JSON.stringify({ [key]: value }),
-      credentials: "include", // 쿠키 세션 유지
     });
+    console.log(`DB 업데이트 성공: ${key}: ${value}`);
   } catch (error) {
-    console.log("서버 저장 실패(백엔드 없음): 로컬 저장만 진행됨");
+    console.error("서버 저장 실패: 네트워크 오류 또는 CORS 문제 발생", error);
   }
 };
 

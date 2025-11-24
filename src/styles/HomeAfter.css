@@ -66,9 +66,16 @@ html, body, #root {
    텍스트 영역
    =============================== */
 .after-text-area {
+  /* 기존의 절대 위치 기반 대신, relative/flex 기반으로 전환 */
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* 로그인 박스가 호랑이 이미지와 겹치지 않도록 위치 조정 */
+  position: relative; /* 자식 요소의 absolute 기준 */
+  z-index: 20; /* 호랑이보다 위에 있도록 설정 */
+  /* 필요에 따라 너비 설정 */
+  width: 40vw; 
+  max-width: 420px;
 }
 
 .after-title {
@@ -154,5 +161,6 @@ html, body, #root {
   top: -8vh;
   right: 1vw;
   width: 55vw;
+  z-index: 10; /* 로그인 폼(20)보다 아래에 있도록 설정 */
   height: auto;
 }

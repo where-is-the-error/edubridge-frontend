@@ -1,31 +1,50 @@
 import React from "react";
 import "../styles/age.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png"; // 아이콘 이미지
+import icon from "../assets/icon.png"; 
 import { saveUserData } from "../utils/userStorage";
+import { updateUserInfo } from "../utils/api"; // 👈 DB 업데이트 API 함수
 
 const Age = () => {
   const navigate = useNavigate();
 
-  // 로고 클릭 시 HomeAfter 페이지로 이동
-  const goHomeAfter = () => {
-    navigate("/homeafter");
+  // 헬퍼 함수: DB 저장 후 로컬 저장소 업데이트 및 페이지 이동
+  const handleSelection = async (ageGroup, nextPath) => {
+    
+    // 1. DB에 나이 그룹 정보 저장 (User 모델의 gradeLevel 필드 사용)
+    const updatePayload = {
+      gradeLevel: ageGroup 
+    };
+    
+    // 🚨 API 경로 가정: PUT /api/user/info
+    const success = await updateUserInfo(updatePayload, "/api/user/info"); 
+
+    if (success) {
+      // 2. DB 저장 성공 시 로컬 저장소 업데이트 (HomeAfter 자동 리다이렉트를 위해)
+      saveUserData("gradeLevel", ageGroup); // HomeAfter에서 확인하는 키에 값 저장
+      saveUserData("age", ageGroup); // 'age'도 별도로 저장
+      
+      // 3. 다음 페이지로 이동
+      navigate(nextPath); 
+    } else {
+      alert("연령 정보 저장에 실패했습니다. 다시 시도해 주세요.");
+    }
   };
+
+  // 로고 클릭 시 HomeAfter 페이지로 이동
+  const goHomeAfter = () => { navigate("/homeafter"); };
 
   // 연령 선택 (저장 + 이동)
   const goElementary = () => {
-    saveUserData("age", "elementary");  // 저장
-    navigate("/ele");                   // 이동
+    handleSelection("elementary", "/ele"); // /ele 페이지로 이동
   };
 
   const goMiddle = () => {
-    saveUserData("age", "middle");
-    navigate("/middle");
+    handleSelection("middle", "/middle"); // /middle 페이지로 이동 (중학생 학년 선택 페이지로 연결되어야 함)
   };
 
   const goHigh = () => {
-    saveUserData("age", "high");
-    navigate("/high");
+    handleSelection("high", "/high"); // /high 페이지로 이동 (고등학생 학년 선택 페이지로 연결되어야 함)
   };
 
   return (

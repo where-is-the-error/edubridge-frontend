@@ -1,3 +1,5 @@
+// src/components/Login.jsx (또는 src/pages/login.jsx)
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
@@ -9,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(""); // 👈 error 상태 추가
+  const [error, setError] = useState("");
 
   // 비밀번호 보기 토글
   const togglePasswordVisibility = () => {
@@ -22,17 +24,15 @@ const Login = () => {
     setError("");
 
     // 🌟 1. 더미 데이터 확인 (임시 로그인 조건)
-    const DUMMY_EMAIL = "11@11.11";
-    const DUMMY_PASSWORD = "11";
+    const DUMMY_EMAIL = "test@test.com";
+    const DUMMY_PASSWORD = "1111";
 
     if (email === DUMMY_EMAIL && password === DUMMY_PASSWORD) {
       console.log("임시 로그인 성공:", email);
-      // 임시 토큰 저장 (구분하기 위해 더미 토큰 사용)
       localStorage.setItem("accessToken", "DUMMY_TOKEN_FOR_TEST");
-      navigate("/age");
-      return; // 임시 로그인 성공했으니 API 호출 건너뛰고 함수 종료
+      navigate("/HomeAfter"); // HomeAfter로 이동하여 설정 유무 체크
+      return;
     }
-    // 🌟 ---------------------------------------
 
     // 2. 실제 API 호출 로직
     const API_URL = "http://localhost:3000/api/auth/signin";
@@ -51,7 +51,7 @@ const Login = () => {
         // API 로그인 성공
         const data = await response.json();
         localStorage.setItem("accessToken", data.token);
-        navigate("/age");
+        navigate("/HomeAfter"); // HomeAfter로 이동하여 설정 유무 체크
 
       } else if (response.status === 401) {
         // 401 Unauthorized
@@ -67,7 +67,6 @@ const Login = () => {
         }
       }
     } catch (err) {
-      // 네트워크 연결 실패
       setError("서버에 연결할 수 없습니다. 백엔드 서버 상태를 확인하세요.");
       console.error("Login Error:", err);
     }
@@ -78,7 +77,6 @@ const Login = () => {
       <div className="login-box">
         <h2>EDU BRIDGE</h2>
 
-        {/* 폼 제출 이벤트에 handleLogin 함수 연결 */}
         <form onSubmit={handleLogin}>
           <div className="input-group">
             <input
@@ -103,7 +101,6 @@ const Login = () => {
             </span>
           </div>
 
-          {/* 에러 메시지 출력 */}
           {error && <p className="error-message">{error}</p>}
 
           <button type="submit" className="login-btn">로그인</button>
