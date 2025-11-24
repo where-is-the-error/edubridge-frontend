@@ -29,7 +29,7 @@ const HighSub2 = () => {
         style={{ cursor: "pointer" }}
       >
         <div className="highsub2-logo-dot"></div>
-        <h1 className="highsub2-logo-text">EDU BRIDGE</h1>
+        <h1 className="highsub2-logo-text">EduBridge</h1>
       </div>
 
       <h1 className="highsub2-title">계열을 선택해주세요!</h1>

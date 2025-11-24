@@ -16,6 +16,8 @@ import HighScience2 from "./pages/highscience2";
 import HighSub3 from "./pages/highsub3";
 import HighSociety3 from "./pages/highsociety3";
 import HighScience3 from "./pages/highscience3";
+import HighScience1 from "./pages/highscience1";
+import MainPage from "./pages/mainpage";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path="/highsub3" element={<HighSub3 />}/>
         <Route path="/highsociety3" element={<HighSociety3 />}/>
         <Route path="/highscience3" element={<HighScience3 />}/>
+        <Route path="/highscience1" element={<HighScience1 />}/>
+        <Route path="/mainpage" element={<MainPage />}/>
       </Routes>
     </Router>
   );

@@ -38,7 +38,7 @@ const HighSociety2 = () => {
         style={{ cursor: "pointer" }}
       >
         <div className="soc2-logo-dot"></div>
-        <h1 className="soc2-logo-text">EDU BRIDGE</h1>
+        <h1 className="soc2-logo-text">EduBridge</h1>
       </div>
 
       <h1 className="soc2-title">과목을 선택해주세요!</h1>
