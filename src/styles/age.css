@@ -1,0 +1,126 @@
+/* ===============================
+   기본 설정
+   =============================== */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+  overflow: auto;
+}
+
+/* ===============================
+   전체 컨테이너
+   =============================== */
+.age-container {
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ===============================
+   로고
+   =============================== */
+.age-logo {
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 6vw;
+  height: 6vw;
+  margin-top: -1vw;
+}
+
+.logotext {
+  width: 25vw;
+  height: 8vw;
+  margin-left: -1vw;
+}
+
+/* ===============================
+   제목
+   =============================== */
+.age-title {
+  margin-top: 5vh;
+  font-size: 4.5vw;
+  font-weight: 900;
+  color: #000;
+}
+
+/* ===============================
+   선택 박스 정렬
+   =============================== */
+.age-box-wrapper {
+  margin-top: 10vh;
+  display: flex;
+  gap: 8vw;
+}
+
+/* ===============================
+   개별 선택 박스
+   =============================== */
+.age-box {
+  width: 19vw;
+  height: 19vw;
+  border: 0.4vw solid #000;
+  border-radius: 2vw;
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.age-box:hover {
+  transform: scale(1.06);
+}
+
+/* ===============================
+   박스 안 아이콘
+   =============================== */
+.age-icon {
+  width: 8vw;
+  height: auto;
+  margin-bottom: 2vh;
+}
+
+.age-middle{
+  width: 12vw;
+  height: auto;
+  margin-bottom: -2vh;
+  margin-top:-2vh;
+}
+
+.age-high{
+  width: 12vw;
+  height: auto;
+  margin-bottom: -2vh;
+  margin-top: -2vh;
+}
+
+/* ===============================
+   박스 안 텍스트
+   =============================== */
+.age-text {
+  font-size: 3.5vw;
+  font-weight: 800;
+  color: #000;
+  margin: 0;
+}

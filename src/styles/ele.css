@@ -1,0 +1,136 @@
+/* ===============================
+   기본 설정
+   =============================== */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+  overflow: auto;
+}
+
+/* ===============================
+   전체 컨테이너
+   =============================== */
+.ele-container {
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===============================
+   로고
+   =============================== */
+.ele-logo {
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 6vw;
+  height: 6vw;
+  margin-top: -1vw;
+}
+
+.logotext {
+  width: 25vw;
+  height: 8vw;
+  margin-left: -1vw;
+}
+
+/* ===============================
+   제목
+   =============================== */
+.ele-title {
+  margin-top: 5vh;
+  font-size: 4.5vw;
+  font-weight: 900;
+  color: #000;
+}
+
+/* ===============================
+   박스 그룹
+   =============================== */
+.ele-box-wrapper {
+  margin-top: 17.4vh;
+  display: flex;
+  gap: 4vw;
+}
+
+/* ===============================
+   박스 개별
+   =============================== */
+.ele-box {
+  width: 15vw;
+  height: 15vw;
+  border: 0.4vw solid #000;
+  border-radius: 2vw;
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+/* hover 확대 효과 */
+.ele-box:hover {
+  transform: scale(1.06);
+}
+
+/* ===============================
+   박스 안 아이콘
+   =============================== */
+.ele-korean {
+  width: 7vw;
+  height: auto;
+  margin-bottom: 2vh;
+}
+
+.ele-math {
+  width: 7vw;
+  height: auto;
+  margin-bottom: 2vh;
+}
+
+.ele-english {
+  width: 9vw;
+  height: auto;
+  margin-bottom: -1vh;
+}
+
+.ele-society {
+  width: 10vw;
+  height: auto;
+  margin-bottom: -0.5vh;
+  margin-top: -2vh;
+}
+
+.ele-science {
+  width: 7vw;
+  height: auto;
+  margin-bottom: 2vh;
+}
+
+/* ===============================
+   박스 안 텍스트
+   =============================== */
+.ele-text {
+  font-size: 2.5vw;
+  font-weight: 800;
+  color: #000;
+  margin: 0;
+}

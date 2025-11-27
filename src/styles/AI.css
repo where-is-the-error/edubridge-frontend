@@ -1,0 +1,105 @@
+/* ===============================
+   기본 설정
+   =============================== */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+  overflow: auto;
+}
+
+/* ===============================
+   전체 컨테이너
+   =============================== */
+.AI-container {
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 좌측 상단 로고 */
+.AI-logo {
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 6vw;
+  height: 6vw;
+  margin-top: -1vw;
+}
+
+.logotext {
+  width: 25vw;
+  height: 8vw;
+  margin-left: -1vw;
+}
+
+/* 중앙 제목 */
+.AI-title {
+  position: absolute;
+  top: 30vh;
+  width: 100%;
+  text-align: center;
+  font-size: 3.8vw;
+
+}
+
+.AI-strong {
+  color: #1C91FF;
+  font-weight: 900;
+}
+
+.AI-rest {
+  color: #1C91FF;
+  font-weight: 350;
+  margin-left: 0.3vw;
+}
+
+/* ---------------------------------
+   (NEW) 호랑이 단독 영역
+----------------------------------*/
+.AI-tiger-wrapper {
+  position: absolute;
+  bottom: 6vh;   /* 원하는 대로 조정 가능 */
+  left: 10vw;     /* 원하는 대로 조정 가능 */
+}
+
+.tiger3-img {
+  width: 30vw;
+  height: auto;
+}
+
+/* ---------------------------------
+   (NEW) 입력창 단독 영역
+----------------------------------*/
+.AI-input-wrapper {
+  position: absolute;
+  bottom: 15vh;   /* 원하는 대로 조정 */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.AI-input {
+  width: 60vw;
+  height: 6.5vh;
+  padding: 0 20px;
+  font-size: 1.5rem;
+
+  border-radius: 20px;
+  border: 1px solid #000;
+  background-color: #ffffff;
+
+  box-shadow: 0 6px 0px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
