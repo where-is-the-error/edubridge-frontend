@@ -24,6 +24,23 @@ const MainPage = () => {
     social: "사회",
     science: "과학",
     history: "한국사",
+    world: "세계사",
+    east: "동아시아사",
+    koreageography: "한국지리",
+    worldgeography: "세계지리",
+    m1: "생활과 윤리",
+    m2: "윤리와 사상",
+    m3: "경제",
+    m4: "정치와 법",
+    m5: "사회・문화",
+    physics: "물리 I",
+    chemical: "화학 I",
+    lifescience: "생명 I",
+    earthscience: "지구 I",
+    physics2: "물리 II",
+    chemical2: "화학 II",
+    lifescience2: "생명 II",
+    earthscience2: "지구 II"
   };
 
   const trackMap = {
@@ -53,10 +70,8 @@ const MainPage = () => {
         {/* 나이 */}
         <p><strong>나이:</strong> {ageMap[user.age]}</p>
 
-        {/* 중학생 & 고등학생만 학년 출력 */}
-        {user.age !== "elementary" && (
+        {/* 학년 출력 */}
           <p><strong>학년:</strong> {user.grade}학년</p>
-        )}
 
         {/* 고2·고3만 계열 출력 */}
         {user.age === "high" && user.grade !== "1" && trackMap[user.track] && (

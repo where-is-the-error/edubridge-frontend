@@ -1,22 +1,21 @@
-html, body, #root {
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  background:#fff;
-  font-family:"Pretendard", sans-serif;
-  overflow: auto;
+html, body, #root { 
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; 
+  background: #fff;
+  font-family: "Pretendard"; 
 }
 
-.sci2-container {
-  width:100%;
-  height:100vh;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  position:relative;
+/* 컨테이너 */
+.sci2-container { 
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 /* 로고 */
@@ -42,65 +41,39 @@ html, body, #root {
 
 /* 제목 */
 .sci2-title {
-  margin-top:5vh;
-  font-size:4.5vw;
-  font-weight:900;
-  color:#000;
+  margin-top: 5vh;
+  font-size: 4.5vw;
+  font-weight: 900;
+  color: #000;
 }
 
-/* 박스 영역 */
+/* 박스 그룹 */
 .sci2-box-wrapper {
-  margin-top:13.7vh;
-  display:flex;
-  gap:4vw;
+  margin-top: 17.5vh;
+  display: flex;
+  gap: 4vw;
 }
 
 /* 박스 */
 .sci2-box {
-  width:17vw;
-  height:17vw;
-  background:#fff;
-  border:0.4vw solid #000;
-  border-radius:2vw;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  transition:0.2s ease;
-  cursor:pointer;
+  width: 15vw;
+  height: 15vw;
+  border: 0.4vw solid #000;
+  border-radius: 2vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease;
+  cursor: pointer;
 }
-
-.sci2-box:hover { transform:scale(1.06); }
-
-/* 아이콘 */
-.sci2-korean {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
-}
-
-.sci2-math {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
-}
-
-.sci2-english {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
-}
-
-.sci2-science {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
-}
+.sci2-box:hover { transform: scale(1.06); }
 
 /* 텍스트 */
 .sci2-text {
-  font-size:3.5vw;
-  font-weight:800;
-  color:#000;
-  margin:0;
+  font-size: 3.5vw;
+  font-weight: 800;
+  color: #000;
+  margin: 0;
 }
