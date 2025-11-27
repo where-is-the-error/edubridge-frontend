@@ -1,7 +1,7 @@
 // src/components/HomeScreen.js
 import React from 'react';
-import StartButton from './StartButton';  // 시작 버튼 컴포넌트
-import TigerIcon from './TigerIcon.js';      // 호랑이 아이콘 컴포넌트
+import StartButton from './StartButton.jsx';  // 시작 버튼 컴포넌트
+import TigerIcon from './TigerIcon.jsx';      // 호랑이 아이콘 컴포넌트
 
 
 const HomeScreen = () => {

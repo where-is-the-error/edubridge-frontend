@@ -1,0 +1,46 @@
+.carousel {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+
+.arrow {
+  border: none;
+  background: none;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.carousel-content {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 20px;
+}
+
+.big-section {
+  width: 50%;
+}
+
+.big-placeholder {
+  width: 100%;
+  height: 200px;
+  background: #e3e3e3;
+  border-radius: 10px;
+}
+
+.small-section {
+  width: 48%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+  justify-items: center;
+}
+
+.small-placeholder {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  background: #e5e5e5;
+}
