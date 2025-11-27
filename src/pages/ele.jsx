@@ -1,9 +1,14 @@
 import React from "react";
 import "../styles/ele.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
-import { saveUserData } from "../utils/userStorage";   
-import { updateUserInfo } from "../utils/api"; // 👈 API 함수 import
+import koreanimg from "../assets/korean.png";
+import mathimg from "../assets/math.png";
+import englishimg from "../assets/english.png";
+import societyimg from "../assets/society.png";
+import scienceimg from "../assets/science.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
+import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
 
 const Ele = () => {
   const navigate = useNavigate();
@@ -49,8 +54,8 @@ const Ele = () => {
         onClick={goHomeAfter}
         style={{ cursor: "pointer" }}
       >
-        <div className="ele-logo-dot"></div>
-        <h1 className="ele-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 제목 */}
@@ -60,27 +65,27 @@ const Ele = () => {
       <div className="ele-box-wrapper">
 
         <div className="ele-box" onClick={korea} style={{ cursor: "pointer" }}>
-          <img src={icon} className="ele-icon" alt="icon" />
+          <img src={koreanimg} className="ele-korean" alt="icon" />
           <p className="ele-text">국어</p>
         </div>
 
         <div className="ele-box" onClick={math} style={{ cursor: "pointer" }}>
-          <img src={icon} className="ele-icon" alt="icon" />
+          <img src={mathimg} className="ele-math" alt="icon" />
           <p className="ele-text">수학</p>
         </div>
 
         <div className="ele-box" onClick={english} style={{ cursor: "pointer" }}>
-          <img src={icon} className="ele-icon" alt="icon" />
+          <img src={englishimg} className="ele-english" alt="icon" />
           <p className="ele-text">영어</p>
         </div>
 
         <div className="ele-box" onClick={social} style={{ cursor: "pointer" }}>
-          <img src={icon} className="ele-icon" alt="icon" />
+          <img src={societyimg} className="ele-society" alt="icon" />
           <p className="ele-text">사회</p>
         </div>
 
         <div className="ele-box" onClick={science} style={{ cursor: "pointer" }}>
-          <img src={icon} className="ele-icon" alt="icon" />
+          <img src={scienceimg} className="ele-science" alt="icon" />
           <p className="ele-text">과학</p>
         </div>
 

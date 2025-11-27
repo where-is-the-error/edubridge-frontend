@@ -4,6 +4,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "./login"; // 👈 Login 컴포넌트 import (경로 확인 필수)
 import "../styles/HomeAfter.css";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import tiger2 from "../assets/tiger2.png";
 
 const HomeAfter = () => {
@@ -45,8 +47,8 @@ const HomeAfter = () => {
     <div className="after-container">
       {/* 로고 */}
       <div className="after-logo">
-        <div className="after-logo-dot"></div>
-        <h1 className="after-logo-text">EDU BRIDGE</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 콘텐츠 영역 */}
@@ -56,7 +58,8 @@ const HomeAfter = () => {
           <div className="after-btn-group">
             <button
               className="after-btn-continue"
-              onClick={handleContinue}
+              // onClick={handleContinue}
+              onClick={() => navigate(-1)}
             >
               Continue!
             </button>

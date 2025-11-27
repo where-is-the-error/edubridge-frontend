@@ -1,7 +1,12 @@
 import React from "react";
 import "../styles/highsociety2.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import koreanimg from "../assets/korean.png";
+import mathimg from "../assets/math.png";
+import englishimg from "../assets/english.png";
+import societyimg from "../assets/society.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
 
 const HighSociety2 = () => {
@@ -37,8 +42,8 @@ const HighSociety2 = () => {
         onClick={goHomeAfter}
         style={{ cursor: "pointer" }}
       >
-        <div className="soc2-logo-dot"></div>
-        <h1 className="soc2-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       <h1 className="soc2-title">과목을 선택해주세요!</h1>
@@ -46,22 +51,22 @@ const HighSociety2 = () => {
       <div className="soc2-box-wrapper">
 
         <div className="soc2-box" onClick={korea} style={{ cursor: "pointer" }}>
-          <img src={icon} className="soc2-icon" alt="icon" />
+          <img src={koreanimg} className="soc2-korean" alt="icon" />
           <p className="soc2-text">국어</p>
         </div>
 
         <div className="soc2-box" onClick={math} style={{ cursor: "pointer" }}>
-          <img src={icon} className="soc2-icon" alt="icon" />
+          <img src={mathimg} className="soc2-math" alt="icon" />
           <p className="soc2-text">수학</p>
         </div>
 
         <div className="soc2-box" onClick={english} style={{ cursor: "pointer" }}>
-          <img src={icon} className="soc2-icon" alt="icon" />
+          <img src={englishimg} className="soc2-english" alt="icon" />
           <p className="soc2-text">영어</p>
         </div>
 
         <div className="soc2-box" onClick={social} style={{ cursor: "pointer" }}>
-          <img src={icon} className="soc2-icon" alt="icon" />
+          <img src={societyimg} className="soc2-society" alt="icon" />
           <p className="soc2-text">사회</p>
         </div>
 

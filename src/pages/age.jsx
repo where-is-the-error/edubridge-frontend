@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import icon from "../assets/icon.png"; 
 import { saveUserData } from "../utils/userStorage";
 import { updateUserInfo } from "../utils/api"; // 👈 DB 업데이트 API 함수
+import middle from "../assets/agemiddle.png";
+import high from "../assets/agehigh.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 
 const Age = () => {
   const navigate = useNavigate();
@@ -20,7 +24,7 @@ const Age = () => {
     const success = await updateUserInfo(updatePayload, "/api/user/info"); 
 
     if (success) {
-      // 2. DB 저장 성공 시 로컬 저장소 업데이트 (HomeAfter 자동 리다이렉트를 위해)
+      // 2. DsssB 저장 성공 시 로컬 저장소 업데이트 (HomeAfter 자동 리다이렉트를 위해)
       saveUserData("gradeLevel", ageGroup); // HomeAfter에서 확인하는 키에 값 저장
       saveUserData("age", ageGroup); // 'age'도 별도로 저장
       
@@ -52,8 +56,8 @@ const Age = () => {
 
       {/* 로고 */}
       <div className="age-logo" onClick={goHomeAfter} style={{ cursor: "pointer" }}>
-        <div className="age-logo-dot"></div>
-        <h1 className="age-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 제목 */}
@@ -70,13 +74,13 @@ const Age = () => {
 
         {/* 중학생 */}
         <div className="age-box" onClick={goMiddle} style={{ cursor: "pointer" }}>
-          <img src={icon} className="age-icon" alt="student" />
+          <img src={middle} className="age-middle" alt="student" />
           <p className="age-text">중학생</p>
         </div>
 
         {/* 고등학생 */}
         <div className="age-box" onClick={goHigh} style={{ cursor: "pointer" }}>
-          <img src={icon} className="age-icon" alt="student" />
+          <img src={high} className="age-high" alt="student" />
           <p className="age-text">고등학생</p>
         </div>
       </div>
