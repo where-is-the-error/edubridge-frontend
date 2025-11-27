@@ -18,6 +18,7 @@ import HighSociety3 from "./pages/highsociety3";
 import HighScience3 from "./pages/highscience3";
 import HighScience1 from "./pages/highscience1";
 import MainPage from "./pages/mainpage";
+import Ai from "./pages/AI";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/highscience3" element={<HighScience3 />}/>
         <Route path="/highscience1" element={<HighScience1 />}/>
         <Route path="/mainpage" element={<MainPage />}/>
+        <Route path="/ai" element={<Ai />}/>
       </Routes>
     </Router>
   );

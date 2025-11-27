@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/HomeAfter.css";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import tiger2 from "../assets/tiger2.png";
 
 const HomeAfter = () => {
@@ -23,8 +25,8 @@ const HomeAfter = () => {
 
       {/* 로고 */}
       <div className="after-logo">
-        <div className="after-logo-dot"></div>
-        <h1 className="after-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 콘텐츠 영역 */}
@@ -37,7 +39,7 @@ const HomeAfter = () => {
             {/* 계속하기 */}
             <button
               className="after-btn-continue"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate(-1)}
             >
               Continue!
             </button>

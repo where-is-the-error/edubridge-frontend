@@ -1,7 +1,9 @@
 import React from "react";
 import "../styles/highsub2.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import highimg from "../assets/agehigh.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
 
 const HighSub2 = () => {
@@ -28,8 +30,8 @@ const HighSub2 = () => {
         onClick={goHomeAfter}
         style={{ cursor: "pointer" }}
       >
-        <div className="highsub2-logo-dot"></div>
-        <h1 className="highsub2-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       <h1 className="highsub2-title">계열을 선택해주세요!</h1>
@@ -37,12 +39,12 @@ const HighSub2 = () => {
       <div className="highsub2-box-wrapper">
 
         <div className="highsub2-box" onClick={goSociety} style={{ cursor: "pointer" }}>
-          <img src={icon} className="highsub2-icon" alt="" />
+          <img src={highimg} className="highsub2-icon" alt="" />
           <p className="highsub2-text">문과</p>
         </div>
 
         <div className="highsub2-box" onClick={goScience} style={{ cursor: "pointer" }}>
-          <img src={icon} className="highsub2-icon" alt="" />
+          <img src={highimg} className="highsub2-icon" alt="" />
           <p className="highsub2-text">이과</p>
         </div>
 
