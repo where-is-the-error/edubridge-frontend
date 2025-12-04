@@ -1,0 +1,109 @@
+/* src/styles/MainPage/Carousel.css */
+.carousel {
+  position: relative;
+  
+  /* 🌟 핵심: 부모 너비를 무시하고 화면 전체(100vw)로 확장 */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden; 
+}
+
+/* 🌟 화살표: 화면 양쪽 끝에 '기둥'처럼 완전히 밀착 */
+.arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px; /* 클릭 영역 너비 (원하는 두께로 조절) */
+  
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+  z-index: 50;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 화살표 아이콘 중앙 정렬 */
+  transition: all 0.3s ease;
+}
+
+/* 왼쪽 벽에 0px로 딱 붙임 */
+.arrow.left {
+  left: 0; 
+  justify-content: flex-start; /* 아이콘을 왼쪽 벽 쪽으로 더 붙임 (선택사항) */
+  padding-left: 5px; /* 약간의 여백 */
+}
+
+/* 오른쪽 벽에 0px로 딱 붙임 */
+.arrow.right {
+  right: 0;
+  justify-content: flex-end; /* 아이콘을 오른쪽 벽 쪽으로 더 붙임 (선택사항) */
+  padding-right: 5px; /* 약간의 여백 */
+}
+
+/* 마우스 올렸을 때 효과 */
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  color: #1C91FF;
+}
+
+/* 🌟 콘텐츠 영역: 화살표와 겹치지 않게 패딩 조정 */
+.carousel-content {
+  width: 100%;
+  height: 100%;
+  max-width: 1600px; /* 콘텐츠 최대 너비 제한 (너무 퍼짐 방지) */
+  
+  /* 양쪽 화살표 너비만큼 패딩을 주어 가려짐 방지 */
+  padding: 0 50px; 
+  box-sizing: border-box;
+  
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 왼쪽 (큰 카드) 영역 */
+.big-section {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 오른쪽 (작은 카드들) 영역 */
+.small-section {
+  flex: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 16px;
+  align-content: center;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 1024px) {
+  .carousel-content {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  
+  .arrow {
+    display: none; /* 모바일은 터치 스크롤 권장 */
+  }
+  
+  .big-section, .small-section {
+    width: 100%;
+    flex: auto;
+  }
+}

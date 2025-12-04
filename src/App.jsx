@@ -19,7 +19,7 @@ import HighSociety3 from "./pages/highsociety3";
 import HighScience3 from "./pages/highscience3";
 import HighScience1 from "./pages/highscience1";
 import HighSociety2_1 from "./pages/highsociety2_1";
-import MainPage from "./pages/mainpage";
+import Profile from "./pages/Profile";
 import Ai from "./pages/AI";
 import History2 from "./pages/history2";
 import Geography from "./pages/geography";
@@ -30,6 +30,7 @@ import History3 from "./pages/history3";
 import Geography3 from "./pages/geography3";
 import Morality3 from "./pages/morality3";
 import HighScience3_1 from "./pages/highscience3_1";
+import MainPage from "./pages/MainPage/Main";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="/highscience3" element={<HighScience3 />}/>
         <Route path="/highscience1" element={<HighScience1 />}/>
         <Route path="/highsociety2_1" element={<HighSociety2_1 />} />
+        <Route path="/profile" element={<Profile />}/>
         <Route path="/mainpage" element={<MainPage />}/>
         <Route path="/ai" element={<Ai />}/>
         <Route path="/history2" element={<History2/>}/>

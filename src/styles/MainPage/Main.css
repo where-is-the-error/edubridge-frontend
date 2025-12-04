@@ -1,0 +1,78 @@
+/* Main.css - 전체 레이아웃 */
+.main-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F8F9FA; /* 배경색 지정 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 배너 영역 */
+.main-banner-area {
+  width: 100%;
+  /* Navbar 높이만큼 margin-top이 필요할 수 있음 */
+}
+
+/* 메인 콘텐츠 컨테이너 (2단 레이아웃) */
+.main-content-container {
+  width: 90%; /* 전체 너비의 90% 사용 */
+  max-width: 1200px; /* 최대 너비 제한 */
+  margin: 40px auto; /* 중앙 정렬 및 상하 여백 */
+  display: flex;
+  gap: 30px; /* 좌우 섹션 간격 */
+}
+
+/* 공통 섹션 스타일 */
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 좌측 섹션 (최근 학습 목록) */
+.left-section {
+  flex: 2; /* 우측보다 넓게 차지 */
+}
+
+/* 우측 섹션 (맞춤 문제 풀기) */
+.right-section {
+  flex: 1;
+}
+
+/* 섹션 헤더 (제목 + 전체보기) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.more-link {
+  font-size: 1rem;
+  color: #888;
+  text-decoration: none;
+}
+
+/* 작은 카드 리스트 (가로 스크롤 가능하게 하거나 Grid 사용) */
+.small-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 반응형 그리드 */
+  gap: 20px;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .main-content-container {
+    flex-direction: column; /* 좁은 화면에선 세로 배치 */
+    width: 95%;
+  }
+  .small-card-list {
+    grid-template-columns: 1fr; /* 카드 한 줄로 배치 */
+  }
+}

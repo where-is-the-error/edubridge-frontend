@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/Login.css"; // 스타일 파일 경로 확인 (대소문자 주의)
+import "../styles/Login.css"; 
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,30 +13,27 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  // 비밀번호 보기 토글
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // 로그인 처리 (API 연동 및 더미 데이터 처리)
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
-    // 🌟 1. 더미 데이터 확인 (백엔드 없이 테스트할 때 사용)
+    // 1. 더미 데이터 확인 (백엔드 없을 때 테스트용)
     const DUMMY_EMAIL = "test@test.com";
     const DUMMY_PASSWORD = "1111";
 
     if (email === DUMMY_EMAIL && password === DUMMY_PASSWORD) {
-      console.log("임시 로그인 성공:", email);
-      localStorage.setItem("accessToken", "DUMMY_TOKEN_FOR_TEST");
-      
-      // 🚀 수정됨: 로그인 성공 시 HomeAfter로 이동하여 추가 정보 확인 절차 진행
-      navigate("/homeafter"); 
+      console.log("임시 로그인 성공");
+      localStorage.setItem("accessToken", "DUMMY_TOKEN");
+      localStorage.setItem("userData", JSON.stringify({ nickname: "테스트유저", grade: 3, subject: "math" })); // 더미 데이터 저장
+      navigate("/homeafter");
       return;
     }
 
-    // 🌟 2. 실제 API 호출 로직
+    // 2. 실제 API 호출
     const API_URL = "http://localhost:3000/api/auth/signin";
 
     try {
@@ -50,28 +47,37 @@ const Login = () => {
       });
 
       if (response.ok) {
-        // API 로그인 성공
+        // 성공 시 응답 데이터 받기
         const data = await response.json();
-        localStorage.setItem("accessToken", data.token);
         
-        // 🚀 수정됨: 로그인 성공 시 HomeAfter로 이동
+        // (1) 토큰 저장
+        localStorage.setItem("accessToken", data.token);
+
+        // (2) 🌟 사용자 정보 매핑 및 저장 (핵심!)
+        // 백엔드 필드명을 프론트엔드에서 사용하는 키로 변환하여 저장합니다.
+        const userData = {
+          nickname: data.nickname,
+          age: data.gradeLevel,         // 예: elementary
+          grade: data.gradeNumber,      // 예: 3
+          subject: data.subjectPrimary, // 예: math
+          scienceDetail: data.subjectDetail,
+          track: data.track
+        };
+        
+        // 객체를 문자열로 변환하여 저장
+        localStorage.setItem("userData", JSON.stringify(userData));
+        
+        // (3) 페이지 이동
         navigate("/homeafter");
 
       } else if (response.status === 401) {
-        // 401 Unauthorized
         setError("이메일 또는 비밀번호가 일치하지 않습니다.");
-
       } else {
-        // 그 외 에러 처리
-        try {
-          const errorData = await response.json();
-          setError(errorData.message || `로그인 실패 (코드: ${response.status})`);
-        } catch (e) {
-          setError(`서버 응답 오류가 발생했습니다. (코드: ${response.status})`);
-        }
+        const errorData = await response.json().catch(() => ({}));
+        setError(errorData.message || `로그인 실패 (코드: ${response.status})`);
       }
     } catch (err) {
-      setError("서버에 연결할 수 없습니다. 백엔드 서버 상태를 확인하세요.");
+      setError("서버에 연결할 수 없습니다.");
       console.error("Login Error:", err);
     }
   };

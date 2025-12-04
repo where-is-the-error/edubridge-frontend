@@ -1,0 +1,18 @@
+/* src/styles/MainPage/Home.css */
+.home {
+  width: 100%;
+  min-height: 100vh;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 전체 콘텐츠 중앙 정렬 */
+}
+
+.main-content-wrapper {
+  width: 95%; /* 화면의 95% 사용 */
+  max-width: 1600px; /* 너무 넓어지지 않게 제한 */
+  margin-top: 30px; /* 네비바와의 간격 */
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
