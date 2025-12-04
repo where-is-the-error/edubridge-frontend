@@ -1,10 +1,6 @@
 import React from "react";
 import "../styles/highscience3.css";
 import { useNavigate } from "react-router-dom";
-import koreanimg from "../assets/korean.png";
-import mathimg from "../assets/math.png";
-import englishimg from "../assets/english.png";
-import scienceimg from "../assets/science.png";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
@@ -29,9 +25,13 @@ const HighScience3 = () => {
     navigate("/mainpage");
   };
 
-  const science = () => {
-    saveUserData("subject", "science");
+  const history =() => {
+    saveUserData("subject", "history");
     navigate("/mainpage");
+  }
+
+  const science = () => {
+    navigate("/highscience3_1");
   };
 
   return (
@@ -58,7 +58,6 @@ const HighScience3 = () => {
           onClick={korea}
           style={{ cursor: "pointer" }}
         >
-          <img src={koreanimg} className="sci3-korean" alt="icon" />
           <p className="sci3-text">국어</p>
         </div>
 
@@ -67,7 +66,6 @@ const HighScience3 = () => {
           onClick={math}
           style={{ cursor: "pointer" }}
         >
-          <img src={mathimg} className="sci3-math" alt="icon" />
           <p className="sci3-text">수학</p>
         </div>
 
@@ -76,8 +74,15 @@ const HighScience3 = () => {
           onClick={english}
           style={{ cursor: "pointer" }}
         >
-          <img src={englishimg} className="sci3-english" alt="icon" />
           <p className="sci3-text">영어</p>
+        </div>
+
+        <div
+          className="sci3-box"
+          onClick={history}
+          style={{ cursor: "pointer" }}
+        >
+          <p className="sci3-text">한국사</p>
         </div>
 
         <div
@@ -85,8 +90,7 @@ const HighScience3 = () => {
           onClick={science}
           style={{ cursor: "pointer" }}
         >
-          <img src={scienceimg} className="sci3-science" alt="icon" />
-          <p className="sci3-text">과학</p>
+          <p className="sci3-text">자연・과학</p>
         </div>
 
       </div>

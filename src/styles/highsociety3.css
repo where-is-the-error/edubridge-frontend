@@ -50,15 +50,15 @@ html, body, #root {
 
 /* 박스 영역 */
 .soc3-box-wrapper {
-  margin-top:13.7vh;
+  margin-top:17.5vh;
   display:flex;
   gap:4vw;
 }
 
 /* 박스 */
 .soc3-box {
-  width:17vw;
-  height:17vw;
+  width:15vw;
+  height:15vw;
   background:#fff;
   border:0.4vw solid #000;
   border-radius:2vw;
@@ -71,32 +71,6 @@ html, body, #root {
 }
 
 .soc3-box:hover { transform:scale(1.06); }
-
-/* 아이콘 */
-.soc3-korean {
-  width: 8vw;
-  height: auto;
-  margin-bottom: 2vh;
-}
-
-.soc3-math {
-  width: 8vw;
-  height: auto;
-  margin-bottom: 2vh;
-}
-
-.soc3-english {
-  width: 8vw;
-  height: auto;
-  margin-bottom: 2vh;
-}
-
-.soc3-society {
-  width: 10vw;
-  height: auto;
-  margin-bottom: -0.5vh;
-  margin-top: -2vh;
-}
 
 .soc3-text {
   font-size:3.5vw;

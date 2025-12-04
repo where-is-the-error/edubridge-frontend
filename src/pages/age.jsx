@@ -41,6 +41,9 @@ const Age = () => {
   // 연령 선택 (저장 + 이동)
   const goElementary = () => {
     handleSelection("elementary", "/ele"); // /ele 페이지로 이동
+  const goElegrade = () => {
+    saveUserData("age", "elementary");  // 저장
+    navigate("/elegrade");                   // 이동
   };
 
   const goMiddle = () => {
@@ -67,7 +70,7 @@ const Age = () => {
       <div className="age-box-wrapper">
 
         {/* 초등학생 */}
-        <div className="age-box" onClick={goElementary} style={{ cursor: "pointer" }}>
+        <div className="age-box" onClick={goElegrade} style={{ cursor: "pointer" }}>
           <img src={icon} className="age-icon" alt="student" />
           <p className="age-text">초등학생</p>
         </div>
@@ -87,5 +90,5 @@ const Age = () => {
     </div>
   );
 };
-
+}
 export default Age;

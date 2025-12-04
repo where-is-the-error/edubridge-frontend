@@ -50,15 +50,15 @@ html, body, #root {
 
 /* 박스 그룹 */
 .sci3-box-wrapper {
-  margin-top:13.7vh;
+  margin-top:17.5vh;
   display:flex;
   gap:4vw;
 }
 
 /* 박스 */
 .sci3-box {
-  width:17vw;
-  height:17vw;
+  width:15vw;
+  height:15vw;
   background:#fff;
   border:0.4vw solid #000;
   border-radius:2vw;
@@ -72,31 +72,6 @@ html, body, #root {
 
 .sci3-box:hover {
   transform:scale(1.06);
-}
-
-/* 아이콘 */
-.sci3-korean {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
-}
-
-.sci3-math {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
-}
-
-.sci3-english {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
-}
-
-.sci3-science {
-  width:8vw;
-  height:auto;
-  margin-bottom:2vh;
 }
 
 /* 텍스트 */
