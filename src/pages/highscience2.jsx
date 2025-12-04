@@ -1,7 +1,8 @@
 import React from "react";
 import "../styles/highscience2.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
 
 const HighScience2 = () => {
@@ -24,9 +25,14 @@ const HighScience2 = () => {
     navigate("/mainpage");
   };
 
+  const history = () => {
+    saveUserData("subject", "history");
+    navigate("/mainpage");
+  }
+
   const science = () => {
     saveUserData("subject", "science");
-    navigate("/mainpage");
+    navigate("/highscience2_1");
   };
 
   return (
@@ -38,8 +44,8 @@ const HighScience2 = () => {
         onClick={goHomeAfter}
         style={{ cursor: "pointer" }}
       >
-        <div className="sci2-logo-dot"></div>
-        <h1 className="sci2-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 제목 */}
@@ -49,23 +55,23 @@ const HighScience2 = () => {
       <div className="sci2-box-wrapper">
 
         <div className="sci2-box" onClick={korea} style={{ cursor: "pointer" }}>
-          <img src={icon} className="sci2-icon" alt="icon" />
           <p className="sci2-text">국어</p>
         </div>
 
         <div className="sci2-box" onClick={math} style={{ cursor: "pointer" }}>
-          <img src={icon} className="sci2-icon" alt="icon" />
           <p className="sci2-text">수학</p>
         </div>
 
         <div className="sci2-box" onClick={english} style={{ cursor: "pointer" }}>
-          <img src={icon} className="sci2-icon" alt="icon" />
           <p className="sci2-text">영어</p>
         </div>
 
+        <div className="sci2-box" onClick={history} style={{ cursor: "pointer" }}>
+          <p className="sci2-text">한국사</p>
+        </div>
+
         <div className="sci2-box" onClick={science} style={{ cursor: "pointer" }}>
-          <img src={icon} className="sci2-icon" alt="icon" />
-          <p className="sci2-text">과학</p>
+          <p className="sci2-text">자연・과학</p>
         </div>
 
       </div>

@@ -1,7 +1,9 @@
 import React from "react";
 import "../styles/high.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import highimg from "../assets/agehigh.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
 
 const High = () => {
@@ -36,8 +38,8 @@ const High = () => {
         onClick={goHomeAfter}
         style={{ cursor: "pointer" }}
       >
-        <div className="high-logo-dot"></div>
-        <h1 className="high-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 제목 */}
@@ -48,19 +50,19 @@ const High = () => {
 
         {/* 1학년 */}
         <div className="high-box" onClick={goHighGrade1} style={{ cursor: "pointer" }}>
-          <img src={icon} className="high-icon" alt="icon" />
+          <img src={highimg} className="high-icon" alt="icon" />
           <p className="high-text">1학년</p>
         </div>
 
         {/* 2학년 */}
         <div className="high-box" onClick={goHighSub2} style={{ cursor: "pointer" }}>
-          <img src={icon} className="high-icon" alt="icon" />
+          <img src={highimg} className="high-icon" alt="icon" />
           <p className="high-text">2학년</p>
         </div>
 
         {/* 3학년 */}
         <div className="high-box" onClick={goHighSub3} style={{ cursor: "pointer" }}>
-          <img src={icon} className="high-icon" alt="icon" />
+          <img src={highimg} className="high-icon" alt="icon" />
           <p className="high-text">3학년</p>
         </div>
 

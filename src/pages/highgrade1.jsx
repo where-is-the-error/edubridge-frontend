@@ -1,7 +1,14 @@
 import React from "react";
 import "../styles/highgrade1.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import koreanimg from "../assets/korean.png";
+import mathimg from "../assets/math.png";
+import englishimg from "../assets/english.png";
+import societyimg from "../assets/society.png";
+import scienceimg from "../assets/science.png";
+import historyimg from "../assets/history.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";
 
 const HighGrade1 = () => {
@@ -47,8 +54,8 @@ const HighGrade1 = () => {
         onClick={goHomeAfter}
         style={{ cursor: "pointer" }}
       >
-        <div className="highgrade1-logo-dot"></div>
-        <h1 className="highgrade1-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 제목 */}
@@ -58,32 +65,32 @@ const HighGrade1 = () => {
       <div className="highgrade1-box-wrapper">
 
         <div className="highgrade1-box" onClick={korea}>
-          <img src={icon} className="highgrade1-icon" alt="icon" />
+          <img src={koreanimg} className="highgrade1-korean" alt="icon" />
           <p className="highgrade1-text">국어</p>
         </div>
 
         <div className="highgrade1-box" onClick={math}>
-          <img src={icon} className="highgrade1-icon" alt="icon" />
+          <img src={mathimg} className="highgrade1-math" alt="icon" />
           <p className="highgrade1-text">수학</p>
         </div>
 
         <div className="highgrade1-box" onClick={english}>
-          <img src={icon} className="highgrade1-icon" alt="icon" />
+          <img src={englishimg} className="highgrade1-english" alt="icon" />
           <p className="highgrade1-text">영어</p>
         </div>
 
         <div className="highgrade1-box" onClick={social}>
-          <img src={icon} className="highgrade1-icon" alt="icon" />
+          <img src={societyimg} className="highgrade1-society" alt="icon" />
           <p className="highgrade1-text">사회</p>
         </div>
 
         <div className="highgrade1-box" onClick={science}>
-          <img src={icon} className="highgrade1-icon" alt="icon" />
+          <img src={scienceimg} className="highgrade1-science" alt="icon" />
           <p className="highgrade1-text">과학</p>
         </div>
 
         <div className="highgrade1-box" onClick={history}>
-          <img src={icon} className="highgrade1-icon" alt="icon" />
+          <img src={historyimg} className="highgrade1-history" alt="icon" />
           <p className="highgrade1-text">한국사</p>
         </div>
       </div>

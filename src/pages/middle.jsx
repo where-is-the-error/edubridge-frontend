@@ -1,7 +1,9 @@
 import React from "react";
 import "../styles//middle.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import middleimg from "../assets/agemiddle.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";  // ⬅ 저장 기능 추가
 
 const Middle = () => {
@@ -34,8 +36,8 @@ const Middle = () => {
         onClick={goHomeAfter}
         style={{ cursor: "pointer" }}
       >
-        <div className="middle-logo-dot"></div>
-        <h1 className="middle-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 제목 */}
@@ -46,19 +48,19 @@ const Middle = () => {
 
         {/* 1학년 */}
         <div className="middle-box" onClick={selectGrade1} style={{ cursor: "pointer" }}>
-          <img src={icon} className="middle-icon" alt="icon" />
+          <img src={middleimg} className="middle-icon" alt="icon" />
           <p className="middle-text">1학년</p>
         </div>
 
         {/* 2학년 */}
         <div className="middle-box" onClick={selectGrade2} style={{ cursor: "pointer" }}>
-          <img src={icon} className="middle-icon" alt="icon" />
+          <img src={middleimg} className="middle-icon" alt="icon" />
           <p className="middle-text">2학년</p>
         </div>
 
         {/* 3학년 */}
         <div className="middle-box" onClick={selectGrade3} style={{ cursor: "pointer" }}>
-          <img src={icon} className="middle-icon" alt="icon" />
+          <img src={middleimg} className="middle-icon" alt="icon" />
           <p className="middle-text">3학년</p>
         </div>
 

@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/Home.css";
 import tiger from "../assets/tiger.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -12,10 +14,10 @@ const Home = () => {
       {/* 캔버스 전체 영역 */}
       <div className="home-content">
 
-        {/* 로고 */}
+        {/* 濡쒓퀬 */}
         <div className="home-logo">
-          <div className="home-logo-dot"></div>
-          <h1 className="home-logo-text">EDU BRIDGE</h1>
+          <img src={logo} alt="EduBridge Logo" className="logo" />
+          <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
         </div>
 
         {/* 텍스트 */}

@@ -1,7 +1,8 @@
 import React from "react";
 import "../styles/highscience1.css";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.png";
+import logo from "../assets/logo.png";
+import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";
 
 const HighScience1 = () => {
@@ -24,8 +25,8 @@ const HighScience1 = () => {
 
       {/* 로고 */}
       <div className="sci1-logo" onClick={goHomeAfter} style={{ cursor: "pointer" }}>
-        <div className="sci1-logo-dot"></div>
-        <h1 className="sci1-logo-text">EduBridge</h1>
+        <img src={logo} alt="EduBridge Logo" className="logo" />
+        <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
       {/* 제목 */}
@@ -35,12 +36,10 @@ const HighScience1 = () => {
       <div className="sci1-box-wrapper">
 
         <div className="sci1-box" onClick={integrated}>
-          <img src={icon} className="sci1-icon" alt="icon" />
           <p className="sci1-text">통합과학</p>
         </div>
 
         <div className="sci1-box" onClick={experiment}>
-          <img src={icon} className="sci1-icon" alt="icon" />
           <p className="sci1-text">과학실험탐구</p>
         </div>
 
