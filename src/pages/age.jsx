@@ -24,7 +24,7 @@ const Age = () => {
     const success = await updateUserInfo(updatePayload, "/api/user/info"); 
 
     if (success) {
-      // 2. DB 저장 성공 시 로컬 저장소 업데이트 (HomeAfter 자동 리다이렉트를 위해)
+      // 2. DsssB 저장 성공 시 로컬 저장소 업데이트 (HomeAfter 자동 리다이렉트를 위해)
       saveUserData("gradeLevel", ageGroup); // HomeAfter에서 확인하는 키에 값 저장
       saveUserData("age", ageGroup); // 'age'도 별도로 저장
       
@@ -39,9 +39,12 @@ const Age = () => {
   const goHomeAfter = () => { navigate("/homeafter"); };
 
   // 연령 선택 (저장 + 이동)
-  // 초등학생을 선택하면 DB에 저장하고, 로컬 스토리지에 저장한 다음
-  // 초등학생 전용 학년 선택 페이지로 이동합니다. 경로는 `/elegrade`로 통일합니다.
-  const goElegrade = () => { handleSelection("elementary", "/elegrade"); };
+  const goElementary = () => {
+    handleSelection("elementary", "/ele"); // /ele 페이지로 이동
+  const goElegrade = () => {
+    saveUserData("age", "elementary");  // 저장
+    navigate("/elegrade");                   // 이동
+  };
 
   const goMiddle = () => {
     handleSelection("middle", "/middle"); // /middle 페이지로 이동 (중학생 학년 선택 페이지로 연결되어야 함)
@@ -87,5 +90,5 @@ const Age = () => {
     </div>
   );
 };
-
+}
 export default Age;

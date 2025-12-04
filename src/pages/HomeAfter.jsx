@@ -45,7 +45,7 @@ const HomeAfter = () => {
   // 3단계: 로그인되어 있을 때 보여줄 UI
   return (
     <div className="after-container">
-      {/* 濡쒓퀬 */}
+      {/* 로고 */}
       <div className="after-logo">
         <img src={logo} alt="EduBridge Logo" className="logo" />
         <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
@@ -58,7 +58,8 @@ const HomeAfter = () => {
           <div className="after-btn-group">
             <button
               className="after-btn-continue"
-              onClick={handleContinue}
+              // onClick={handleContinue}
+              onClick={() => navigate(-1)}
             >
               Continue!
             </button>

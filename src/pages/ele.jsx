@@ -8,8 +8,9 @@ import societyimg from "../assets/society.png";
 import scienceimg from "../assets/science.png";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
-import { saveUserData } from "../utils/userStorage";
-import { updateUserInfo } from "../utils/api";const Ele = () => {
+import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
+
+const Ele = () => {
   const navigate = useNavigate();
 
   const goHomeAfter = () => navigate("/homeafter");
