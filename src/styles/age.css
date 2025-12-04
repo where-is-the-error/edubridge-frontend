@@ -96,9 +96,10 @@ body,
    박스 안 아이콘
    =============================== */
 .age-icon {
-  width: 8vw;
+  width: 12vw;
   height: auto;
-  margin-bottom: 2vh;
+  margin-bottom: -2vh;
+  margin-top: -2vh;
 }
 
 .age-middle{

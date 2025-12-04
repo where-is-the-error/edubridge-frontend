@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/highscience1.css";
 import { useNavigate } from "react-router-dom";
-import scienceimg from "../assets/science.png";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";
@@ -37,12 +36,10 @@ const HighScience1 = () => {
       <div className="sci1-box-wrapper">
 
         <div className="sci1-box" onClick={integrated}>
-          <img src={scienceimg} className="sci1-icon" alt="icon" />
           <p className="sci1-text">통합과학</p>
         </div>
 
         <div className="sci1-box" onClick={experiment}>
-          <img src={scienceimg} className="sci1-icon" alt="icon" />
           <p className="sci1-text">과학실험탐구</p>
         </div>
 

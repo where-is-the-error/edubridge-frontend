@@ -1,7 +1,8 @@
 import React from "react";
 import "../styles/highsub3.css";
 import { useNavigate } from "react-router-dom";
-import high from "../assets/agehigh.png";
+import high3atom from "../assets/atom.png";
+import high3earth from "../assets/earth.png";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
@@ -46,7 +47,7 @@ const HighSub3 = () => {
           onClick={goSociety}
           style={{ cursor: "pointer" }}
         >
-          <img src={high} className="highsub3-icon" alt="icon" />
+          <img src={high3earth} className="highsub3-icon" alt="icon" />
           <p className="highsub3-text">문과</p>
         </div>
 
@@ -55,7 +56,7 @@ const HighSub3 = () => {
           onClick={goScience}
           style={{ cursor: "pointer" }}
         >
-          <img src={high} className="highsub3-icon" alt="icon" />
+          <img src={high3atom} className="highsub3-icon" alt="icon" />
           <p className="highsub3-text">이과</p>
         </div>
 

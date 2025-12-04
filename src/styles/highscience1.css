@@ -77,12 +77,6 @@ html, body, #root {
   transform: scale(1.06);
 }
 
-/* 아이콘 */
-.sci1-icon {
-  width: 10vw;
-  height: auto;
-  margin-bottom: 0.5vh;
-}
 
 /* 텍스트 */
 .sci1-text {

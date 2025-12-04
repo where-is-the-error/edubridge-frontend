@@ -1,10 +1,6 @@
 import React from "react";
 import "../styles/highsociety3.css";
 import { useNavigate } from "react-router-dom";
-import koreanimg from "../assets/korean.png";
-import mathimg from "../assets/math.png";
-import englishimg from "../assets/english.png";
-import societyimg from "../assets/society.png";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
 import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
@@ -29,10 +25,14 @@ const HighSociety3 = () => {
     navigate("/mainpage");
   };
 
-  const social = () => {
-    saveUserData("subject", "social");
+  const history = () => {
+    saveUserData("subject", "history");
     navigate("/mainpage");
   };
+
+  const highsociety3_1 = () => {
+    navigate("/highsociety3_1");
+  }
 
   return (
     <div className="soc3-container">
@@ -58,7 +58,6 @@ const HighSociety3 = () => {
           onClick={korea}
           style={{ cursor: "pointer" }}
         >
-          <img src={koreanimg} className="soc3-korean" alt="icon" />
           <p className="soc3-text">국어</p>
         </div>
 
@@ -67,7 +66,6 @@ const HighSociety3 = () => {
           onClick={math}
           style={{ cursor: "pointer" }}
         >
-          <img src={mathimg} className="soc3-math" alt="icon" />
           <p className="soc3-text">수학</p>
         </div>
 
@@ -76,17 +74,23 @@ const HighSociety3 = () => {
           onClick={english}
           style={{ cursor: "pointer" }}
         >
-          <img src={englishimg} className="soc3-english" alt="icon" />
           <p className="soc3-text">영어</p>
         </div>
 
         <div
           className="soc3-box"
-          onClick={social}
+          onClick={history}
           style={{ cursor: "pointer" }}
         >
-          <img src={societyimg} className="soc3-society" alt="icon" />
-          <p className="soc3-text">사회</p>
+          <p className="soc3-text">한국사</p>
+        </div>
+
+        <div
+          className="soc3-box"
+          onClick={highsociety3_1}
+          style={{ cursor: "pointer" }}
+        >
+          <p className="soc3-text">인문・사회</p>
         </div>
 
       </div>
