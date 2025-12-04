@@ -1,8 +1,8 @@
-// src/components/Login.jsx (또는 src/pages/login.jsx)
+// src/pages/login.jsx
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/login.css";
+import "../styles/Login.css"; // 스타일 파일 경로 확인 (대소문자 주의)
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,18 +23,20 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    // 🌟 1. 더미 데이터 확인 (임시 로그인 조건)
+    // 🌟 1. 더미 데이터 확인 (백엔드 없이 테스트할 때 사용)
     const DUMMY_EMAIL = "test@test.com";
     const DUMMY_PASSWORD = "1111";
 
     if (email === DUMMY_EMAIL && password === DUMMY_PASSWORD) {
       console.log("임시 로그인 성공:", email);
       localStorage.setItem("accessToken", "DUMMY_TOKEN_FOR_TEST");
-      navigate("/HomeAfter"); // HomeAfter로 이동하여 설정 유무 체크
+      
+      // 🚀 수정됨: 로그인 성공 시 HomeAfter로 이동하여 추가 정보 확인 절차 진행
+      navigate("/homeafter"); 
       return;
     }
 
-    // 2. 실제 API 호출 로직
+    // 🌟 2. 실제 API 호출 로직
     const API_URL = "http://localhost:3000/api/auth/signin";
 
     try {
@@ -51,7 +53,9 @@ const Login = () => {
         // API 로그인 성공
         const data = await response.json();
         localStorage.setItem("accessToken", data.token);
-        navigate("/HomeAfter"); // HomeAfter로 이동하여 설정 유무 체크
+        
+        // 🚀 수정됨: 로그인 성공 시 HomeAfter로 이동
+        navigate("/homeafter");
 
       } else if (response.status === 401) {
         // 401 Unauthorized
@@ -101,7 +105,7 @@ const Login = () => {
             </span>
           </div>
 
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-message" style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
 
           <button type="submit" className="login-btn">로그인</button>
         </form>

@@ -12,152 +12,143 @@ html, body, #root {
 }
 
 /* ===============================
-   전체 컨테이너
+   전체 컨테이너 (Flex로 중앙 정렬)
    =============================== */
 .after-container {
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   position: relative;
   background: #fff;
 }
 
 /* ===============================
-   로고
+   로고 (좌측 상단 고정은 absolute 유지)
    =============================== */
 .after-logo {
   position: absolute;
-  top: 1vh;
-  left: 1vw;
+  top: 2vh;
+  left: 2vw;
   display: flex;
   align-items: center;
+  z-index: 100;
 }
 
 .logo {
-  width: 6vw;
-  height: 6vw;
-  margin-top: -1vw;
+  width: 60px;
+  height: auto;
 }
 
 .logotext {
-  width: 25vw;
-  height: 8vw;
-  margin-left: -1vw;
+  width: 200px;
+  height: auto;
+  margin-left: -10px;
 }
 
 /* ===============================
-   텍스트 + 버튼 전체 그룹
+   중앙 콘텐츠 영역 (좌: 텍스트/버튼, 우: 호랑이)
    =============================== */
-.after-body {
-  position: absolute;
-  top: 28vh;
-  left: 18vw;
+.after-content {
   display: flex;
   align-items: center;
-  gap: 12vw;
+  justify-content: center;
+  gap: 5vw; /* 텍스트와 호랑이 사이 간격 */
+  width: 80%;
+  max-width: 1200px;
 }
 
-/* ===============================
-   텍스트 영역
-   =============================== */
+/* 텍스트 및 버튼 그룹 */
 .after-text-area {
-  /* 기존의 절대 위치 기반 대신, relative/flex 기반으로 전환 */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* 로그인 박스가 호랑이 이미지와 겹치지 않도록 위치 조정 */
-  position: relative; /* 자식 요소의 absolute 기준 */
-  z-index: 20; /* 호랑이보다 위에 있도록 설정 */
-  /* 필요에 따라 너비 설정 */
-  width: 40vw; 
-  max-width: 420px;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  justify-content: center;
+  gap: 30px; /* 제목과 버튼 사이 간격 */
+  flex: 1;
 }
 
 .after-title {
-  position: absolute;
-  top: 30vh; 
-  left: 23vw;
-  font-size: 4.5vw;
+  font-size: 3rem; /* 반응형 폰트 크기 조정 권장 */
   font-weight: 900;
   color: #3B3B3B;
   margin: 0;
+  white-space: nowrap;
+}
+
+/* 버튼 그룹 */
+.after-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 버튼 사이 간격 */
+  width: 100%;
 }
 
 /* Continue 버튼 */
 .after-btn-continue {
-  position: absolute;
-  top: 43vh;
-  left: 19vw;
-  width: 35vw;
-  height: 10vh;
-
-  font-size: 3.5vw;
+  width: 100%;
+  max-width: 400px;
+  height: 80px;
+  font-size: 1.8rem;
   font-weight: 700;
   background: #1C91FF;
   color: white;
-  border-radius: 1.5vw;
-  transition: transform 0.2s ease;
+  border: none;
+  border-radius: 15px;
   cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  box-shadow: 0px 1vh 0px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease;
 }
 
 .after-btn-continue:hover {
-  transform: scale(1.03);
-  background: #1C91FF !important;
-  color: white !important;
-  border-color: #1C91FF !important;
-  box-shadow: 0px 1vh 0px rgba(0, 0, 0, 0.2) !important;
+  transform: scale(1.02);
+  background: #1478d6;
 }
 
 /* 계정 변경 버튼 */
 .after-btn-change {
-  position: absolute;
-  top: 57vh;   /* 570px → vh */
-  left: 19vw;  /* 310px → vw */
-
-  width: 35vw;
-  height: 10vh;
-
-  font-size: 3.5vw;
+  width: 100%;
+  max-width: 400px;
+  height: 80px;
+  font-size: 1.8rem;
   font-weight: 700;
   background: #fff;
   color: #000;
-  border: 0.3vw solid #000;
-  border-radius: 1.5vw;
-  box-shadow: 0 1vh 0px rgba(0, 0, 0, 0.2);
-
+  border: 3px solid #000;
+  border-radius: 15px;
   cursor: pointer;
-  transition: transform 0.2s ease;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  z-index: 10;
+  box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease;
 }
 
 .after-btn-change:hover {
-  transform: scale(1.03);
-  background: #fff !important;
-  color: #000 !important;
-  border-color: #000 !important;
-  box-shadow: 0px 1vh 0px rgba(0, 0, 0, 0.2) !important;
+  transform: scale(1.02);
+  background: #f0f0f0;
 }
 
 /* ===============================
    호랑이 이미지
    =============================== */
 .after-tiger {
-  position: absolute;
-  top: -8vh;
-  right: 1vw;
-  width: 55vw;
-  z-index: 10; /* 로그인 폼(20)보다 아래에 있도록 설정 */
+  width: 45%; /* 화면 너비의 45% 차지 */
+  max-width: 500px;
   height: auto;
+  object-fit: contain;
+}
+
+/* 모바일 반응형 처리 */
+@media (max-width: 768px) {
+  .after-content {
+    flex-direction: column-reverse; /* 모바일에서는 호랑이가 위, 텍스트가 아래 */
+    text-align: center;
+  }
+
+  .after-text-area {
+    align-items: center;
+  }
+  
+  .after-tiger {
+    width: 60%;
+  }
 }
