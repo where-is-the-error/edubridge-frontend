@@ -1,7 +1,14 @@
 // src/utils/api.js
 
+<<<<<<< Updated upstream
 // 환경 변수에서 URL 가져오기 (없으면 기본값)
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+=======
+// 백엔드 URL은 환경변수 `VITE_API_URL`을 통해 설정합니다.
+// 예: 프로젝트 루트에 `.env` 파일을 만들고
+// `VITE_API_URL=http://localhost:8080` 처럼 설정하세요.
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+>>>>>>> Stashed changes
 
 /**
  * 공통 fetch 래퍼 함수 (토큰 자동 포함 및 401 처리)
@@ -17,6 +24,7 @@ const authFetch = async (endpoint, options = {}) => {
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
+<<<<<<< Updated upstream
 
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -52,6 +60,29 @@ export const updateUserInfo = async (updateData) => {
     });
 
     return response && response.ok;
+=======
+  
+  const API_URL = `${BASE_URL}${path}`;
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(updateData),
+    });
+
+    if (response.ok) {
+      return true;
+    } else {
+      console.error(`정보 업데이트 실패. 서버 응답 코드: ${response.status}`);
+      const errorBody = await response.text();
+      console.error("서버 에러 본문:", errorBody);
+      return false; 
+    }
+>>>>>>> Stashed changes
   } catch (error) {
     return false;
   }

@@ -1,13 +1,24 @@
 /* src/styles/login.css */
 
+<<<<<<< Updated upstream
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+=======
+body {
+  font-family: Arial, sans-serif;
+>>>>>>> Stashed changes
   background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
+<<<<<<< Updated upstream
 .login-box {
   background-color: #ffffff;
   padding: 40px;
@@ -19,6 +30,27 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+=======
+/* 로그인 컨테이너을 회원가입 스타일과 동일하게 적용 */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.login-box {
+  width: 20%;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+>>>>>>> Stashed changes
 }
 
 .login-box h2 {
@@ -30,6 +62,7 @@
 
 .input-group {
   position: relative;
+<<<<<<< Updated upstream
   width: 100%;
 }
 
@@ -45,15 +78,35 @@
 .input-group input:focus {
   border-color: #1C91FF;
   outline: none;
+=======
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+input[type="password"] {
+  padding-right: 30px;
+>>>>>>> Stashed changes
 }
 
 .toggle-password {
   position: absolute;
+<<<<<<< Updated upstream
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   color: #888;
+=======
+  right: 10px;
+  top: 12px;
+  cursor: pointer;
+>>>>>>> Stashed changes
 }
 
 .error-message {
@@ -64,8 +117,15 @@
 
 .login-btn {
   width: 100%;
+<<<<<<< Updated upstream
   padding: 15px;
   background-color: #1C91FF;
+=======
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1a73e8;
+>>>>>>> Stashed changes
   color: white;
   border: none;
   border-radius: 10px;
@@ -79,7 +139,29 @@
   background-color: #0a74d6;
 }
 
+.login-btn {
+  background-color: #1a73e8;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #145db1;
+}
+
 .google-login-btn {
+<<<<<<< Updated upstream
+=======
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #db4437;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+>>>>>>> Stashed changes
   width: 100%;
   padding: 12px;
   background-color: #ffffff;
@@ -102,5 +184,31 @@
 
 .signup-link:hover {
   text-decoration: underline;
+<<<<<<< Updated upstream
   color: #1C91FF;
+=======
+}
+
+/* 모바일 대응 */
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20px;
+  }
+  .login-box {
+    width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .input-group {
+    margin-bottom: 14px;
+  }
+  input[type="text"], input[type="password"], input[type="email"] {
+    padding: 10px;
+    font-size: 15px;
+  }
+  .toggle-password {
+    top: 10px;
+    right: 10px;
+  }
+>>>>>>> Stashed changes
 }
