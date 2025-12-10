@@ -1,5 +1,4 @@
-/* src/styles/login.css */
-
+/* 전체 화면 중앙 정렬 */
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
@@ -10,145 +9,136 @@ body {
   margin: 0;
 }
 
-/* 로그인 컨테이너을 회원가입 스타일과 동일하게 적용 */
+/* 로그인 전체 컨테이너 */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   width: 100vw;
-  padding: 0;
-  background-color: #fff;
-  box-sizing: border-box;
+  height: 100vh;
 }
 
+/* 로그인 박스 */
 .login-box {
-  width: 20%;
-  padding: 40px;
+  width: 25%; /* 박스의 가로 길이를 고정하여 안정감 있게 */
+  min-height: 600px;
+  padding: 90px 48px 40px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
+/* 제목 */
 .login-box h2 {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   color: #1C91FF;
   font-size: 2rem;
   font-weight: 900;
 }
 
+/* 입력창 그룹 */
 .input-group {
   position: relative;
+  margin-bottom: 15px;
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
+/* 입력 필드 통일 */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
   width: 100%;
-  padding: 10px;
-  margin: 5px 0;
+  padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 18px;
+  font-size: 1.2rem;
+  box-sizing: border-box;
 }
 
-input[type="password"] {
-  padding-right: 30px;
+/* placeholder 중앙 */
+input::placeholder {
+  text-align: center;
 }
 
+/* 눈 아이콘 */
 .toggle-password {
   position: absolute;
-  right: 10px;
-  top: 12px;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
 }
 
+/* 에러 메시지 */
 .error-message {
   color: #ff4d4f;
   font-size: 0.9rem;
-  text-align: left;
-}
-
-.login-btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1a73e8;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.login-btn:hover {
-  background-color: #0a74d6;
-}
-
-.login-btn {
-  background-color: #1a73e8;
-  color: white;
-  font-size: 16px;
-  padding: 12px;
-  cursor: pointer;
-}
-
-.login-btn:hover {
-  background-color: #145db1;
-}
-
-.google-login-btn {
-  margin-top: 10px;
-  padding: 12px;
-  background-color: #db4437;
-  color: white;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  width: 100%;
-  padding: 12px;
-  background-color: #ffffff;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
   margin-top: 5px;
 }
 
+/* 로그인 버튼 */
+.login-btn {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a73e8;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 18px;
+}
+
+.login-btn:hover {
+  background-color: #0a64c8;
+}
+
+/* 구글 로그인 버튼 */
+.google-login-btn {
+  width: 100%;
+  padding: 18px;
+  margin-top: 19px;
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.google-login-btn:hover {
+  background-color: #f2f2f2;
+}
+
+/* 회원가입 링크 */
 .signup-link {
-  display: block;
-  margin-top: 15px;
-  color: #666;
+  margin-top: 30px; /* 아래로 여유 있게 떨어뜨림 */
+  color: #555;
+  font-size: 1.25rem;
   text-decoration: none;
-  font-size: 0.95rem;
+  margin-top: 50px;
 }
 
 .signup-link:hover {
   text-decoration: underline;
 }
 
-/* 모바일 대응 */
+/* 모바일 */
 @media (max-width: 480px) {
-  h2 {
-    font-size: 20px;
-  }
   .login-box {
     width: 90%;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 28px 20px;
   }
-  .input-group {
-    margin-bottom: 14px;
+  h2 {
+    font-size: 1.7rem;
   }
-  input[type="text"], input[type="password"], input[type="email"] {
-    padding: 10px;
-    font-size: 15px;
-  }
-  .toggle-password {
-    top: 10px;
-    right: 10px;
+  input {
+    font-size: 14px;
   }
 }
