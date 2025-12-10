@@ -12,10 +12,10 @@
   flex-direction: column;
 }
 
-.bigcard-wrapper:hover {
+/* .bigcard-wrapper:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 40px rgba(16,24,40,0.08);
-}
+} */
 
 .video-box {
   width: 100%;
