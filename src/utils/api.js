@@ -1,5 +1,8 @@
 // src/utils/api.js
 
+// 🚨 누락된 BASE_URL 정의 (백엔드 서버 주소)
+const BASE_URL = "http://localhost:3000";
+
 // 환경 변수에서 URL 가져오기 (없으면 기본값)
 const authFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem("accessToken");
