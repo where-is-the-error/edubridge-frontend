@@ -1,7 +1,6 @@
 // src/utils/api.js
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
-
+// 환경 변수에서 URL 가져오기 (없으면 기본값)
 const authFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem("accessToken");
   const headers = {

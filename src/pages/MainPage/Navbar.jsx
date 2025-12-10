@@ -4,6 +4,8 @@ import "../../styles/MainPage/Navbar.css";
 
 const Navbar = ({ user }) => {
   const [showGrade, setShowGrade] = useState(false);
+  const [showMiddle, setShowMiddle] = useState(false);
+  const [showHigh, setShowHigh] = useState(false);
   const [showSubject, setShowSubject] = useState(false);
   const navigate = useNavigate();
 
@@ -48,9 +50,22 @@ const Navbar = ({ user }) => {
             </div>
           )}
         </li>
-        <li>중학생</li>
-        <li>고등학생</li>
-        
+        <li onMouseEnter={() => setShowMiddle(true)} onMouseLeave={() => setShowMiddle(false)}>
+          중학생
+          {showMiddle && (
+            <div className="dropdown grade-dropdown">
+              <p>1학년</p><p>2학년</p><p>3학년</p>
+            </div>
+          )}
+        </li>
+        <li onMouseEnter={() => setShowHigh(true)} onMouseLeave={() => setShowHigh(false)}>
+          고등학생
+          {showHigh && (
+            <div className="dropdown grade-dropdown">
+              <p>1학년</p><p>2학년</p><p>3학년</p>
+            </div>
+          )}
+        </li>
         <li onMouseEnter={() => setShowSubject(true)} onMouseLeave={() => setShowSubject(false)}>
           과목
           {showSubject && (
