@@ -131,24 +131,10 @@ html, body, #root {
    호랑이 이미지
    =============================== */
 .after-tiger {
-  width: 45%; /* 화면 너비의 45% 차지 */
-  max-width: 500px;
-  height: auto;
-  object-fit: contain;
+ position:absolute;
+ top: -60px;
+ right: 20px;
+ width: 1000px;
+ height: auto;
 }
 
-/* 모바일 반응형 처리 */
-@media (max-width: 768px) {
-  .after-content {
-    flex-direction: column-reverse; /* 모바일에서는 호랑이가 위, 텍스트가 아래 */
-    text-align: center;
-  }
-
-  .after-text-area {
-    align-items: center;
-  }
-  
-  .after-tiger {
-    width: 60%;
-  }
-}

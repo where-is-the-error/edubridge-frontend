@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
@@ -39,40 +40,49 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* ✅ 누구나 접근 가능한 공개 페이지 */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/homeafter" element={<HomeAfter />} />
-        <Route path="/age" element={<Age />}/>
-        <Route path="/ele" element={<Ele />}/>
-        <Route path="/elegrade" element={<Elegrade />}/>
-        <Route path="/middle" element={<Middle />}/>
-        <Route path="/high" element={<High />}/>
-        <Route path="/middlesub" element={<MiddleSub />}/>
-        <Route path="/highgrade1" element={<HighGrade1 />}/>
-        <Route path="/highsub2" element={<HighSub2 />}/>
-        <Route path="/highsociety2" element={<HighSociety2 />}/>
-        <Route path="/highscience2" element={<HighScience2 />}/>
-        <Route path="/highsub3" element={<HighSub3 />}/>
-        <Route path="/highsociety3" element={<HighSociety3 />}/>
-        <Route path="/highscience3" element={<HighScience3 />}/>
-        <Route path="/highscience1" element={<HighScience1 />}/>
-        <Route path="/highsociety2_1" element={<HighSociety2_1 />} />
-        <Route path="/profile" element={<Profile />}/>
-        <Route path="/mainpage" element={<MainPage />}/>
-        <Route path="/ai" element={<Ai />}/>
-        <Route path="/history2" element={<History2/>}/>
-        <Route path="/geography" element={<Geography/>}/>
-        <Route path="/morality" element={<Morality/>}/>
-        <Route path="/highscience2_1" element={<HighScience2_1/>}/>
-        <Route path="/highsociety3_1" element={<HighSociety3_1/>}/>
-        <Route path="/history3" element={<History3/>}/>
-        <Route path="/geography3" element={<Geography3/>}/>
-        <Route path="/morality3" element={<Morality3/>}/>
-        <Route path="/highscience3_1" element={<HighScience3_1/>}/>
-        <Route path="/timetable" element={<TimeTable />}/>
-        <Route path="/dayselect" element={<DaySelect />}/>
-        <Route path="/schoollevelselect" element={<SchoolLevelSelect />}/>
+
+        {/* 🔒 로그인이 필요한 비공개 페이지 (PrivateRoute로 감싸기) */}
+        <Route path="/homeafter" element={<PrivateRoute><HomeAfter /></PrivateRoute>} />
+        <Route path="/mainpage" element={<PrivateRoute><MainPage /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/ai" element={<PrivateRoute><Ai /></PrivateRoute>} />
+        <Route path="/timetable" element={<PrivateRoute><TimeTable /></PrivateRoute>} />
+        
+        {/* 선택 페이지들 */}
+        <Route path="/age" element={<PrivateRoute><Age /></PrivateRoute>} />
+        <Route path="/ele" element={<PrivateRoute><Ele /></PrivateRoute>} />
+        <Route path="/elegrade" element={<PrivateRoute><Elegrade /></PrivateRoute>} />
+        <Route path="/middle" element={<PrivateRoute><Middle /></PrivateRoute>} />
+        <Route path="/high" element={<PrivateRoute><High /></PrivateRoute>} />
+        <Route path="/middlesub" element={<PrivateRoute><MiddleSub /></PrivateRoute>} />
+        <Route path="/highgrade1" element={<PrivateRoute><HighGrade1 /></PrivateRoute>} />
+        <Route path="/highsub2" element={<PrivateRoute><HighSub2 /></PrivateRoute>} />
+        <Route path="/highsub3" element={<PrivateRoute><HighSub3 /></PrivateRoute>} />
+        
+        {/* 고등 세부 과목 선택 */}
+        <Route path="/highsociety2" element={<PrivateRoute><HighSociety2 /></PrivateRoute>} />
+        <Route path="/highscience2" element={<PrivateRoute><HighScience2 /></PrivateRoute>} />
+        <Route path="/highsociety3" element={<PrivateRoute><HighSociety3 /></PrivateRoute>} />
+        <Route path="/highscience3" element={<PrivateRoute><HighScience3 /></PrivateRoute>} />
+        <Route path="/highscience1" element={<PrivateRoute><HighScience1 /></PrivateRoute>} />
+        <Route path="/highsociety2_1" element={<PrivateRoute><HighSociety2_1 /></PrivateRoute>} />
+        <Route path="/history2" element={<PrivateRoute><History2 /></PrivateRoute>} />
+        <Route path="/geography" element={<PrivateRoute><Geography /></PrivateRoute>} />
+        <Route path="/morality" element={<PrivateRoute><Morality /></PrivateRoute>} />
+        <Route path="/highscience2_1" element={<PrivateRoute><HighScience2_1 /></PrivateRoute>} />
+        <Route path="/highsociety3_1" element={<PrivateRoute><HighSociety3_1 /></PrivateRoute>} />
+        <Route path="/history3" element={<PrivateRoute><History3 /></PrivateRoute>} />
+        <Route path="/geography3" element={<PrivateRoute><Geography3 /></PrivateRoute>} />
+        <Route path="/morality3" element={<PrivateRoute><Morality3 /></PrivateRoute>} />
+        <Route path="/highscience3_1" element={<PrivateRoute><HighScience3_1 /></PrivateRoute>} />
+
+        {/* 컴포넌트 테스트용 라우트 (필요하다면 유지, 아니면 제거) */}
+        <Route path="/dayselect" element={<DaySelect />} />
+        <Route path="/schoollevelselect" element={<SchoolLevelSelect />} />
       </Routes>
     </Router>
   );

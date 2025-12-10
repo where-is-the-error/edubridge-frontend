@@ -4,38 +4,46 @@
   width: 100%;
   height: 100%;
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  padding: 30px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bigcard-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
 }
 
 .video-box {
   width: 100%;
-  flex: 1; /* 남은 공간 채우기 (높이 유동적) */
-  min-height: 200px; /* 최소 높이 */
+  flex: 1; /* 남은 높이 채우기 */
+  min-height: 250px;
   background-color: #eee;
-  border-radius: 12px;
+  border-radius: 16px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 15px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
 }
 
 .big-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease;
   text-decoration: none;
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.6rem;
+  font-weight: 800;
+  backdrop-filter: blur(2px);
 }
 
 .video-box:hover .big-overlay {
@@ -43,45 +51,72 @@
 }
 
 .video-title {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #111;
-  margin: 0 0 10px 0;
-  
-  white-space: nowrap;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .rating-section {
   background: #f8fbff;
-  padding: 15px;
-  border-radius: 10px;
-  border-left: 4px solid #1C91FF;
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 5px solid #1C91FF;
 }
 
 .section-title {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #1C91FF;
-  font-weight: 700;
-  margin: 0 0 5px 0;
+  font-weight: 800;
+  margin: 0 0 8px 0;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.average-rating {
-  font-size: 1.2rem;
-  color: #F2C94C;
-  margin-bottom: 8px;
+/* ⭐️ 별점 오버레이 컨테이너 */
+.star-rating-container {
+  display: inline-block;
+  font-size: 1.5rem;
+  color: #ddd; /* 빈 별 색상 (회색) */
+  position: relative;
+  unicode-bidi: bidi-override;
+  width: max-content;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+/* ⭐️ 채워진 별 (오버레이) */
+.star-rating-fill {
+  color: #F2C94C; /* 채워진 별 색상 (노란색) */
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 1;
 }
 
 .ai-comment-box {
-  font-size: 0.9rem;
-  color: #333;
-  line-height: 1.5;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
   font-weight: 500;
   
+  /* ⭐️ 줄바꿈 적용 핵심 코드 */
+  white-space: pre-wrap; 
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 6; /* 줄바꿈이 되므로 넉넉하게 늘림 */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
