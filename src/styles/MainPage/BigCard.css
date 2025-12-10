@@ -1,26 +1,21 @@
 /* src/styles/MainPage/BigCard.css */
 .bigcard-wrapper {
-  width: 100%; /* 80% -> 100%로 변경하여 꽉 차게 만듦 */
-  height: 100%; /* 높이도 부모에 맞춤 */
+  width: 100%;
+  height: 100%;
   background: #ffffff;
   padding: 25px;
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(16,24,40,0.06);
   transition: box-shadow 150ms ease, transform 150ms ease;
-  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
 
-/* .bigcard-wrapper:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 40px rgba(16,24,40,0.08);
-} */
-
 .video-box {
   width: 100%;
-  flex-grow: 1; /* 남은 공간을 영상 박스가 차지하도록 */
-  min-height: 350px; /* 영상 박스 최소 높이 증가 (260px -> 350px) */
+  flex-grow: 1;
+  min-height: 350px;
   background: linear-gradient(180deg, #ececec, #dcdcdc);
   border-radius: 12px;
 }
@@ -85,7 +80,7 @@
 }
 
 .bar-container {
-  flex: 1; /* 그래프가 남은 공간 차지 */
+  flex: 1;
   height: 14px;
   background: #f1f5f9;
   margin: 0 12px;

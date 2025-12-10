@@ -8,7 +8,7 @@ import societyimg from "../assets/society.png";
 import scienceimg from "../assets/science.png";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
-import { handleSelection } from "../utils/selectionHandler"; // 👈 import
+import { handleSelection } from "../utils/selectionHandler"; 
 
 const Ele = () => {
   const navigate = useNavigate();

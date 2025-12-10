@@ -1,4 +1,3 @@
-// src/pages/MainPage/Navbar.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import "../../styles/MainPage/Navbar.css";
@@ -8,11 +7,11 @@ const Navbar = ({ user }) => {
   const [showSubject, setShowSubject] = useState(false);
   const navigate = useNavigate();
 
-  // 🌟 누락되었던 함수 정의 추가!
   const handleProfileClick = () => {
     navigate("/profile");
   };
 
+  // 과목 코드를 한글명으로 변환하는 맵
   const subjectMap = {
     korea: "국어", math: "수학", english: "영어", social: "사회", science: "과학",
     history: "한국사", world: "세계사", east: "동아시아사",
@@ -36,9 +35,11 @@ const Navbar = ({ user }) => {
   return (
     <nav className="navbar">
       <ul className="nav-menu">
-        <li className="logo" onClick={() => navigate("/mainpage")} style={{cursor: "pointer"}}>EduBridge</li>
+        {/* 로고 클릭 시 메인페이지 이동 */}
+        <li className="logo" onClick={() => navigate("/mainpage")} style={{cursor: "pointer"}}>
+          EduBridge
+        </li>
 
-        {/* ... (중간 메뉴 생략 - 기존과 동일) ... */}
         <li onMouseEnter={() => setShowGrade(true)} onMouseLeave={() => setShowGrade(false)}>
           초등학생
           {showGrade && (
@@ -49,6 +50,7 @@ const Navbar = ({ user }) => {
         </li>
         <li>중학생</li>
         <li>고등학생</li>
+        
         <li onMouseEnter={() => setShowSubject(true)} onMouseLeave={() => setShowSubject(false)}>
           과목
           {showSubject && (
@@ -60,6 +62,7 @@ const Navbar = ({ user }) => {
         
         <li onClick={() => navigate("/ai")} style={{ cursor: "pointer" }}>AI</li>
 
+        {/* 프로필 영역: 동적 데이터 표시 */}
         <li 
           className="profile" 
           onClick={handleProfileClick} 

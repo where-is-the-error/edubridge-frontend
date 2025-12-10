@@ -31,6 +31,9 @@ import Geography3 from "./pages/geography3";
 import Morality3 from "./pages/morality3";
 import HighScience3_1 from "./pages/highscience3_1";
 import MainPage from "./pages/MainPage/Main";
+import TimeTable from "./pages/timetable";
+import DaySelect from "./components/DaySelect";
+import SchoolLevelSelect from "./components/SchoolLevelSelect";
 
 function App() {
   return (
@@ -67,6 +70,9 @@ function App() {
         <Route path="/geography3" element={<Geography3/>}/>
         <Route path="/morality3" element={<Morality3/>}/>
         <Route path="/highscience3_1" element={<HighScience3_1/>}/>
+        <Route path="/timetable" element={<TimeTable />}/>
+        <Route path="/dayselect" element={<DaySelect />}/>
+        <Route path="/schoollevelselect" element={<SchoolLevelSelect />}/>
       </Routes>
     </Router>
   );
