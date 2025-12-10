@@ -1,12 +1,12 @@
 /* src/styles/MainPage/BigCard.css */
+
 .bigcard-wrapper {
   width: 100%;
   height: 100%;
   background: #ffffff;
-  padding: 25px;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(16,24,40,0.06);
-  transition: box-shadow 150ms ease, transform 150ms ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  padding: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -14,99 +14,74 @@
 
 .video-box {
   width: 100%;
-  flex-grow: 1;
-  min-height: 350px;
-  background: linear-gradient(180deg, #ececec, #dcdcdc);
+  flex: 1; /* 남은 공간 채우기 (높이 유동적) */
+  min-height: 200px; /* 최소 높이 */
+  background-color: #eee;
   border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.big-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.video-box:hover .big-overlay {
+  opacity: 1;
 }
 
 .video-title {
-  margin-top: 20px;
-  font-size: 26px;
-  font-weight: 700;
-  color: #111827;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 10px 0;
+  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .rating-section {
-  margin-top: 20px;
+  background: #f8fbff;
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #1C91FF;
 }
 
 .section-title {
-  font-size: 16px;
-  color: #374151;
-  margin-bottom: 8px;
-  font-weight: 600;
+  font-size: 0.8rem;
+  color: #1C91FF;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
 }
 
 .average-rating {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 15px 0;
+  font-size: 1.2rem;
+  color: #F2C94C;
+  margin-bottom: 8px;
 }
 
-.star-row {
-  font-size: 24px;
-  color: #f59e0b;
-}
-
-.rate-btn {
-  background: #ffda4b;
-  border: none;
-  padding: 10px 18px;
-  font-size: 14px;
-  border-radius: 24px;
-  cursor: pointer;
-  font-weight: 700;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.rating-bars {
-  margin-top: 15px;
-}
-
-.rating-row {
-  display: flex;
-  align-items: center;
-  margin: 8px 0;
-}
-
-.score-label {
-  width: 40px;
-  font-size: 14px;
-  color: #374151;
+.ai-comment-box {
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.5;
   font-weight: 500;
-}
-
-.bar-container {
-  flex: 1;
-  height: 14px;
-  background: #f1f5f9;
-  margin: 0 12px;
-  border-radius: 10px;
+  
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.bar-fill {
-  height: 100%;
-  border-radius: 10px;
-}
-
-.count-label {
-  font-size: 13px;
-  color: #6b7280;
-}
-
-.ai-title {
-  margin-top: 20px;
-  font-size: 16px;
-  color: #111827;
-  font-weight: 600;
-}
-
-.ai-stars {
-  font-size: 26px;
-  color: #f59e0b;
-  margin-top: 5px;
 }

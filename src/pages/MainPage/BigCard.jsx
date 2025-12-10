@@ -1,55 +1,39 @@
 import React from "react";
-import "../../styles/mainpage/Bigcard.css";
+import "../../styles/MainPage/BigCard.css";
 
-const BigCard = () => {
+const BigCard = ({ data }) => {
+  if (!data) return <div className="bigcard-wrapper">Loading...</div>;
+
+  const renderStars = (rating) => {
+    const score = Math.round(rating || 0);
+    return "★".repeat(score) + "☆".repeat(5 - score);
+  };
+
   return (
     <div className="bigcard-wrapper">
-      {/* 영상 플레이어 (회색 박스) */}
-      <div className="video-box"></div>
+      <div 
+        className="video-box" 
+        style={{ 
+          backgroundImage: `url(${data.imageUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <a href={data.detailUrl} target="_blank" rel="noreferrer" className="big-overlay">
+          영상 보러가기 ▶
+        </a>
+      </div>
 
-      {/* 영상 제목 */}
-      <h2 className="video-title">영상 제목</h2>
+      <h2 className="video-title">{data.title}</h2>
 
-      {/* 사용자 별점 영역 */}
       <div className="rating-section">
-        <p className="section-title">사용자 별점</p>
-        <hr />
-
-        {/* 평균 별점 */}
+        <p className="section-title">AI 분석 리포트</p>
         <div className="average-rating">
-          <span className="star-row">★ ★ ★ ★ ☆</span>
-          <button className="rate-btn">별점 매기러 가기!</button>
+          {renderStars(data.aiRating)} <span style={{color:'black', fontSize:'0.9rem'}}>({data.aiRating}점)</span>
         </div>
-
-        {/* 별점 분포 그래프 */}
-        <div className="rating-bars">
-          {[
-            { score: 5, color: "#f2c94c", width: "60%" },
-            { score: 4, color: "#f2c94c", width: "45%" },
-            { score: 3, color: "#eb5757", width: "80%" },
-            { score: 2, color: "#f2c94c", width: "35%" },
-            { score: 1, color: "#f2c94c", width: "55%" },
-          ].map((item) => (
-            <div key={item.score} className="rating-row">
-              <span className="score-label">{item.score}점</span>
-
-              <div className="bar-container">
-                <div
-                  className="bar-fill"
-                  style={{ background: item.color, width: item.width }}
-                />
-              </div>
-
-              <span className="count-label">개수</span>
-            </div>
-          ))}
-        </div>
-
-        <hr />
-
-        {/* AI 별점 */}
-        <p className="ai-title">AI 별점</p>
-        <p className="ai-stars">★ ★ ★ ★ ☆</p>
+        <p className="ai-comment-box">
+          "{data.aiComment}"
+        </p>
       </div>
     </div>
   );

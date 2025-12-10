@@ -1,92 +1,78 @@
 /* src/styles/MainPage/Carousel.css */
+
 .carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 600px; /* 전체 높이 고정 (화면에 맞게 조절 가능) */
   position: relative;
-  
-  /* 화면 전체 너비로 확장 */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0 50px; /* 화살표 공간 확보 */
   box-sizing: border-box;
-  overflow: hidden; 
-}
-
-.arrow {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 40px;
-  border: none;
-  background: transparent;
-  font-size: 2rem;
-  color: #ddd;
-  cursor: pointer;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.arrow.left {
-  left: 0; 
-  padding-left: 5px;
-}
-
-.arrow.right {
-  right: 0;
-  padding-right: 5px;
-}
-
-.arrow:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-  color: #1C91FF;
 }
 
 .carousel-content {
+  display: flex;
   width: 100%;
   height: 100%;
-  max-width: 1600px;
-  padding: 0 50px; 
-  box-sizing: border-box;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+  gap: 20px; /* 큰 카드와 작은 카드 영역 사이 간격 */
 }
 
+/* 왼쪽: 큰 카드 영역 */
 .big-section {
-  flex: 1;
+  flex: 0 0 35%; /* 전체 너비의 35% 고정 */
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  min-width: 300px;
 }
 
+/* 오른쪽: 작은 카드 그리드 영역 */
 .small-section {
-  flex: 1;
+  flex: 1; /* 남은 공간 모두 차지 */
   height: 100%;
+  
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 16px;
-  align-content: center;
+  /* 가로는 최소 220px, 남으면 1fr씩 분배 */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  /* 세로는 2줄로 고정하되 비율(1fr)로 나눔 */
+  grid-template-rows: repeat(2, 1fr);
+  gap: 15px;
+  
+  /* 내용이 너무 많으면 스크롤 */
+  overflow-y: auto;
+  padding: 2px; /* 그림자 잘림 방지 */
 }
 
-@media (max-width: 1024px) {
-  .carousel-content {
-    flex-direction: column;
-    padding: 0 20px;
-  }
-  .arrow {
-    display: none;
-  }
-  .big-section, .small-section {
-    width: 100%;
-    flex: auto;
-  }
+/* 스크롤바 숨기기 (깔끔하게) */
+.small-section::-webkit-scrollbar {
+  width: 6px;
 }
+.small-section::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 3px;
+}
+
+/* 화살표 버튼 */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.arrow:hover {
+  background: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.arrow.left { left: 5px; }
+.arrow.right { right: 5px; }
