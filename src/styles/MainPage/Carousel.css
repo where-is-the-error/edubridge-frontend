@@ -1,55 +1,151 @@
 /* src/styles/MainPage/Carousel.css */
 
-.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* 1. 3D 공간 */
+.book-perspective {
   width: 100%;
-  height: 650px; /* 높이를 조금 늘려 시원하게 */
-  position: relative;
-  /* 화살표 제거로 인한 패딩 제거 */
-  padding: 0; 
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1500px;
+  padding: 20px;
   box-sizing: border-box;
 }
 
-.carousel-content {
+/* 2. 책 컨테이너 */
+.book-container {
   display: flex;
   width: 100%;
+  max-width: 1300px;
   height: 100%;
-  gap: 24px; /* 섹션 간격 */
+  transform-style: preserve-3d;
+  transform: rotateX(5deg);
+  transition: transform 0.5s ease;
+  position: relative; /* 책갈피 위치 기준 */
 }
 
-/* 왼쪽: 큰 카드 영역 (50%) */
-.big-section {
-  flex: 1; 
-  height: 100%;
-  min-width: 0; /* flex 자식의 overflow 문제 방지 */
-}
-
-/* 오른쪽: 작은 카드 그리드 영역 (50%) */
-.small-section {
+/* 3. 공통 페이지 */
+.book-page {
   flex: 1;
   height: 100%;
-  min-width: 0;
-  
-  display: grid;
-  /* 반응형 그리드: 화면이 좁아지면 1열, 넓으면 2열 */
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-template-rows: repeat(2, 1fr); /* 2줄로 배치 */
-  gap: 20px;
-  
-  overflow-y: auto;
-  padding: 4px; /* 그림자 잘림 방지용 여백 */
+  background-color: #fffef8;
+  position: relative;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow: visible; /* 책갈피가 밖으로 나가야 함 */
+  border: 1px solid #e0dcd0;
 }
 
-/* 스크롤바 숨김 (깔끔하게) */
-.small-section::-webkit-scrollbar {
+/* 4. 왼쪽 페이지 */
+.left-page {
+  border-radius: 15px 0 0 15px;
+  background: linear-gradient(to right, #fffef8 90%, #e8e4d9 100%);
+  box-shadow: 
+    -1px 1px 0 #c9c5b9,
+    -2px 2px 0 #c9c5b9,
+    -3px 3px 0 #c9c5b9,
+    -4px 4px 0 #c9c5b9,
+    -5px 5px 0 #c9c5b9,
+    -6px 6px 0 #c9c5b9,
+    -15px 15px 20px rgba(0,0,0,0.15);
+  transform-origin: right center;
+  z-index: 2; /* 오른쪽 페이지보다 위로 */
+}
+
+/* 5. 오른쪽 페이지 */
+.right-page {
+  border-radius: 0 15px 15px 0;
+  background: linear-gradient(to left, #fffef8 90%, #e8e4d9 100%);
+  box-shadow: 
+    1px 1px 0 #c9c5b9,
+    2px 2px 0 #c9c5b9,
+    3px 3px 0 #c9c5b9,
+    4px 4px 0 #c9c5b9,
+    5px 5px 0 #c9c5b9,
+    6px 6px 0 #c9c5b9,
+    15px 15px 20px rgba(0,0,0,0.15);
+  transform-origin: left center;
+  z-index: 1;
+}
+
+/* 6. 페이지 내부 콘텐츠 */
+.page-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* 내부 내용은 넘치지 않게 */
+}
+
+.page-content.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.page-content.grid-layout::-webkit-scrollbar {
   width: 6px;
 }
-.small-section::-webkit-scrollbar-thumb {
-  background-color: #ddd;
+.page-content.grid-layout::-webkit-scrollbar-thumb {
+  background-color: #dcd8cc;
   border-radius: 3px;
 }
-.small-section::-webkit-scrollbar-track {
-  background-color: transparent;
+
+.carousel-loading {
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* 🏷️ 책갈피 (인덱스 탭) 스타일 */
+.book-bookmarks {
+  position: absolute;
+  top: 40px; /* 위쪽 여백 */
+  right: -12px; /* 책 안쪽으로 살짝 숨김 (기본) */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 0; /* 페이지 뒤로 보내서 끼워진 느낌 */
+}
+
+.bookmark {
+  width: 100px;
+  height: 50px;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 글자를 끝쪽으로 */
+  padding-right: 15px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+  
+  /* 폰트 스타일 */
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 1rem;
+}
+
+/* 색상별 스타일 */
+.bookmark.red { background-color: #FF6B6B; top: 0; }
+.bookmark.orange { background-color: #FF9F43; top: 60px; }
+.bookmark.yellow { background-color: #F2C94C; top: 120px; color: #333; } /* 노랑은 글자색 진하게 */
+
+/* 🖱️ 호버 시 오른쪽으로 튀어나옴 */
+.bookmark:hover {
+  transform: translateX(80px); /* 오른쪽으로 쑥 나옴 */
+}
+
+.bookmark span {
+  opacity: 0.8; /* 평소엔 약간 흐리게 */
+  transition: opacity 0.3s;
+}
+
+.bookmark:hover span {
+  opacity: 1; /* 호버 시 선명하게 */
 }

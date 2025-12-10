@@ -42,7 +42,7 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   font-size: 1rem;
-  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  box-sizing: border-box;
   transition: border-color 0.2s;
 }
 

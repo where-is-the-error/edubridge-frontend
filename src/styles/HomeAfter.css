@@ -131,10 +131,12 @@ html, body, #root {
    호랑이 이미지
    =============================== */
 .after-tiger {
- position:absolute;
- top: -60px;
- right: 20px;
- width: 1000px;
- height: auto;
+ position: absolute;
+  /* 픽셀 대신 뷰포트 단위 사용 */
+  top: -7vh; 
+  right: 3vw;
+  width: 55vw; 
+  height: auto;
+  z-index: 5;
 }
 

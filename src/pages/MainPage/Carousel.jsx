@@ -1,49 +1,66 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/MainPage/Carousel.css";
 import BigCard from "./BigCard";
 import SmallCard from "./Smallcard";
 
 const Carousel = ({ data }) => {
-  // 현재 빅 카드에 보여줄 데이터를 상태로 관리
+  const navigate = useNavigate();
   const [selectedData, setSelectedData] = useState(null);
 
-  // 데이터가 로드되면 첫 번째 영상을 기본값으로 설정
   useEffect(() => {
     if (data && data.length > 0) {
       setSelectedData(data[0]);
     }
   }, [data]);
 
-  // 데이터 로딩 중 처리
   if (!data || data.length === 0 || !selectedData) {
     return (
-      <div className="carousel" style={{ height: "600px", background: "#f8f9fa", borderRadius: "16px" }}>
-        <p style={{ color: "#888" }}>추천 영상을 불러오는 중입니다...</p>
+      <div className="carousel-loading">
+        <p>책을 펼치는 중입니다...</p>
       </div>
     );
   }
 
-  // 오른쪽 리스트: 현재 선택된(빅카드에 있는) 영상을 제외하고 나머지 표시 (최대 6개)
   const smallCardData = data.filter(item => item.id !== selectedData.id).slice(0, 6);
 
   return (
-    <div className="carousel">
-      <div className="carousel-content">
-        {/* 왼쪽: 선택된 큰 카드 (정보 모두 표시) */}
-        <div className="big-section">
-          <BigCard data={selectedData} />
-        </div>
+    <div className="book-perspective">
+      <div className="book-container">
         
-        {/* 오른쪽: 작은 카드 리스트 (썸네일만 표시, 클릭 시 빅카드로 이동) */}
-        <div className="small-section">
-          {smallCardData.map((item) => (
-            <SmallCard 
-              key={item.id} 
-              data={item} 
-              onClick={() => setSelectedData(item)} // 클릭 시 해당 데이터로 교체
-            />
-          ))}
+        {/* 📖 왼쪽 페이지 */}
+        <div className="book-page left-page">
+          <div className="page-content">
+            <BigCard key={selectedData.id} data={selectedData} />
+          </div>
         </div>
+
+        {/* 📖 오른쪽 페이지 */}
+        <div className="book-page right-page">
+          <div className="page-content grid-layout">
+            {smallCardData.map((item) => (
+              <SmallCard 
+                key={item.id} 
+                data={item} 
+                onClick={() => setSelectedData(item)} 
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* 🏷️ 책갈피 (인덱스) - 페이지 뒤에 숨겨진 느낌을 위해 컨테이너 직속 자식으로 배치 */}
+        <div className="book-bookmarks">
+          <div className="bookmark red" onClick={() => navigate("/mainpage")}>
+            <span>메인으로</span>
+          </div>
+          <div className="bookmark orange" onClick={() => navigate("/ai")}>
+            <span>학습하기</span>
+          </div>
+          <div className="bookmark yellow" onClick={() => navigate("/profile")}>
+            <span>내 정보</span>
+          </div>
+        </div>
+
       </div>
     </div>
   );

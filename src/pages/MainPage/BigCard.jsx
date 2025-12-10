@@ -14,7 +14,9 @@ const BigCard = ({ data }) => {
         className="video-box" 
         style={{ 
           backgroundImage: `url(${data.imageUrl})`,
-          backgroundSize: 'cover',
+          /* ⭐️ 수정됨: 가로/세로 비율 유지하며 전체 보이기 */
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center'
         }}
       >
@@ -28,12 +30,10 @@ const BigCard = ({ data }) => {
       <div className="rating-section">
         <p className="section-title">AI 분석 리포트</p>
         
-        {/* ⭐️ 소수점 별점 구현 */}
+        {/* 별점 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
           <div className="star-rating-container">
-            {/* 회색 배경 별 (항상 5개) */}
             <span>★★★★★</span>
-            {/* 노란색 채워진 별 (width로 조절) */}
             <div className="star-rating-fill" style={{ width: `${percentage}%` }}>
               ★★★★★
             </div>
@@ -43,7 +43,7 @@ const BigCard = ({ data }) => {
           </span>
         </div>
 
-        {/* ⭐️ 줄바꿈이 적용된 코멘트 (CSS white-space: pre-wrap 덕분에 \n이 적용됨) */}
+        {/* 코멘트 */}
         <p className="ai-comment-box">
           {data.aiComment}
         </p>
