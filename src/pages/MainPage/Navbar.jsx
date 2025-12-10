@@ -1,103 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom"; 
 import "../../styles/MainPage/Navbar.css";
+import logo from "../../assets/logo.png";
+import tigerIcon from "../../assets/tiger.png"; // 프로필용
 
 const Navbar = ({ user }) => {
-  const [showGrade, setShowGrade] = useState(false);
-  const [showMiddle, setShowMiddle] = useState(false);
-  const [showHigh, setShowHigh] = useState(false);
-  const [showSubject, setShowSubject] = useState(false);
   const navigate = useNavigate();
-
-  const handleProfileClick = () => {
-    navigate("/profile");
-  };
-
-  // 과목 코드를 한글명으로 변환하는 맵
-  const subjectMap = {
-    korea: "국어", math: "수학", english: "영어", social: "사회", science: "과학",
-    history: "한국사", world: "세계사", east: "동아시아사",
-    koreageography: "한국지리", worldgeography: "세계지리",
-    m1: "생활과 윤리", m2: "윤리와 사상", m3: "경제", m4: "정치와 법", m5: "사회・문화",
-    physics: "물리 I", chemical: "화학 I", lifescience: "생명 I", earthscience: "지구 I",
-    physics2: "물리 II", chemical2: "화학 II", lifescience2: "생명 II", earthscience2: "지구 II"
-  };
-
-  const getUserInfoText = () => {
-    if (!user || !user.grade) return "학습 정보를 선택해주세요";
-    let text = `${user.grade}학년`;
-    const subjectKey = user.scienceDetail || user.subject;
-    if (subjectKey) {
-      const subjectName = subjectMap[subjectKey] || subjectKey;
-      text += ` | ${subjectName} 위주`;
-    }
-    return text;
-  };
 
   return (
     <nav className="navbar">
-      <ul className="nav-menu">
-        {/* 로고 클릭 시 메인페이지 이동 */}
-        <li className="logo" onClick={() => navigate("/mainpage")} style={{cursor: "pointer"}}>
-          EduBridge
-        </li>
+      
+      {/* 1. 로고 (좌측) */}
+      <div className="nav-logo-group" onClick={() => navigate("/mainpage")}>
+        <img src={logo} alt="EduBridge Logo" className="nav-logo-img" />
+        <span className="nav-logo-text">EduBridge</span>
+      </div>
 
-        <li onMouseEnter={() => setShowGrade(true)} onMouseLeave={() => setShowGrade(false)}>
-          초등학생
-          {showGrade && (
-            <div className="dropdown grade-dropdown">
-              <p>1학년</p><p>2학년</p><p>3학년</p><p>4학년</p><p>5학년</p><p>6학년</p>
-            </div>
-          )}
-        </li>
-        <li onMouseEnter={() => setShowMiddle(true)} onMouseLeave={() => setShowMiddle(false)}>
-          중학생
-          {showMiddle && (
-            <div className="dropdown grade-dropdown">
-              <p>1학년</p><p>2학년</p><p>3학년</p>
-            </div>
-          )}
-        </li>
-        <li onMouseEnter={() => setShowHigh(true)} onMouseLeave={() => setShowHigh(false)}>
-          고등학생
-          {showHigh && (
-            <div className="dropdown grade-dropdown">
-              <p>1학년</p><p>2학년</p><p>3학년</p>
-            </div>
-          )}
-        </li>
-        <li onMouseEnter={() => setShowSubject(true)} onMouseLeave={() => setShowSubject(false)}>
-          과목
-          {showSubject && (
-            <div className="dropdown subject-dropdown">
-              <p>국어</p><p>수학</p><p>영어</p><p>사회</p><p>과학</p>
-            </div>
-          )}
-        </li>
+      {/* 2. 오른쪽 메뉴 (시간표, AI, 프로필) */}
+      <div className="nav-menu-group">
         
-        <li onClick={() => navigate("/ai")} style={{ cursor: "pointer" }}>AI</li>
+        {/* 시간표 아이콘 */}
+        <div className="nav-icon-btn" onClick={() => navigate("/timetable")}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+          </svg>
+          <span className="nav-icon-label">시간표</span>
+        </div>
 
-        {/* 프로필 영역: 동적 데이터 표시 */}
-        <li 
-          className="profile" 
-          onClick={handleProfileClick} 
-          style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'flex-end', 
-            justifyContent: 'center', 
-            lineHeight: '1.2',
-            cursor: 'pointer'
-          }}
-        >
-          <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>
-            {user && user.nickname ? user.nickname : "게스트"}님
-          </span>
-          <span style={{ fontSize: '0.75rem', opacity: 0.9, fontWeight: 'normal' }}>
-            {getUserInfoText()}
-          </span>
-        </li>
-      </ul>
+        {/* AI 아이콘 */}
+        <div className="nav-icon-btn" onClick={() => navigate("/ai")}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+          </svg>
+          <span className="nav-icon-label">AI</span>
+        </div>
+
+        {/* 프로필 */}
+        <div className="nav-profile-box" onClick={() => navigate("/profile")}>
+          <img src={tigerIcon} alt="profile" className="profile-img" />
+          <div>
+            <span className="profile-text">
+              {user && user.nickname ? user.nickname : "게스트"}
+            </span>
+            <span className="profile-nim">님</span>
+          </div>
+        </div>
+
+      </div>
     </nav>
   );
 };

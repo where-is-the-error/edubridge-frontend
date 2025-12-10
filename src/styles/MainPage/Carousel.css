@@ -1,151 +1,252 @@
 /* src/styles/MainPage/Carousel.css */
 
-/* 1. 3D 공간 */
+/* 1. 3D 공간 설정 */
 .book-perspective {
   width: 100%;
-  height: 700px;
+  height: 750px;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1500px;
+  perspective: 2000px;
+  overflow: visible;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-/* 2. 책 컨테이너 */
+/* 2. 책 전체 컨테이너 */
 .book-container {
-  display: flex;
+  position: relative;
   width: 100%;
   max-width: 1300px;
   height: 100%;
   transform-style: preserve-3d;
-  transform: rotateX(5deg);
-  transition: transform 0.5s ease;
-  position: relative; /* 책갈피 위치 기준 */
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* 3. 공통 페이지 */
-.book-page {
-  flex: 1;
+/* 📕 닫힌 상태: 책(오른쪽 반쪽)이 화면 정중앙에 오도록 위치 보정 */
+.book-container.book-closed {
+  transform: translateX(-25%);
+}
+
+/* 📖 열린 상태: 전체가 화면 중앙 */
+.book-container:not(.book-closed) {
+  transform: translateX(0%);
+}
+
+
+/* =========================================
+   3. 책장 (Leaf) - 표지와 왼쪽 페이지를 묶는 그룹
+   ========================================= */
+.book-leaf {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
   height: 100%;
-  background-color: #fffef8;
-  position: relative;
-  padding: 40px;
-  box-sizing: border-box;
-  overflow: visible; /* 책갈피가 밖으로 나가야 함 */
-  border: 1px solid #e0dcd0;
+  
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  z-index: 10;
 }
 
-/* 4. 왼쪽 페이지 */
-.left-page {
-  border-radius: 15px 0 0 15px;
-  background: linear-gradient(to right, #fffef8 90%, #e8e4d9 100%);
+/* 닫힘 */
+.book-container.book-closed .book-leaf {
+  transform: rotateY(0deg);
+}
+
+/* 열림 */
+.book-container:not(.book-closed) .book-leaf {
+  transform: rotateY(-180deg);
+}
+
+
+/* =========================================
+   4. 표지 (Leaf의 앞면) - ⭐️ 두께감 대폭 강화
+   ========================================= */
+.book-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background-color: #1C91FF;
+  border-radius: 0 15px 15px 0;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  
+  backface-visibility: hidden; 
+  z-index: 2;
+  
+  /* ⭐️ 요청하신 두꺼운 그림자 적용 (파란색 계열로 조정) */
   box-shadow: 
+    inset 15px 0 20px rgba(0,0,0,0.1),
+    1px 1px 0 #0d6bbd,
+    2.5px 2.5px 0 #0d6bbd,
+    3px 3px 0 #0d6bbd,
+    4px 4px 0 #0d6bbd,
+    5px 5px 0 #0d6bbd,
+    6px 6px 0 #0d6bbd,
+    7px 7px 0 #0d6bbd,
+    8px 8px 0 #0d6bbd,
+    20px 20px 40px rgba(0,0,0,0.3);
+}
+
+.book-cover h1 {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+.book-cover p {
+  font-size: 1.8rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+
+/* =========================================
+   5. 왼쪽 페이지 (Leaf의 뒷면) - ⭐️ 종이 두께감 강화
+   ========================================= */
+.book-page.left-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background: #fffef8;
+  border-radius: 15px 0 0 15px; 
+  border: 1px solid #e0dcd0;
+  box-sizing: border-box;
+  padding: 40px;
+  
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  z-index: 1;
+
+  /* ⭐️ 왼쪽 페이지 두께감 (종이색 계열) */
+  box-shadow: 
+    inset -10px 0 20px rgba(0,0,0,0.1),
     -1px 1px 0 #c9c5b9,
-    -2px 2px 0 #c9c5b9,
+    -2.5px 2.5px 0 #c9c5b9,
     -3px 3px 0 #c9c5b9,
     -4px 4px 0 #c9c5b9,
     -5px 5px 0 #c9c5b9,
     -6px 6px 0 #c9c5b9,
-    -15px 15px 20px rgba(0,0,0,0.15);
-  transform-origin: right center;
-  z-index: 2; /* 오른쪽 페이지보다 위로 */
+    -7px 7px 0 #c9c5b9,
+    -8px 8px 0 #c9c5b9,
+    -15px 15px 30px rgba(0,0,0,0.15);
 }
 
-/* 5. 오른쪽 페이지 */
-.right-page {
+
+/* =========================================
+   6. 오른쪽 페이지 (바닥 고정) - ⭐️ 종이 두께감 강화
+   ========================================= */
+.book-page.right-page {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  
+  background: #fffef8;
   border-radius: 0 15px 15px 0;
-  background: linear-gradient(to left, #fffef8 90%, #e8e4d9 100%);
+  border: 1px solid #e0dcd0;
+  box-sizing: border-box;
+  padding: 40px;
+  
+  z-index: 1;
+
+  /* ⭐️ 오른쪽 페이지 두께감 (종이색 계열) */
   box-shadow: 
+    inset 10px 0 20px rgba(0,0,0,0.1),
     1px 1px 0 #c9c5b9,
-    2px 2px 0 #c9c5b9,
+    2.5px 2.5px 0 #c9c5b9,
     3px 3px 0 #c9c5b9,
     4px 4px 0 #c9c5b9,
     5px 5px 0 #c9c5b9,
     6px 6px 0 #c9c5b9,
-    15px 15px 20px rgba(0,0,0,0.15);
-  transform-origin: left center;
-  z-index: 1;
+    7px 7px 0 #c9c5b9,
+    8px 8px 0 #c9c5b9,
+    15px 15px 30px rgba(0,0,0,0.15);
 }
 
-/* 6. 페이지 내부 콘텐츠 */
+
+/* =========================================
+   7. 페이지 내용 및 책갈피
+   ========================================= */
 .page-content {
   width: 100%;
   height: 100%;
-  overflow: hidden; /* 내부 내용은 넘치지 않게 */
+  overflow: hidden;
 }
 
 .page-content.grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
   overflow-y: auto;
   padding-right: 10px;
 }
 
-.page-content.grid-layout::-webkit-scrollbar {
-  width: 6px;
-}
-.page-content.grid-layout::-webkit-scrollbar-thumb {
-  background-color: #dcd8cc;
-  border-radius: 3px;
-}
+.page-content.grid-layout::-webkit-scrollbar { width: 6px; }
+.page-content.grid-layout::-webkit-scrollbar-thumb { background-color: #dcd8cc; border-radius: 3px; }
 
-.carousel-loading {
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  color: #888;
-}
-
-/* 🏷️ 책갈피 (인덱스 탭) 스타일 */
+/* 책갈피 위치 설정 */
 .book-bookmarks {
   position: absolute;
-  top: 40px; /* 위쪽 여백 */
-  right: -12px; /* 책 안쪽으로 살짝 숨김 (기본) */
+  top: 50px;
+  right: -25px; /* 책 두께만큼 더 밖으로 이동 */
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  z-index: 0; /* 페이지 뒤로 보내서 끼워진 느낌 */
+  gap: 15px; /* 책갈피 사이 간격 */
+  z-index: 0; 
+  
+  opacity: 0;
+  transition: opacity 0.5s ease 0.8s;
 }
 
+.book-container:not(.book-closed) .book-bookmarks {
+  opacity: 1;
+}
+
+/* 책갈피 공통 디자인 */
 .bookmark {
-  width: 100px;
-  height: 50px;
-  border-radius: 0 10px 10px 0;
+  width: 110px;
+  height: 55px;
+  border-radius: 0 12px 12px 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* 글자를 끝쪽으로 */
-  padding-right: 15px;
+  justify-content: flex-end;
+  padding-right: 20px;
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
   
-  /* 폰트 스타일 */
   font-family: "Pretendard", sans-serif;
   font-weight: 700;
   color: white;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
-/* 색상별 스타일 */
-.bookmark.red { background-color: #FF6B6B; top: 0; }
-.bookmark.orange { background-color: #FF9F43; top: 60px; }
-.bookmark.yellow { background-color: #F2C94C; top: 120px; color: #333; } /* 노랑은 글자색 진하게 */
+/* ⭐️ 책갈피 색상 팔레트 (예쁜 파스텔톤) */
+.bookmark.red    { background-color: #FF6B6B; } /* 메인으로 */
+.bookmark.orange { background-color: #FF9F43; } /* 학습하기 */
+.bookmark.yellow { background-color: #FDCB6E; color: #333; } /* 내 정보 (밝아서 글자색 어둡게) */
+.bookmark.green  { background-color: #00B894; } /* 시간표 */
+.bookmark.purple { background-color: #6C5CE7; } /* 메모 (보라색 포인트) */
 
-/* 🖱️ 호버 시 오른쪽으로 튀어나옴 */
-.bookmark:hover {
-  transform: translateX(80px); /* 오른쪽으로 쑥 나옴 */
-}
-
-.bookmark span {
-  opacity: 0.8; /* 평소엔 약간 흐리게 */
-  transition: opacity 0.3s;
-}
-
-.bookmark:hover span {
-  opacity: 1; /* 호버 시 선명하게 */
+/* 마우스 올렸을 때 툭 튀어나오는 효과 */
+.bookmark:hover { 
+  transform: translateX(80px); 
 }

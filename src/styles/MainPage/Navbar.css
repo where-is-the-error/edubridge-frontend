@@ -1,89 +1,140 @@
+/* src/styles/MainPage/Navbar.css */
+
 .navbar {
   width: 100%;
-  min-height: 72px; /* flexibly grow if contents need more space */
-  background: #0a74d6;
+  height: 72px; /* 기존 높이 유지 */
+  background: #0a74d6; /* ⭐️ EduBridge Blue 복구 */
   color: white;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 36px; /* add vertical padding so two-line items aren't clipped */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 0 36px;
   box-sizing: border-box;
-  position: relative;
-  z-index: 100; /* keep navbar above other content */
-  overflow: visible; /* ensure dropdowns and multi-line text aren't cut */
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* 그림자 살짝 추가 */
 }
 
-.nav-menu {
+/* 1. 로고 영역 */
+.nav-logo-group {
   display: flex;
-  list-style: none;
-  gap: 18px;
   align-items: center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  justify-content: space-between; /* more natural spacing, prevents items being pushed into edges */
-  overflow: visible;
-}
-
-
-.nav-menu li {
+  gap: 10px;
   cursor: pointer;
-  position: relative;
+  transition: opacity 0.2s;
+}
+
+.nav-logo-group:hover {
+  opacity: 0.9;
+}
+
+.nav-logo-img {
+  width: 32px; /* 로고 크기 적절히 조절 */
+  height: 32px;
+  object-fit: contain;
+}
+
+.nav-logo-text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  padding-top: 2px;
+}
+
+/* 2. 오른쪽 메뉴 그룹 (아이콘 + 프로필) */
+.nav-menu-group {
   display: flex;
   align-items: center;
-  /* don't force height: allow content to determine it */
-  padding: 12px 10px; /* increased top padding to lower text */
-  border-radius: 6px;
-  overflow: visible;
-  font-size: 2.05rem; /* slightly larger nav item text */
+  gap: 30px; /* 아이콘 간격 */
 }
 
-.logo {
-  font-weight: 800;
-  font-size: 1.25rem; /* larger logo text */
-  padding-top: 6px; /* nudge logo text down */
-}
-
-.profile {
-  padding: 8px 12px; /* a bit more padding */
-  background: rgba(255,255,255,0.06);
-  border-radius: 8px;
+/* 공통 아이콘 버튼 스타일 */
+.nav-icon-btn {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-end;
-  line-height: 1.1;
+  gap: 4px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9); /* 흰색 (살짝 투명) */
+  transition: all 0.2s ease;
 }
 
-.dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  background: white;
-  color: black;
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  min-width: 120px;
-  z-index: 200; /* above header */
+.nav-icon-btn:hover {
+  color: #ffffff; /* 호버 시 완전 흰색 */
+  transform: translateY(-2px);
 }
 
-/* ensure long profile text wraps instead of being clipped */
-.profile span {
-  white-space: normal;
-  word-break: keep-all;
+.nav-icon-btn svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.8;
 }
 
-/* increase and nudge profile text down */
-.profile span:first-child {
-  font-size: 1.15rem; /* larger nickname */
+.nav-icon-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* 3. 프로필 영역 (블루 배경에 어울리는 반투명 스타일) */
+.nav-profile-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  
+  /* ⭐️ 반투명 흰색 배경 */
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-profile-box:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.profile-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #fff; /* 호랑이 배경 흰색 */
+  padding: 2px;
+  object-fit: cover;
+}
+
+.profile-text {
+  font-size: 0.95rem;
   font-weight: 700;
-  margin-top: 6px;
+  color: white;
 }
 
-.profile span:last-child {
-  font-size: 0.9rem; /* slightly larger detail text */
-  margin-top: 2px;
-  opacity: 0.95;
+.profile-nim {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+  }
+  .nav-logo-text {
+    display: none;
+  }
+  .nav-menu-group {
+    gap: 20px;
+  }
+  .nav-icon-label {
+    display: none;
+  }
 }

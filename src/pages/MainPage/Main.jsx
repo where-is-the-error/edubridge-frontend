@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar"; // 👈 Navbar 컴포넌트 import (필수!)
 import Carousel from "./Carousel";
 import "../../styles/MainPage/Home.css";
 import { fetchUserInfo, getCrawledData } from "../../utils/api";
 
 const Main = () => {
-  const [user, setUser] = useState(null); // 초기값 null로 명확히 구분
+  const [user, setUser] = useState(null);
   const [crawledData, setCrawledData] = useState([]);
 
   useEffect(() => {
@@ -43,8 +44,13 @@ const Main = () => {
 
   return (
     <div className="home"> 
-      {/* Navbar 컴포넌트 삭제됨 */}
-      <div className="main-content-wrapper" style={{ marginTop: "50px" }}>
+      {/* ⭐️ Navbar 추가: 상단에 고정된 네비게이션 바 표시 */}
+      <Navbar user={user} />
+
+      {/* Navbar 높이(72px)만큼 콘텐츠가 가려지지 않도록 marginTop 조정 
+         (기존 50px -> 80px 또는 100px 권장)
+      */}
+      <div className="main-content-wrapper" style={{ marginTop: "100px" }}>
         <Carousel data={crawledData} />
       </div>
     </div>

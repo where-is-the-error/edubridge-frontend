@@ -7,131 +7,149 @@ html, body, #root {
   width: 100%;
   height: 100%;
   background: #fff;
-  font-family: "Pretendard", sans-serif;
+  /* Pretendard 폰트가 설치되지 않은 경우를 대비하여 fallback 추가 */
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; 
   overflow: auto;
 }
 
 /* ===============================
-   전체 컨테이너 (Flex로 중앙 정렬)
+   전체 컨테이너
    =============================== */
 .after-container {
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
   position: relative;
   background: #fff;
 }
 
 /* ===============================
-   로고 (좌측 상단 고정은 absolute 유지)
+   로고
    =============================== */
 .after-logo {
   position: absolute;
-  top: 2vh;
-  left: 2vw;
+  top: 1vh;
+  left: 1vw;
   display: flex;
   align-items: center;
-  z-index: 100;
 }
 
 .logo {
-  width: 60px;
-  height: auto;
+  width: 6vw;
+  height: 6vw;
+  margin-top: -1vw;
 }
 
 .logotext {
-  width: 200px;
-  height: auto;
-  margin-left: -10px;
+  width: 25vw;
+  height: 8vw;
+  margin-left: -1vw;
 }
 
 /* ===============================
-   중앙 콘텐츠 영역 (좌: 텍스트/버튼, 우: 호랑이)
+   콘텐츠 영역 (텍스트 + 버튼 + 호랑이 전체)
+   * 참고: 기존 after-body 대신 after-content를 사용합니다.
    =============================== */
 .after-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5vw; /* 텍스트와 호랑이 사이 간격 */
-  width: 80%;
-  max-width: 1200px;
+  /* after-container 내에서 중앙에 가깝게 위치시키기 위한 설정 */
+  width: 100%; 
+  height: 100%;
+  position: relative; /* 자식 요소의 absolute 위치 기준 */
 }
 
-/* 텍스트 및 버튼 그룹 */
+/* ===============================
+   텍스트 영역
+   =============================== */
 .after-text-area {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 왼쪽 정렬 */
-  justify-content: center;
-  gap: 30px; /* 제목과 버튼 사이 간격 */
-  flex: 1;
+  align-items: center;
 }
 
 .after-title {
-  font-size: 3rem; /* 반응형 폰트 크기 조정 권장 */
+  position: absolute;
+  /* 고정된 픽셀 대신 뷰포트 상대 위치 사용 */
+  top: 30vh; 
+  left: 23vw;
+  font-size: 4.5vw;
   font-weight: 900;
   color: #3B3B3B;
   margin: 0;
-  white-space: nowrap;
-}
-
-/* 버튼 그룹 */
-.after-btn-group {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* 버튼 사이 간격 */
-  width: 100%;
 }
 
 /* Continue 버튼 */
 .after-btn-continue {
-  width: 100%;
-  max-width: 400px;
-  height: 80px;
-  font-size: 1.8rem;
+  position: absolute;
+  top: 43vh;
+  left: 19vw;
+  width: 35vw;
+  height: 10vh;
+
+  font-size: 3.5vw;
   font-weight: 700;
   background: #1C91FF;
   color: white;
-  border: none;
-  border-radius: 15px;
+  border-radius: 1.5vw;
+  transition: transform 0.2s ease;
   cursor: pointer;
-  box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
-  transition: transform 0.1s ease;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* box-shadow도 상대 단위 사용 권장 (vh) */
+  box-shadow: 0px 1vh 0px rgba(0, 0, 0, 0.2); 
+  z-index: 10;
 }
 
 .after-btn-continue:hover {
-  transform: scale(1.02);
-  background: #1478d6;
+  transform: scale(1.03);
+  background: #1C91FF !important;
+  color: white !important;
+  border-color: #1C91FF !important;
+  box-shadow: 0px 1vh 0px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* 계정 변경 버튼 */
 .after-btn-change {
-  width: 100%;
-  max-width: 400px;
-  height: 80px;
-  font-size: 1.8rem;
+  position: absolute;
+  top: 57vh;   /* 픽셀 대신 vh */
+  left: 19vw;  /* 픽셀 대신 vw */
+
+  width: 35vw;
+  height: 10vh;
+
+  font-size: 3.5vw;
   font-weight: 700;
   background: #fff;
   color: #000;
-  border: 3px solid #000;
-  border-radius: 15px;
+  border: 0.3vw solid #000;
+  border-radius: 1.5vw;
+  box-shadow: 0 1vh 0px rgba(0, 0, 0, 0.2);
+
   cursor: pointer;
-  box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 10;
 }
 
 .after-btn-change:hover {
-  transform: scale(1.02);
-  background: #f0f0f0;
+  transform: scale(1.03);
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #000 !important;
+  box-shadow: 0px 1vh 0px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* ===============================
-   호랑이 이미지
+   호랑이 이미지 (반응형 핵심 수정 부분)
    =============================== */
 .after-tiger {
- position: absolute;
+  position: absolute;
   /* 픽셀 대신 뷰포트 단위 사용 */
   top: -7vh; 
   right: 3vw;
@@ -139,4 +157,3 @@ html, body, #root {
   height: auto;
   z-index: 5;
 }
-
