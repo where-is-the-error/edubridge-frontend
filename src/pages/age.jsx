@@ -43,7 +43,7 @@ const Age = () => {
     handleSelection("elementary", "/ele"); // /ele 페이지로 이동
   const goElegrade = () => {
     saveUserData("age", "elementary");  // 저장
-    navigate("/elegrade");                   // 이동
+    navigate("/elegrade");
   };
 
   const goMiddle = () => {
