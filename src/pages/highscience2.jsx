@@ -3,80 +3,34 @@ import "../styles/highscience2.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
-import { saveUserData } from "../utils/userStorage";   // ⬅ 저장 기능 추가
+import { handleSelection } from "../utils/selectionHandler";
 
 const HighScience2 = () => {
   const navigate = useNavigate();
   const goHomeAfter = () => navigate("/homeafter");
-
-  // ⬇ 과목 선택 시 저장 + 이동
-  const korea = () => {
-    saveUserData("subject", "korea");
-    navigate("/mainpage");
-  };
-
-  const math = () => {
-    saveUserData("subject", "math");
-    navigate("/mainpage");
-  };
-
-  const english = () => {
-    saveUserData("subject", "english");
-    navigate("/mainpage");
-  };
-
-  const history = () => {
-    saveUserData("subject", "history");
-    navigate("/mainpage");
-  }
-
-  const science = () => {
-    saveUserData("subject", "science");
-    navigate("/highscience2_1");
-  };
+  const toMain = (subj) => handleSelection("subject", subj, navigate, "/mainpage");
 
   return (
     <div className="sci2-container">
-
-      {/* 로고 */}
-      <div
-        className="sci2-logo"
-        onClick={goHomeAfter}
-        style={{ cursor: "pointer" }}
-      >
+      <div className="sci2-logo" onClick={goHomeAfter} style={{ cursor: "pointer" }}>
         <img src={logo} alt="EduBridge Logo" className="logo" />
         <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
-      {/* 제목 */}
       <h1 className="sci2-title">과목을 선택해주세요!</h1>
 
-      {/* 선택 박스 */}
       <div className="sci2-box-wrapper">
-
-        <div className="sci2-box" onClick={korea} style={{ cursor: "pointer" }}>
-          <p className="sci2-text">국어</p>
-        </div>
-
-        <div className="sci2-box" onClick={math} style={{ cursor: "pointer" }}>
-          <p className="sci2-text">수학</p>
-        </div>
-
-        <div className="sci2-box" onClick={english} style={{ cursor: "pointer" }}>
-          <p className="sci2-text">영어</p>
-        </div>
-
-        <div className="sci2-box" onClick={history} style={{ cursor: "pointer" }}>
-          <p className="sci2-text">한국사</p>
-        </div>
-
-        <div className="sci2-box" onClick={science} style={{ cursor: "pointer" }}>
-          <p className="sci2-text">자연・과학</p>
-        </div>
-
+        <div className="sci2-box" onClick={() => toMain("korea")}><p className="sci2-text">국어</p></div>
+        <div className="sci2-box" onClick={() => toMain("math")}><p className="sci2-text">수학</p></div>
+        <div className="sci2-box" onClick={() => toMain("english")}><p className="sci2-text">영어</p></div>
+        <div className="sci2-box" onClick={() => toMain("history")}><p className="sci2-text">한국사</p></div>
+        {/* 과탐 선택 이동 */}
+        <div className="sci2-box" onClick={() => handleSelection("subject", "science", navigate, "/highscience2_1")}><p className="sci2-text">자연・과학</p></div>
       </div>
     </div>
   );
 };
 
 export default HighScience2;
+
+

@@ -1,9 +1,7 @@
 // src/utils/api.js
 
-// 🚨 누락된 BASE_URL 정의 (백엔드 서버 주소)
 const BASE_URL = "http://localhost:3000";
 
-// 환경 변수에서 URL 가져오기 (없으면 기본값)
 const authFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem("accessToken");
   const headers = {
@@ -24,7 +22,6 @@ const authFetch = async (endpoint, options = {}) => {
     if (response.status === 401) {
       alert("세션이 만료되었습니다. 다시 로그인해주세요.");
       localStorage.removeItem("accessToken");
-      localStorage.removeItem("userData");
       window.location.href = "/login";
       return null;
     }
@@ -33,6 +30,21 @@ const authFetch = async (endpoint, options = {}) => {
   } catch (error) {
     console.error("API 요청 중 네트워크 오류 발생:", error);
     throw error;
+  }
+};
+
+// ⭐️ [신규] 내 정보 가져오기 (DB 조회)
+export const fetchUserInfo = async () => {
+  try {
+    const response = await authFetch("/api/user/info", {
+      method: "GET",
+    });
+    if (response && response.ok) {
+      return await response.json();
+    }
+    return null;
+  } catch (error) {
+    return null;
   }
 };
 
@@ -82,7 +94,6 @@ export const registerUser = async (userData) => {
   return response;
 };
 
-// ⭐️ [추가됨] 크롤링 데이터 조회 함수
 export const getCrawledData = async () => {
   try {
     const response = await fetch(`${BASE_URL}/api/crawled-data`);

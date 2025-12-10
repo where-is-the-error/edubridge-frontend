@@ -4,13 +4,12 @@ import { useNavigate } from "react-router-dom";
 import middleimg from "../assets/agemiddle.png";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
-import { handleSelection } from "../utils/selectionHandler"; // 👈 import
+import { handleSelection } from "../utils/selectionHandler";
 
 const Middle = () => {
   const navigate = useNavigate();
   const goHomeAfter = () => navigate("/homeafter");
 
-  // 공통 선택 핸들러
   const onSelect = (grade) => handleSelection("grade", grade, navigate, "/middlesub");
 
   return (

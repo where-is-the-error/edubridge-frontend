@@ -1,62 +1,34 @@
 import React from "react";
-import "../styles/highsociety2_1.css";
+import "../styles/highsociety2.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
+import { handleSelection } from "../utils/selectionHandler";
 
-const HighSociety2_1 = () => {
+const HighSociety2 = () => {
   const navigate = useNavigate();
-
-  // 로고 클릭 시 HomeAfter 페이지로 이동
-  const goHomeAfter = () => {
-    navigate("/homeafter");
-  };
-
-  // 연령 선택 (저장 + 이동)
-  const gohistory = () => {
-    navigate("/history2");
-  };
-
-  const geography = () => {
-    navigate("/geography");
-  };
-
-  const morality = () => {
-    navigate("/morality");
-  };
+  const goHomeAfter = () => navigate("/homeafter");
+  const toMain = (subj) => handleSelection("subject", subj, navigate, "/mainpage");
 
   return (
-    <div className="sc2_1-container">
-
-      {/* 로고 */}
-      <div className="sc2_1-logo" onClick={goHomeAfter} style={{ cursor: "pointer" }}>
+    <div className="soc2-container">
+      <div className="soc2-logo" onClick={goHomeAfter} style={{ cursor: "pointer" }}>
         <img src={logo} alt="EduBridge Logo" className="logo" />
         <img src={logotext} alt="EduBridge Text Logo" className="logotext" />
       </div>
 
-      {/* 제목 */}
-      <h1 className="sc2_1-title">과목군을 선택해주세요!</h1>
+      <h1 className="soc2-title">과목을 선택해주세요!</h1>
 
-      {/* 선택 박스 영역 */}
-      <div className="sc2_1-box-wrapper">
-
-        {/* 초등학생 */}
-        <div className="sc2_1-box" onClick={gohistory} style={{ cursor: "pointer" }}>
-          <p className="sc2_1-text">역사</p>
-        </div>
-
-        {/* 중학생 */}
-        <div className="sc2_1-box" onClick={geography} style={{ cursor: "pointer" }}>
-          <p className="sc2_1-text">지리</p>
-        </div>
-
-        {/* 고등학생 */}
-        <div className="sc2_1-box" onClick={morality} style={{ cursor: "pointer" }}>
-          <p className="sc2_1-text">사회・윤리</p>
-        </div>
+      <div className="soc2-box-wrapper">
+        <div className="soc2-box" onClick={() => toMain("korea")}><p className="soc2-text">국어</p></div>
+        <div className="soc2-box" onClick={() => toMain("math")}><p className="soc2-text">수학</p></div>
+        <div className="soc2-box" onClick={() => toMain("english")}><p className="soc2-text">영어</p></div>
+        <div className="soc2-box" onClick={() => toMain("history")}><p className="soc2-text">한국사</p></div>
+        {/* 탐구 영역 이동 */}
+        <div className="soc2-box" onClick={() => navigate("/highsociety2_1")}><p className="soc2-text">인문・사회</p></div>
       </div>
     </div>
   );
 };
 
-export default HighSociety2_1;
+export default HighSociety2;

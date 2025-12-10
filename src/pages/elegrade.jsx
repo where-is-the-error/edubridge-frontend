@@ -3,13 +3,13 @@ import "../styles/elegrade.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
-import { handleSelection } from "../utils/selectionHandler"; // 👈 이것만 import
+import { handleSelection } from "../utils/selectionHandler";
 
 const EleGrade = () => {
   const navigate = useNavigate();
   const goHomeAfter = () => navigate("/homeafter");
 
-  // 이제 함수 하나로 모든 학년 처리가 가능합니다.
+  // DB 저장 및 페이지 이동 처리
   const onSelect = (grade) => handleSelection("grade", grade, navigate, "/ele");
 
   return (

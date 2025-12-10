@@ -5,46 +5,29 @@ import { loginUser } from "../utils/api";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      // api.js의 loginUser 함수 호출
       const response = await loginUser(email, password);
 
       if (response.ok) {
-        // 성공 시 응답 데이터 받기
         const data = await response.json();
         
-        // (1) 토큰 저장
+        // (1) 토큰만 저장 (필수)
         localStorage.setItem("accessToken", data.token);
 
-        // (2) 사용자 정보 매핑 및 저장
-        // MainPage 등에서 사용하는 키 이름으로 변환하여 저장
-        const userData = {
-          nickname: data.nickname,
-          age: data.gradeLevel,         // 예: elementary
-          grade: data.gradeNumber,      // 예: 3
-          subject: data.subjectPrimary, // 예: math
-          scienceDetail: data.subjectDetail,
-          track: data.track
-        };
-        
-        // 객체를 문자열로 변환하여 저장
-        localStorage.setItem("userData", JSON.stringify(userData));
-        
-        // (3) 페이지 이동
+        // 🚨 사용자 정보 로컬 저장 로직 제거 (DB에서 매번 불러오도록 변경)
+        // localStorage.setItem("userData", ... ); 
+
         navigate("/homeafter");
       } else if (response.status === 401) {
         setError("이메일 또는 비밀번호가 일치하지 않습니다.");
@@ -54,11 +37,11 @@ const Login = () => {
       }
     } catch (err) {
       setError("서버에 연결할 수 없습니다.");
-      console.error("Login Error:", err);
     }
   };
 
   return (
+    // ... (기존 JSX UI 코드 그대로 유지) ...
     <div className="login-container">
       <div className="login-box">
         <h2>EDU BRIDGE</h2>
