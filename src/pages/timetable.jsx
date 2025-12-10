@@ -104,9 +104,6 @@ const Timetable = () => {
     }
   };
 
-  // ================================================
-  // 학교 선택 → classInfo(학년/반 정보) 불러오기
-  // ================================================
   const handleSchoolChange = async (e) => {
     const code = e.target.value;
     setSchoolCode(code);

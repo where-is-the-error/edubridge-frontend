@@ -1,45 +1,98 @@
-// src/utils/api.js (새로 생성해야 할 파일)
+// src/utils/api.js
 
-const BASE_URL = "http://localhost:3000"; // 🚨 백엔드 실행 주소 확인
+// 환경 변수에서 URL 가져오기 (없으면 기본값)
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 /**
- * 사용자의 추가 정보(학년/과목 등)를 백엔드에 업데이트합니다.
- * @param {object} updateData - 업데이트할 데이터 ({ gradeLevel?: string, subjectPrimary?: string })
- * @param {string} path - API 엔드포인트 경로 (기본값: /api/user/info)
- * @returns {Promise<boolean>} - 성공 여부
+ * 공통 fetch 래퍼 함수 (토큰 자동 포함 및 401 처리)
  */
-export const updateUserInfo = async (updateData, path = "/api/user/info") => {
+const authFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem("accessToken");
   
-  if (!token) {
-    console.error("인증 토큰이 없습니다. 로그인 상태를 확인하세요.");
-    return false;
+  const headers = {
+    "Content-Type": "application/json",
+    ...options.headers,
+  };
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
   }
-  
-  const API_URL = `${BASE_URL}${path}`; 
 
   try {
-    const response = await fetch(API_URL, {
-      method: "PUT", // 사용자 정보 업데이트는 PUT/PATCH를 사용합니다.
-      headers: {
-        "Content-Type": "application/json",
-        // 🔑 인증 토큰을 헤더에 포함합니다.
-        "Authorization": `Bearer ${token}`, 
-      },
+    const response = await fetch(`${BASE_URL}${endpoint}`, {
+      ...options,
+      headers,
+    });
+
+    // 401 Unauthorized: 토큰 만료 또는 위조
+    if (response.status === 401) {
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userData");
+      window.location.href = "/login"; // 로그인 페이지로 강제 이동
+      return null;
+    }
+
+    return response;
+  } catch (error) {
+    console.error("API 요청 중 네트워크 오류 발생:", error);
+    throw error;
+  }
+};
+
+/**
+ * 사용자 정보 업데이트 (PUT)
+ * @param {object} updateData - { gradeLevel, subjectPrimary 등 }
+ */
+export const updateUserInfo = async (updateData) => {
+  try {
+    const response = await authFetch("/api/user/info", {
+      method: "PUT",
       body: JSON.stringify(updateData),
     });
 
-    if (response.ok) {
-      return true; // 업데이트 성공
-    } else {
-      console.error(`정보 업데이트 실패. 서버 응답 코드: ${response.status}`);
-      // 401 Unauthorized 에러 등의 상세 정보 확인
-      const errorBody = await response.text();
-      console.error("서버 에러 본문:", errorBody);
-      return false; 
-    }
+    return response && response.ok;
   } catch (error) {
-    console.error("정보 업데이트 중 네트워크 오류:", error);
     return false;
   }
+};
+
+/**
+ * AI 문제 생성 요청 (POST)
+ * @param {string} prompt - 사용자 입력 텍스트
+ */
+export const generateAiProblem = async (prompt) => {
+  try {
+    const response = await authFetch("/api/ai/generate", {
+      method: "POST",
+      body: JSON.stringify({ userPrompt: prompt }),
+    });
+
+    if (response && response.ok) {
+      return await response.text(); // 또는 response.json() 상황에 맞춰
+    }
+    return "AI 응답을 받아오지 못했습니다.";
+  } catch (error) {
+    return "AI 서버 연결 오류가 발생했습니다.";
+  }
+};
+
+// 로그인 요청 (토큰이 없으므로 일반 fetch 사용)
+export const loginUser = async (email, password) => {
+  const response = await fetch(`${BASE_URL}/api/auth/signin`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  return response;
+};
+
+// 회원가입 요청
+export const registerUser = async (userData) => {
+  const response = await fetch(`${BASE_URL}/api/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userData),
+  });
+  return response;
 };

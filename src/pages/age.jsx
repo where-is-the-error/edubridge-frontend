@@ -45,6 +45,7 @@ const Age = () => {
     saveUserData("age", "elementary");  // 저장
     navigate("/elegrade");
   };
+  }
 
   const goMiddle = () => {
     handleSelection("middle", "/middle"); // /middle 페이지로 이동 (중학생 학년 선택 페이지로 연결되어야 함)
@@ -90,5 +91,4 @@ const Age = () => {
     </div>
   );
 };
-}
 export default Age;
