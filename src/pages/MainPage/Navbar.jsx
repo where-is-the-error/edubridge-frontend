@@ -2,13 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; 
 import "../../styles/MainPage/Navbar.css";
 import logo from "../../assets/logo.png";
-import tigerIcon from "../../assets/tiger.png"; // 프로필용
+import tigerIcon from "../../assets/tiger.png";
 
-const Navbar = ({ user }) => {
+// ⭐️ isVisible prop 구조 분해 할당
+const Navbar = ({ user, isVisible }) => {
   const navigate = useNavigate();
 
   return (
-    <nav className="navbar">
+    // ⭐️ isVisible이 false면 'navbar-hidden' 클래스 추가 -> CSS에서 위로 올려버림
+    <nav className={`navbar ${!isVisible ? 'navbar-hidden' : ''}`}>
       
       {/* 1. 로고 (좌측) */}
       <div className="nav-logo-group" onClick={() => navigate("/mainpage")}>

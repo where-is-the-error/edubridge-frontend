@@ -1,3 +1,5 @@
+/* src/styles/timetable.css */
+
 /* ===============================
    기본 설정
 =============================== */
@@ -17,12 +19,10 @@ html, body, #root {
   width: 100%;
   height: 100vh;
   position: relative;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: #F7F9FB; /* 은은한 회색 배경 */
+  background: #F7F9FB;
 }
 
 /* ===============================
@@ -49,18 +49,29 @@ html, body, #root {
 }
 
 /* ===============================
-   페이지 제목
+   페이지 제목 (애니메이션 적용)
 =============================== */
 .tt-title {
   position: absolute;
-  top: 14vh;
+  /* ⭐️ 기본 위치: 화면 상단 (선택창 위) */
+  top: 10vh; 
   width: 100%;
   text-align: center;
 
   font-size: 4vw;
   font-weight: 900;
-
   color: #1C91FF;
+
+  /* 위치와 폰트 크기가 부드럽게 변하도록 설정 */
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+}
+
+/* ⭐️ 조회 후 적용될 클래스: 아래로 내려오고 글자가 작아짐 */
+.tt-title.slide-down {
+  top: 26vh; /* 시간표 바로 위쪽으로 이동 */
+  font-size: 2.2vw; /* 글자 크기 축소 */
+  color: #333; /* 색상을 진하게 변경 (가독성) */
 }
 
 /* ===============================
@@ -68,26 +79,35 @@ html, body, #root {
 =============================== */
 .tt-select-group {
   position: absolute;
-  top: 25vh;
-
+  top: 25vh; /* 타이틀 아래 */
   width: 90%;
   display: flex;
   justify-content: center;
   gap: 1.5vw;
+
+  /* 사라질 때 효과 */
+  transition: opacity 0.5s ease, visibility 0.5s;
+  opacity: 1;
+  visibility: visible;
+  z-index: 20;
+}
+
+/* 숨김 상태 */
+.tt-select-group.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .tt-select {
   width: 20vw;
   height: 6vh;
-
   border-radius: 0.8vw;
   border: 0.2vw solid #C9C9C9;
   background: #ffffff;
-
   font-size: 1.3vw;
   color:#000000;
   padding-left: 1vw;
-
   outline: none;
 }
 
@@ -97,18 +117,13 @@ html, body, #root {
 .tt-btn {
   width: 7vw;
   height: 6.5vh;
-
   background: #1C91FF;
   color: white;
-
   font-size: 1.5vw;
   font-weight: 800;
-
   border: none;
   border-radius: 0.8vw;
-
   cursor: pointer;
-
   box-shadow: 0 0.6vh 0 rgba(0, 0, 0, 0.22);
   transition: transform 0.12s ease-in-out;
 }
@@ -122,46 +137,45 @@ html, body, #root {
 =============================== */
 .tt-content-area {
   position: absolute;
-  top: 35vh;
-
+  top: 35vh; /* ⭐️ 위치 고정 (움직이지 않음) */
   width: 95%;
-  height: 56vh;
-
+  height: 58vh;
   display: flex;
   justify-content: center;
   gap: 2vw;
+}
+
+/* 왼쪽 테이블 래퍼 (테이블 + 버튼을 세로로 배치) */
+.tt-table-wrapper {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* 테이블과 버튼 사이 간격 */
 }
 
 /* ===============================
    시간표 테이블
 =============================== */
 .tt-table {
-  width: 75%;
-  height: 100%;
+  width: 100%;
+  /* 높이를 flex로 자동 조절하되, 버튼 공간을 위해 약간 여유를 둠 */
+  flex: 1; 
   border-collapse: collapse;
   background: #ffffff;
-
   border: 0.25vw solid #D2D2D2;
   border-radius: 1vw;
   overflow: hidden;
-
   font-size: 1.35vw;
-
-  /* 🔥 추가 */
   table-layout: fixed;
 }
 
-
-/* 테이블 헤더 */
 .tt-table thead th {
   height: 6.5vh;
-
   background: #0A4F8F;
   color: #ffffff;
-
   font-size: 1.4vw;
   font-weight: 800;
-
   border-right: 0.15vw solid #0a467d;
 }
 
@@ -169,38 +183,97 @@ html, body, #root {
   border-right: none;
 }
 
-/* 테이블 바디 */
 .tt-table td {
   border: 0.13vw solid #E6E6E6;
   text-align: center;
   font-weight: 500;
-  color: #000000
+  color: #000000;
 }
 
-/* 교시 열 */
 .tt-time {
   background: #f1f5f9;
   font-weight: 900;
   font-size: 1.3vw;
 }
 
-
 /* ===============================
    개인 메모 박스
 =============================== */
 .tt-memo {
   width: 20%;
-  height: 100%;
-
+  /* 테이블과 높이를 맞추기 위해 flex-grow 대신 높이 지정 */
+  height: calc(100% - 45px); /* 버튼 높이만큼 뺌 */
   background: #ffffff;
   border: 0.25vw solid #C9C9C9;
   border-radius: 1vw;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 2vw;
   font-weight: 600;
   color: #222;
 }
+
+/* ===============================
+   ⭐️ [신규] 다른 학교 조회하기 (작은 버튼)
+=============================== */
+.tt-reset-btn {
+  align-self: flex-end; /* 오른쪽 정렬 */
+  padding: 8px 20px;
+  background-color: #E0E0E0;
+  color: #555;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 20px; /* 둥근 버튼 */
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tt-reset-btn:hover {
+  background-color: #d0d0d0;
+  transform: translateY(-2px);
+  color: #333;
+}
+
+/* src/styles/timetable.css 하단에 추가 또는 수정 */
+
+.tt-memo {
+  width: 20%;
+  height: calc(100% - 45px);
+  background: #fffef8; /* 연한 노란색 종이 느낌 */
+  border: 0.25vw solid #D2D2D2;
+  border-radius: 1vw;
+  
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+}
+
+.memo-header {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #FF6B6B;
+  margin-bottom: 15px;
+  border-bottom: 2px dashed #ddd;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.memo-content {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  overflow-y: auto; /* 내용 많으면 스크롤 */
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* 스크롤바 꾸미기 */
+.memo-content::-webkit-scrollbar { width: 4px; }
+.memo-content::-webkit-scrollbar-thumb { background-color: #ddd; border-radius: 2px; }

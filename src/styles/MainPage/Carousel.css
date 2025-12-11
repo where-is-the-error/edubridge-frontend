@@ -10,8 +10,57 @@
   perspective: 2000px;
   overflow: visible;
   padding: 20px;
+  /* ⭐️ z-index 컨텍스트 생성 (필요시) */
+  position: relative; 
+}
+/* src/styles/MainPage/Carousel.css */
+
+/* ... (기존 스타일 유지) ... */
+
+/* 1. 3D 공간 설정 */
+.book-perspective {
+  width: 100%;
+  height: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px;
+  overflow: visible;
+  padding: 20px;
+  /* ⭐️ z-index 컨텍스트 생성 (필요시) */
+  position: relative; 
 }
 
+/* ... (중간 생략) ... */
+
+/* =========================================
+   ⭐️ [신규] 책 바깥 왼쪽 상단 정보 텍스트
+   ========================================= */
+.book-header-info {
+  position: absolute;
+  /* 책 컨테이너 기준 위로 60px, 왼쪽 0px (책 왼쪽 모서리 정렬) */
+  top: -60px;
+  left: 10px;
+  
+  font-family: "Pretendard", sans-serif;
+  font-size: 1.8rem; /* 크기 키움 */
+  font-weight: 800;
+  color: #333; /* 잘 보이게 진한 색 */
+  letter-spacing: -0.5px;
+  
+  z-index: 20;
+  
+  /* 닫혀있을 땐 안 보임 */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 1s, transform 0.8s ease 1s; /* 책이 열린 후(1s 뒤) 등장 */
+}
+
+/* 책이 열리면(.book-closed 클래스가 제거되면) 나타남 */
+.book-container:not(.book-closed) .book-header-info {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* 2. 책 전체 컨테이너 */
 .book-container {
   position: relative;
@@ -238,15 +287,157 @@
   color: white;
   font-size: 1.1rem;
 }
-
+.book-header-info {
+  position: absolute;
+  top: 25px;
+  left: 40px; /* 페이지 패딩과 맞춤 */
+  
+  font-family: "Pretendard", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #888; /* 은은한 회색 */
+  letter-spacing: -0.5px;
+  
+  z-index: 20; /* 콘텐츠보다 위에 표시 */
+}
 /* ⭐️ 책갈피 색상 팔레트 (예쁜 파스텔톤) */
 .bookmark.red    { background-color: #FF6B6B; } /* 메인으로 */
 .bookmark.orange { background-color: #FF9F43; } /* 학습하기 */
-.bookmark.yellow { background-color: #FDCB6E; color: #333; } /* 내 정보 (밝아서 글자색 어둡게) */
+.bookmark.yellow { background-color: #FDCB6E; color: #fffffffa; } /* 내 정보 (밝아서 글자색 어둡게) */
 .bookmark.green  { background-color: #00B894; } /* 시간표 */
 .bookmark.purple { background-color: #6C5CE7; } /* 메모 (보라색 포인트) */
 
 /* 마우스 올렸을 때 툭 튀어나오는 효과 */
 .bookmark:hover { 
   transform: translateX(80px); 
+}
+/* src/styles/MainPage/SmallCard.css */
+
+/* ⭐️ 리스트 아이템 등장 애니메이션 */
+@keyframes listFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.small-card {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+  border: none;
+  overflow: visible;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  
+  /* ⭐️ 애니메이션 적용 */
+  animation: listFadeIn 0.5s ease backwards;
+}
+
+/* 순차적으로 나타나는 느낌을 주고 싶다면 JS에서 index별 delay를 줘야 하지만, 
+   CSS만으로는 전체가 부드럽게 바뀌는 것만으로도 충분히 좋습니다. */
+
+.small-card:hover {
+  transform: scale(1.03) rotate(1deg);
+  z-index: 10;
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid white; 
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+}
+
+.small-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(28, 145, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.small-overlay span {
+  color: white;
+  font-weight: 700;
+  background: rgba(0,0,0,0.5);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: none;
+}
+
+.small-card:hover .small-overlay {
+  opacity: 1;
+}
+
+/* src/styles/MainPage/Carousel.css 기존 코드 하단에 추가 */
+
+/* ... (기존 스타일 유지) ... */
+
+/* ⭐️ [신규] 우측 하단 견출지 스타일 */
+.memo-index-tab {
+  position: absolute;
+  bottom: 30px;
+  right: -12px; /* 페이지 밖으로 살짝 튀어나오게 */
+  width: 70px;
+  height: 35px;
+  
+  background-color: #FF6B6B; /* 빨간색 견출지 */
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  cursor: pointer;
+  z-index: 50;
+  transition: transform 0.2s ease;
+}
+
+.memo-index-tab:hover {
+  transform: translateX(5px) scale(1.1); /* 호버 시 툭 튀어나옴 */
+}
+
+/* 견출지 텍스트 */
+.memo-index-tab span {
+  color: white;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/* 견출지 접힌 느낌 (선택 사항) */
+.memo-index-tab::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #c0392b; /* 그림자 */
+  border-right: 10px solid transparent;
 }

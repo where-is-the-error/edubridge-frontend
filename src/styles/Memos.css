@@ -1,0 +1,172 @@
+/* src/styles/Memos.css */
+
+.memos-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fdfdfd;
+  
+  /* ⭐️ 모눈종이 (점선 십자) 패턴 배경 */
+  background-image: 
+    linear-gradient(#e0e0e0 1px, transparent 1px),
+    linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
+  background-size: 40px 40px; /* 격자 크기 */
+  background-position: center;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+/* 헤더 */
+.memos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 2px solid #ddd;
+  backdrop-filter: blur(5px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.small-logo { width: 40px; }
+.small-text { width: 100px; margin-left: -5px; }
+
+.close-btn {
+  background: none;
+  border: 2px solid #333;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.close-btn:hover {
+  background: #333;
+  color: white;
+}
+
+/* 내용 영역 */
+.memos-content {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.memos-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #333;
+  background-color: #fff;
+  display: inline-block;
+  padding: 10px 30px;
+  border: 3px solid #333;
+  box-shadow: 5px 5px 0 #333;
+  transform: rotate(-2deg);
+}
+
+/* 그리드 레이아웃 */
+.memos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+/* 메모 카드 */
+.memo-card {
+  height: 250px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.memo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+/* 색상 테마 */
+.memo-card.yellow { background-color: #FFF6C3; }
+.memo-card.pink { background-color: #FFDEE9; }
+.memo-card.blue { background-color: #D4F1F4; }
+.memo-card.green { background-color: #E2F0CB; }
+
+/* 핀 장식 */
+.pin-deco {
+  width: 16px;
+  height: 16px;
+  background-color: #FF6B6B;
+  border-radius: 50%;
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.memo-card-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  resize: none;
+  outline: none;
+  font-family: 'Nanum Pen Script', sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.memo-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.memo-card:hover .memo-actions { opacity: 1; }
+
+.memo-actions button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.memo-actions button:hover { color: #d63031; }
+
+/* 추가 카드 */
+.add-card {
+  background-color: rgba(255,255,255,0.5);
+  border: 3px dashed #ccc;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #aaa;
+  box-shadow: none;
+}
+.add-card:hover {
+  border-color: #1C91FF;
+  color: #1C91FF;
+  background-color: #fff;
+}
+.plus-icon {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 10px;
+}

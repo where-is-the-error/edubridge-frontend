@@ -1,6 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+// 컴포넌트 임포트
 import PrivateRoute from "./components/PrivateRoute";
+import PageTransition from "./components/PageTransition"; // ⭐️ 애니메이션 컴포넌트
+
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
@@ -35,55 +40,131 @@ import MainPage from "./pages/MainPage/Main";
 import TimeTable from "./pages/timetable";
 import DaySelect from "./components/DaySelect";
 import SchoolLevelSelect from "./components/SchoolLevelSelect";
+import Memos from "./pages/Memos";
+
+
+// ⭐️ 라우트 설정을 별도 컴포넌트로 분리 (useLocation 사용을 위해)
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    // mode="wait": 이전 페이지가 사라진 후 다음 페이지가 나타남
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        
+        {/* ✅ 공개 페이지 */}
+        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+        <Route path="/signup" element={<PageTransition><SignUp /></PageTransition>} />
+        
+        {/* 🔒 비공개 페이지 (PrivateRoute + PageTransition) */}
+        <Route path="/homeafter" element={
+          <PrivateRoute><PageTransition><HomeAfter /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/mainpage" element={
+          <PrivateRoute><PageTransition><MainPage /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/profile" element={
+          <PrivateRoute><PageTransition><Profile /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/ai" element={
+          <PrivateRoute><PageTransition><Ai /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/timetable" element={
+          <PrivateRoute><PageTransition><TimeTable /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/memos" element={
+          <PrivateRoute><PageTransition><Memos /></PageTransition></PrivateRoute>
+        } />
+        
+        {/* 선택 페이지들 */}
+        <Route path="/age" element={
+          <PrivateRoute><PageTransition><Age /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/ele" element={
+          <PrivateRoute><PageTransition><Ele /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/elegrade" element={
+          <PrivateRoute><PageTransition><Elegrade /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/middle" element={
+          <PrivateRoute><PageTransition><Middle /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/high" element={
+          <PrivateRoute><PageTransition><High /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/middlesub" element={
+          <PrivateRoute><PageTransition><MiddleSub /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highgrade1" element={
+          <PrivateRoute><PageTransition><HighGrade1 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highsub2" element={
+          <PrivateRoute><PageTransition><HighSub2 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highsub3" element={
+          <PrivateRoute><PageTransition><HighSub3 /></PageTransition></PrivateRoute>
+        } />
+        
+        {/* 고등 세부 과목 선택 */}
+        <Route path="/highsociety2" element={
+          <PrivateRoute><PageTransition><HighSociety2 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highscience2" element={
+          <PrivateRoute><PageTransition><HighScience2 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highsociety3" element={
+          <PrivateRoute><PageTransition><HighSociety3 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highscience3" element={
+          <PrivateRoute><PageTransition><HighScience3 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highscience1" element={
+          <PrivateRoute><PageTransition><HighScience1 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highsociety2_1" element={
+          <PrivateRoute><PageTransition><HighSociety2_1 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/history2" element={
+          <PrivateRoute><PageTransition><History2 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/geography" element={
+          <PrivateRoute><PageTransition><Geography /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/morality" element={
+          <PrivateRoute><PageTransition><Morality /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highscience2_1" element={
+          <PrivateRoute><PageTransition><HighScience2_1 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highsociety3_1" element={
+          <PrivateRoute><PageTransition><HighSociety3_1 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/history3" element={
+          <PrivateRoute><PageTransition><History3 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/geography3" element={
+          <PrivateRoute><PageTransition><Geography3 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/morality3" element={
+          <PrivateRoute><PageTransition><Morality3 /></PageTransition></PrivateRoute>
+        } />
+        <Route path="/highscience3_1" element={
+          <PrivateRoute><PageTransition><HighScience3_1 /></PageTransition></PrivateRoute>
+        } />
+
+        {/* 컴포넌트 테스트용 */}
+        <Route path="/dayselect" element={<DaySelect />} />
+        <Route path="/schoollevelselect" element={<SchoolLevelSelect />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 function App() {
   return (
     <Router>
-      <Routes>
-        {/* ✅ 누구나 접근 가능한 공개 페이지 */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-
-        {/* 🔒 로그인이 필요한 비공개 페이지 (PrivateRoute로 감싸기) */}
-        <Route path="/homeafter" element={<PrivateRoute><HomeAfter /></PrivateRoute>} />
-        <Route path="/mainpage" element={<PrivateRoute><MainPage /></PrivateRoute>} />
-        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-        <Route path="/ai" element={<PrivateRoute><Ai /></PrivateRoute>} />
-        <Route path="/timetable" element={<PrivateRoute><TimeTable /></PrivateRoute>} />
-        
-        {/* 선택 페이지들 */}
-        <Route path="/age" element={<PrivateRoute><Age /></PrivateRoute>} />
-        <Route path="/ele" element={<PrivateRoute><Ele /></PrivateRoute>} />
-        <Route path="/elegrade" element={<PrivateRoute><Elegrade /></PrivateRoute>} />
-        <Route path="/middle" element={<PrivateRoute><Middle /></PrivateRoute>} />
-        <Route path="/high" element={<PrivateRoute><High /></PrivateRoute>} />
-        <Route path="/middlesub" element={<PrivateRoute><MiddleSub /></PrivateRoute>} />
-        <Route path="/highgrade1" element={<PrivateRoute><HighGrade1 /></PrivateRoute>} />
-        <Route path="/highsub2" element={<PrivateRoute><HighSub2 /></PrivateRoute>} />
-        <Route path="/highsub3" element={<PrivateRoute><HighSub3 /></PrivateRoute>} />
-        
-        {/* 고등 세부 과목 선택 */}
-        <Route path="/highsociety2" element={<PrivateRoute><HighSociety2 /></PrivateRoute>} />
-        <Route path="/highscience2" element={<PrivateRoute><HighScience2 /></PrivateRoute>} />
-        <Route path="/highsociety3" element={<PrivateRoute><HighSociety3 /></PrivateRoute>} />
-        <Route path="/highscience3" element={<PrivateRoute><HighScience3 /></PrivateRoute>} />
-        <Route path="/highscience1" element={<PrivateRoute><HighScience1 /></PrivateRoute>} />
-        <Route path="/highsociety2_1" element={<PrivateRoute><HighSociety2_1 /></PrivateRoute>} />
-        <Route path="/history2" element={<PrivateRoute><History2 /></PrivateRoute>} />
-        <Route path="/geography" element={<PrivateRoute><Geography /></PrivateRoute>} />
-        <Route path="/morality" element={<PrivateRoute><Morality /></PrivateRoute>} />
-        <Route path="/highscience2_1" element={<PrivateRoute><HighScience2_1 /></PrivateRoute>} />
-        <Route path="/highsociety3_1" element={<PrivateRoute><HighSociety3_1 /></PrivateRoute>} />
-        <Route path="/history3" element={<PrivateRoute><History3 /></PrivateRoute>} />
-        <Route path="/geography3" element={<PrivateRoute><Geography3 /></PrivateRoute>} />
-        <Route path="/morality3" element={<PrivateRoute><Morality3 /></PrivateRoute>} />
-        <Route path="/highscience3_1" element={<PrivateRoute><HighScience3_1 /></PrivateRoute>} />
-
-        {/* 컴포넌트 테스트용 라우트 (필요하다면 유지, 아니면 제거) */}
-        <Route path="/dayselect" element={<DaySelect />} />
-        <Route path="/schoollevelselect" element={<SchoolLevelSelect />} />
-      </Routes>
+      <AnimatedRoutes />
     </Router>
   );
 }

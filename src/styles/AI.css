@@ -1,105 +1,271 @@
-/* ===============================
-   기본 설정
-   =============================== */
-html, body, #root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  font-family: "Pretendard", sans-serif;
-  overflow: auto;
-}
+/* src/styles/AI.css */
 
-/* ===============================
-   전체 컨테이너
-   =============================== */
-.AI-container {
+/* 1. 배경: 차분한 우드톤 또는 짙은 회색으로 책상 느낌 */
+.ai-page-background {
   width: 100%;
   height: 100vh;
-  background: #ffffff;
+  background-color: #F0EAD6; /* 부드러운 베이지/우드 톤 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
+  overflow: hidden;
+}
+
+/* 로고 (편지지 바깥 좌측 상단) */
+.ai-logo-group {
+  position: absolute;
+  top: 2vh;
+  left: 2vw;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.ai-logo-img { width: 50px; }
+.ai-logo-text { width: 140px; margin-left: -5px; }
+
+
+/* 2. 📜 편지지 (메인 컨테이너) */
+.letter-paper {
+  width: 60vw;
+  min-width: 600px;
+  height: 85vh;
+  background-color: #fffef8; /* 아주 연한 미색 (종이 색) */
+  border-radius: 10px;
+  box-shadow: 
+    0 10px 30px rgba(0,0,0,0.1), /* 큰 그림자 */
+    0 2px 5px rgba(0,0,0,0.05);  /* 미세 그림자 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 40px 50px;
+  box-sizing: border-box;
+  
+  /* 종이 질감 효과 (선택사항) */
+  background-image: linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 2.5rem; /* 줄 노트 느낌 */
+  background-attachment: local;
+}
+
+/* 3. 헤더 (우표, 제목, 호랑이) */
+.letter-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #1C91FF;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.header-tiger {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-right: 20px;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.letter-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1C91FF;
+  margin: 0 0 5px 0;
+  font-family: "Pretendard", serif; /* 명조체 느낌 추천 */
+}
+
+.letter-subtitle {
+  font-size: 1rem;
+  color: #888;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* 우표 느낌 장식 */
+.stamp {
+  width: 70px;
+  height: 80px;
+  border: 2px dashed #ff9f43;
+  color: #ff9f43;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transform: rotate(-10deg);
+  opacity: 0.8;
+}
+
+
+/* 4. 내용 (대화 리스트) */
+.letter-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-right: 10px; /* 스크롤바 공간 */
+}
+
+/* 스크롤바 커스텀 */
+.letter-content::-webkit-scrollbar { width: 6px; }
+.letter-content::-webkit-scrollbar-thumb { background-color: #ddd; border-radius: 3px; }
+
+/* 메시지 공통 */
+.message-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+.message-sender-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #eee;
+  overflow: hidden;
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* 좌측 상단 로고 */
-.AI-logo {
-  position: absolute;
-  top: 1vh;
-  left: 1vw;
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 6vw;
-  height: 6vw;
-  margin-top: -1vw;
-}
-
-.logotext {
-  width: 25vw;
-  height: 8vw;
-  margin-left: -1vw;
-}
-
-/* 중앙 제목 */
-.AI-title {
-  position: absolute;
-  top: 30vh;
-  width: 100%;
-  text-align: center;
-  font-size: 3.8vw;
-
-}
-
-.AI-strong {
-  color: #1C91FF;
-  font-weight: 900;
-}
-
-.AI-rest {
-  color: #1C91FF;
-  font-weight: 350;
-  margin-left: 0.3vw;
-}
-
-/* ---------------------------------
-   (NEW) 호랑이 단독 영역
-----------------------------------*/
-.AI-tiger-wrapper {
-  position: absolute;
-  bottom: 6vh;   /* 원하는 대로 조정 가능 */
-  left: 10vw;     /* 원하는 대로 조정 가능 */
-}
-
-.tiger3-img {
-  width: 30vw;
+.message-sender-icon img {
+  width: 80%;
   height: auto;
 }
 
-/* ---------------------------------
-   (NEW) 입력창 단독 영역
-----------------------------------*/
-.AI-input-wrapper {
-  position: absolute;
-  bottom: 15vh;   /* 원하는 대로 조정 */
-  left: 50%;
-  transform: translateX(-50%);
+/* AI 메시지 */
+.message-row.ai .message-text {
+  background-color: transparent; /* 배경 없이 글자만 */
+  color: #333;
+  text-align: left;
 }
 
-.AI-input {
-  width: 60vw;
-  height: 6.5vh;
-  padding: 0 20px;
-  font-size: 1.5rem;
+/* 유저 메시지 (오른쪽 정렬 아님 - 편지글처럼 쭉 이어지게) */
+.message-row.user {
+  flex-direction: row-reverse; /* 아이콘을 오른쪽으로 */
+}
 
-  border-radius: 20px;
-  border: 1px solid #000;
-  background-color: #ffffff;
+.message-row.user .message-text {
+  background-color: #f0f7ff; /* 살짝 강조 */
+  border-radius: 15px;
+  padding: 15px 20px;
+  color: #000;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
 
-  box-shadow: 0 6px 0px rgba(0, 0, 0, 0.2);
+.message-text p {
+  margin: 5px 0;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+}
+
+
+/* 5. 입력 영역 (하단 고정) */
+.letter-footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px dashed #ddd;
+}
+
+.input-line-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  border-radius: 30px;
+  padding: 5px 10px 5px 20px;
+  border: 1px solid #ddd;
+  transition: border-color 0.2s;
+}
+
+.input-line-wrapper:focus-within {
+  border-color: #1C91FF;
+  background: #fff;
+}
+
+.letter-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  padding: 10px 0;
+  resize: none; /* 크기 조절 불가 */
   outline: none;
+  font-family: "Pretendard", sans-serif;
+  height: 44px; /* 높이 고정 (1줄 기준) */
+  line-height: 24px;
+}
+
+.send-btn {
+  background-color: #1C91FF;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+  white-space: nowrap;
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+  background-color: #0a74d6;
+}
+
+.send-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 로딩 애니메이션 */
+.loading span {
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out both;
+  font-size: 2rem;
+  color: #1C91FF;
+  margin: 0 2px;
+}
+.chat-input {
+  width: 100%;
+  height: 60px;
+  padding: 0 80px 0 30px; 
+  font-size: 1.1rem;
+  
+  border-radius: 30px;
+  border: 2px solid #E0E0E0;
+  
+  /* ⭐️ [수정] 배경 흰색, 글자 검정색 강제 적용 */
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: "Pretendard";
+  
+  /* ⭐️ 텍스트 입력 시 연필 커서 (이미지 없을 시 기본 text 커서) */
+  cursor: text; 
+}
+
+.chat-input::placeholder {
+  color: #999; /* 플레이스홀더 색상도 잘 보이게 */
+}
+.loading span:nth-child(1) { animation-delay: -0.32s; }
+.loading span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
 }

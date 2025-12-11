@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/timetable.css";
 import logo from "../assets/logo.png";
 import logotext from "../assets/logotext.png";
+import { saveSchoolInfo, fetchSavedSchoolInfo } from "../utils/api";
 
-// 시도교육청 리스트
 const officeList = [
   { code: "B10", name: "서울특별시교육청" },
   { code: "C10", name: "부산광역시교육청" },
@@ -24,39 +24,37 @@ const officeList = [
   { code: "S10", name: "경상남도교육청" },
   { code: "T10", name: "제주특별자치도교육청" },
 ];
-
-// 오늘 날짜 기준 학년도 + 학기 계산
+const [aiMemo, setAiMemo] = useState("AI가 메모를 정리하고 있어요... 🐯");
 const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth() + 1;
-
-// 학년도 (3월 기준, 1~2월은 전년도 학년도)
 const AY = month >= 3 ? year : year - 1;
 const AY_STRING = AY.toString();
-
-// 학기 계산 (1학기: 3~8월, 2학기: 9~2월)
 const SEM = month >= 3 && month <= 8 ? "1" : "2";
 
 const Timetable = () => {
   const NEIS_KEY = import.meta.env.VITE_NEIS_API_KEY;
 
-  // 선택값
   const [atptCode, setAtptCode] = useState("");
   const [schoolCode, setSchoolCode] = useState("");
   const [grade, setGrade] = useState("");
   const [className, setClassName] = useState("");
 
-  // 리스트들
   const [schoolList, setSchoolList] = useState([]);
   const [gradeList, setGradeList] = useState([]);
   const [classList, setClassList] = useState([]);
   const [classInfoRows, setClassInfoRows] = useState([]);
 
-  // 시간표
   const [timetable, setTimetable] = useState({});
   const [loading, setLoading] = useState(false);
+  const [isSelectionHidden, setIsSelectionHidden] = useState(false);
+  
+  // ⭐️ [신규] 화면에 표시할 학교 이름 상태
+  const [schoolNameDisplay, setSchoolNameDisplay] = useState("");
 
-  // 날짜 → 요일 변환
+  const days = ["월", "화", "수", "목", "금"];
+  const periods = [1, 2, 3, 4, 5, 6, 7];
+  
   const getDayName = (dateStr) => {
     const date = new Date(
       dateStr.substring(0, 4),
@@ -66,290 +64,222 @@ const Timetable = () => {
     return ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
   };
 
-  // ================================================
-  //  교육청 선택 → 학교 리스트 불러오기
-  // ================================================
+  useEffect(() => {
+    const init = async () => {
+      const savedInfo = await fetchSavedSchoolInfo();
+      if (savedInfo) {
+        setAtptCode(savedInfo.officeCode);
+        setSchoolCode(savedInfo.schoolCode);
+        setGrade(savedInfo.grade);
+        setClassName(savedInfo.classNm);
+        
+        // 저장된 학교 이름 설정
+        setSchoolNameDisplay(savedInfo.schoolName);
+
+        await executeFetchTimetable(
+          savedInfo.officeCode,
+          savedInfo.schoolCode,
+          savedInfo.grade,
+          savedInfo.classNm,
+          false 
+        );
+        setTimeout(() => setIsSelectionHidden(true), 500);
+      }
+
+      const summary = await fetchAiMemoSummary();
+      setAiMemo(summary);
+    };
+    init();
+  }, []);
+
   const handleAtptChange = async (e) => {
     const code = e.target.value;
     setAtptCode(code);
-
-    // 초기화
-    setSchoolCode("");
-    setGrade("");
-    setClassName("");
-    setSchoolList([]);
-    setGradeList([]);
-    setClassList([]);
-    setClassInfoRows([]);
-    setTimetable({});
-
+    setSchoolCode(""); setGrade(""); setClassName("");
+    setSchoolList([]); setGradeList([]); setClassList([]); setTimetable({});
     if (!code) return;
-
     try {
       const res = await axios.get("https://open.neis.go.kr/hub/schoolInfo", {
-        params: {
-          KEY: NEIS_KEY,
-          Type: "json",
-          ATPT_OFCDC_SC_CODE: code,
-          pIndex: 1,
-          pSize: 1000,
-        },
+        params: { KEY: NEIS_KEY, Type: "json", ATPT_OFCDC_SC_CODE: code, pIndex: 1, pSize: 1000 },
       });
-
-      const rows = res.data.schoolInfo?.[1]?.row || [];
-      setSchoolList(rows);
-    } catch (err) {
-      console.error("학교 리스트 불러오기 실패:", err);
-      alert("학교 정보를 불러오지 못했습니다.");
-    }
+      setSchoolList(res.data.schoolInfo?.[1]?.row || []);
+    } catch (err) { alert("학교 정보를 불러오지 못했습니다."); }
   };
 
   const handleSchoolChange = async (e) => {
     const code = e.target.value;
     setSchoolCode(code);
-
-    // 초기화
-    setGrade("");
-    setClassName("");
-    setGradeList([]);
-    setClassList([]);
-    setClassInfoRows([]);
-    setTimetable({});
-
-    if (!code || !atptCode) return;
-
+    setGrade(""); setClassName(""); setGradeList([]); setClassList([]); setTimetable({});
+    if (!code) return;
     setLoading(true);
-
     try {
       const res = await axios.get("https://open.neis.go.kr/hub/classInfo", {
-        params: {
-          KEY: NEIS_KEY,
-          Type: "json",
-          ATPT_OFCDC_SC_CODE: atptCode,
-          SD_SCHUL_CODE: code,
-          AY: AY_STRING,     // 🔥 자동학년도 적용
-          pIndex: 1,
-          pSize: 1000,
-        },
+        params: { KEY: NEIS_KEY, Type: "json", ATPT_OFCDC_SC_CODE: atptCode, SD_SCHUL_CODE: code, AY: AY_STRING, pIndex: 1, pSize: 1000 },
       });
-
       const rows = res.data.classInfo?.[1]?.row || [];
       setClassInfoRows(rows);
-
-      const grades = Array.from(new Set(rows.map((r) => r.GRADE))).sort(
-        (a, b) => Number(a) - Number(b)
-      );
-
+      const grades = Array.from(new Set(rows.map((r) => r.GRADE))).sort((a, b) => Number(a) - Number(b));
       setGradeList(grades);
-    } catch (err) {
-      console.error("classInfo 불러오기 실패:", err);
-      alert("학년/반 정보를 불러오지 못했습니다.");
-    } finally {
-      setLoading(false);
-    }
+    } catch (err) { alert("학년 정보를 불러오지 못했습니다."); }
+    finally { setLoading(false); }
   };
 
-  // ================================================
-  // 학년 선택 → 해당 학년의 반 추출
-  // ================================================
   const handleGradeChange = (e) => {
     const g = e.target.value;
     setGrade(g);
-    setClassName("");
-    setTimetable({});
-
-    if (!g) {
-      setClassList([]);
-      return;
-    }
-
+    setClassName(""); setTimetable({});
+    if (!g) { setClassList([]); return; }
     const filtered = classInfoRows.filter((r) => r.GRADE === g);
-    const classes = Array.from(new Set(filtered.map((r) => r.CLASS_NM))).sort(
-      (a, b) => Number(a) - Number(b)
-    );
-
+    const classes = Array.from(new Set(filtered.map((r) => r.CLASS_NM))).sort((a, b) => Number(a) - Number(b));
     setClassList(classes);
   };
 
-  // 반 선택
-  const handleClassChange = (e) => {
-    setClassName(e.target.value);
-    setTimetable({});
-  };
+  const handleClassChange = (e) => setClassName(e.target.value);
 
-  // ================================================
-  // 조회 버튼 → misTimetable 불러오기
-  // ================================================
-  const handleFetchTimetable = async () => {
-    if (!atptCode || !schoolCode || !grade || !className) {
-      alert("시도교육청, 학교, 학년, 반을 모두 선택해 주세요.");
-      return;
-    }
-
+  const executeFetchTimetable = async (pAtpt, pSchool, pGrade, pClass, shouldSave = false) => {
     setLoading(true);
     setTimetable({});
+
+    if (shouldSave) {
+      const selectedOffice = officeList.find(o => o.code === pAtpt);
+      const selectedSchool = schoolList.find(s => s.SD_SCHUL_CODE === pSchool);
+      if (selectedOffice && selectedSchool) {
+        saveSchoolInfo({
+          officeCode: pAtpt,
+          officeName: selectedOffice.name,
+          schoolCode: pSchool,
+          schoolName: selectedSchool.SCHUL_NM,
+          grade: pGrade,
+          classNm: pClass
+        });
+      }
+    }
 
     try {
       const res = await axios.get("https://open.neis.go.kr/hub/misTimetable", {
         params: {
           KEY: NEIS_KEY,
           Type: "json",
-          ATPT_OFCDC_SC_CODE: atptCode,
-          SD_SCHUL_CODE: schoolCode,
-          AY: AY_STRING,    // 🔥 자동 학년도
-          SEM: SEM,         // 🔥 자동 학기
-          GRADE: grade,
-          CLASS_NM: className,
+          ATPT_OFCDC_SC_CODE: pAtpt,
+          SD_SCHUL_CODE: pSchool,
+          AY: AY_STRING,
+          SEM: SEM,
+          GRADE: pGrade,
+          CLASS_NM: pClass,
           pIndex: 1,
           pSize: 100,
         },
       });
 
       const row = res.data.misTimetable?.[1]?.row || [];
-
       const newTable = {};
       row.forEach((item) => {
         const day = getDayName(item.ALL_TI_YMD);
         if (!newTable[day]) newTable[day] = [];
         newTable[day].push(item);
       });
-
-      // 교시 정렬
       Object.keys(newTable).forEach((day) => {
         newTable[day].sort((a, b) => Number(a.PERIO) - Number(b.PERIO));
       });
-
       setTimetable(newTable);
     } catch (err) {
-      console.error("시간표 불러오기 실패:", err);
-      alert("시간표를 불러오지 못했습니다.");
+      console.error("시간표 로드 실패", err);
     } finally {
       setLoading(false);
     }
   };
 
-  // 요일/교시
-  const days = ["월", "화", "수", "목", "금"];
-  const periods = [1, 2, 3, 4, 5, 6, 7];
+  const onManualFetch = () => {
+    if (!atptCode || !schoolCode || !grade || !className) {
+      alert("모든 정보를 선택해주세요.");
+      return;
+    }
+    
+    // ⭐️ 선택된 학교 이름 찾아서 설정
+    const selectedSchool = schoolList.find(s => s.SD_SCHUL_CODE === schoolCode);
+    if (selectedSchool) setSchoolNameDisplay(selectedSchool.SCHUL_NM);
+
+    executeFetchTimetable(atptCode, schoolCode, grade, className, true);
+    setIsSelectionHidden(true); 
+  };
+
+  const handleReset = () => {
+    setIsSelectionHidden(false);
+    setTimetable({});
+  };
 
   return (
     <div className="tt-container">
-      {/* 로고 */}
       <div className="tt-logo">
         <img src={logo} className="logo" alt="logo-dot" />
         <img src={logotext} className="logotext" alt="logo-text" />
       </div>
 
-      {/* 제목 */}
-      <h1 className="tt-title">시간표 조회</h1>
+      {/* ⭐️ isSelectionHidden 여부에 따라 텍스트와 스타일 변경 */}
+      <h1 className={`tt-title ${isSelectionHidden ? "slide-down" : ""}`}>
+        {isSelectionHidden 
+          ? `${schoolNameDisplay} ${grade}학년 ${className}반` 
+          : "시간표 조회"}
+      </h1>
 
-      {/* 선택 박스 */}
-      <div className="tt-select-group">
-
-        {/* 교육청 */}
+      <div className={`tt-select-group ${isSelectionHidden ? "hidden" : ""}`}>
         <select className="tt-select" value={atptCode} onChange={handleAtptChange}>
           <option value="">시도교육청</option>
-          {officeList.map((o) => (
-            <option key={o.code} value={o.code}>
-              {o.name}
-            </option>
-          ))}
+          {officeList.map((o) => (<option key={o.code} value={o.code}>{o.name}</option>))}
         </select>
-
-        {/* 학교 */}
-        <select
-          className="tt-select"
-          value={schoolCode}
-          onChange={handleSchoolChange}
-          disabled={!atptCode}
-        >
-          <option value="">
-            {atptCode ? "학교 선택" : "교육청 먼저 선택"}
-          </option>
-          {schoolList.map((s) => (
-            <option key={s.SD_SCHUL_CODE} value={s.SD_SCHUL_CODE}>
-              {s.SCHUL_NM}
-            </option>
-          ))}
+        <select className="tt-select" value={schoolCode} onChange={handleSchoolChange} disabled={!atptCode}>
+          <option value="">{atptCode ? "학교 선택" : "교육청 먼저 선택"}</option>
+          {schoolList.map((s) => (<option key={s.SD_SCHUL_CODE} value={s.SD_SCHUL_CODE}>{s.SCHUL_NM}</option>))}
         </select>
-
-        {/* 학년 */}
-        <select
-          className="tt-select"
-          value={grade}
-          onChange={handleGradeChange}
-          disabled={!schoolCode}
-        >
+        <select className="tt-select" value={grade} onChange={handleGradeChange} disabled={!schoolCode}>
           <option value="">학년</option>
-          {gradeList.map((g) => (
-            <option key={g} value={g}>
-              {g}학년
-            </option>
-          ))}
+          {gradeList.map((g) => (<option key={g} value={g}>{g}학년</option>))}
         </select>
-
-        {/* 반 */}
-        <select
-          className="tt-select"
-          value={className}
-          onChange={handleClassChange}
-          disabled={!grade}
-        >
+        <select className="tt-select" value={className} onChange={handleClassChange} disabled={!grade}>
           <option value="">반</option>
-          {classList.map((c) => (
-            <option key={c} value={c}>
-              {c}반
-            </option>
-          ))}
+          {classList.map((c) => (<option key={c} value={c}>{c}반</option>))}
         </select>
-
-        <button className="tt-btn" onClick={handleFetchTimetable}>
-          조회
-        </button>
+        <button className="tt-btn" onClick={onManualFetch}>조회</button>
       </div>
 
-      {/* 시간표 + 메모 */}
       <div className="tt-content-area">
-        <table className="tt-table">
-          <thead>
-            <tr>
-              <th className="tt-time">교시</th>
-              {days.map((d) => (
-                <th key={d}>{d}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {periods.map((p) => (
-              <tr key={p}>
-                <td className="tt-time">{p}교시</td>
-                {days.map((day) => {
-                  const subject =
-                    timetable[day]?.find((r) => Number(r.PERIO) === p)
-                      ?.ITRT_CNTNT || "";
-                  return <td key={day + p}>{subject.replace("-", "")}</td>;
-                })}
+        {/* ⭐️ 왼쪽: 테이블 */}
+        <div className="tt-table-wrapper">
+          <table className="tt-table">
+            <thead>
+              <tr>
+                <th className="tt-time">교시</th>
+                {days.map((d) => <th key={d}>{d}</th>)}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {periods.map((p) => (
+                <tr key={p}>
+                  <td className="tt-time">{p}교시</td>
+                  {days.map((day) => {
+                    const subject = timetable[day]?.find((r) => Number(r.PERIO) === p)?.ITRT_CNTNT || "";
+                    return <td key={day + p}>{subject.replace("-", "")}</td>;
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
+          {/* ⭐️ 테이블 바로 아래에 작은 버튼 배치 */}
+          {isSelectionHidden && (
+            <button className="tt-reset-btn" onClick={handleReset}>
+              다른 학교 조회하기 ↻
+            </button>
+          )}
+        </div>
 
+        {/* 오른쪽: 메모 */}
         <div className="tt-memo">개인 메모</div>
       </div>
 
       {loading && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "3vh",
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontSize: "1.2vw",
-            fontWeight: 600,
-            color: "#0A4F8F",
-          }}
-        >
-          불러오는 중...
+        <div style={{ position: "absolute", bottom: "3vh", left: "50%", transform: "translateX(-50%)", fontSize: "1.2vw", fontWeight: 600, color: "#0A4F8F" }}>
+          시간표를 가져오는 중...
         </div>
       )}
     </div>

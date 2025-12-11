@@ -1,0 +1,173 @@
+/* src/styles/Profile.css */
+
+.profile-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #F7F9FB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pretendard", sans-serif;
+  position: relative;
+}
+
+/* 로고 (좌측 상단) */
+.profile-logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.logo-img { width: 40px; }
+.logo-text { width: 120px; margin-left: 10px; }
+
+/* 🪪 학생증 카드 본체 */
+.id-card {
+  width: 380px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 40px 0;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.id-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 상단 컬러 밴드 */
+.card-header-band {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(135deg, #1C91FF 0%, #0056b3 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+
+/* 목걸이 구멍 */
+.lanyard-hole {
+  width: 60px;
+  height: 10px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  margin-top: -10px;
+}
+
+/* 🐯 프로필 사진 (호랑이) */
+.profile-tiger {
+  width: 130px;
+  height: 130px;
+  background: #fff;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  object-fit: cover;
+  margin-top: -65px; /* 밴드 위로 걸치게 */
+  z-index: 2;
+}
+
+/* 텍스트 정보 영역 */
+.card-body {
+  width: 100%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 이름 (닉네임) */
+.name-area {
+  margin-bottom: 10px;
+}
+.label-role {
+  display: block;
+  font-size: 0.9rem;
+  color: #1C91FF;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.name-text {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #333;
+}
+
+/* 정보 행 (학교급, 학년 등) */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 12px 0;
+}
+
+.info-label {
+  font-size: 1rem;
+  color: #888;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* 입력창 & 선택창 디자인 (수정 모드) */
+.edit-input, .edit-select {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1C91FF;
+  font-weight: 700;
+  text-align: right;
+  outline: none;
+  background: #f9f9f9;
+}
+.edit-input:focus, .edit-select:focus {
+  border-color: #1C91FF;
+  background: #fff;
+}
+
+/* 버튼 그룹 */
+.btn-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.action-btn {
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-edit { background: #1C91FF; color: white; }
+.btn-edit:hover { background: #0077cc; transform: translateY(-2px); }
+
+.btn-home { background: #e0e0e0; color: #555; }
+.btn-home:hover { background: #d0d0d0; }
+
+.btn-save { background: #1C91FF; color: white; }
+.btn-cancel { background: #FF6B6B; color: white; }

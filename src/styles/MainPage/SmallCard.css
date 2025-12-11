@@ -58,7 +58,86 @@
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+/* src/styles/MainPage/SmallCard.css */
 
+/* ⭐️ 리스트 아이템 등장 애니메이션 */
+@keyframes listFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.small-card {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+  border: none;
+  overflow: visible;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  
+  /* ⭐️ 애니메이션 적용 */
+  animation: listFadeIn 0.5s ease backwards;
+}
+
+/* 순차적으로 나타나는 느낌을 주고 싶다면 JS에서 index별 delay를 줘야 하지만, 
+   CSS만으로는 전체가 부드럽게 바뀌는 것만으로도 충분히 좋습니다. */
+
+.small-card:hover {
+  transform: scale(1.03) rotate(1deg);
+  z-index: 10;
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid white; 
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+}
+
+.small-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(28, 145, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.small-overlay span {
+  color: white;
+  font-weight: 700;
+  background: rgba(0,0,0,0.5);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: none;
+}
+
+.small-card:hover .small-overlay {
+  opacity: 1;
+}
 .small-overlay span {
   color: white;
   font-weight: 700;
